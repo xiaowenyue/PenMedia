@@ -7,6 +7,13 @@ pluginManagement {
                 includeGroupByRegex("androidx.*")
             }
         }
+        maven {
+            url = uri("https://maven.aliyun.com/repository/central")
+        }
+        maven {
+            url =uri("http://mirrors.cloud.tencent.com/nexus/repository/maven-public/")
+            isAllowInsecureProtocol=true
+        }
         mavenCentral()
         gradlePluginPortal()
     }
