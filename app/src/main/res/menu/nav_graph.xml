@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.movieapp.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_mine"
+        android:name="com.example.movieapp.MineFragment"
+        android:label="Mine"
+        tools:layout="@layout/fragment_mine" />
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="com.example.movieapp.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/nav_history"
+        android:name="com.example.movieapp.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/nav_movies"
+        android:name="com.example.movieapp.MoviesFragment"
+        android:label="Movies"
+        tools:layout="@layout/fragment_movies" />
+    <fragment
+        android:id="@+id/nav_tv_series"
+        android:name="com.example.movieapp.TVSeriesFragment"
+        android:label="TV Series"
+        tools:layout="@layout/fragment_tv_series" />
+    <fragment
+        android:id="@+id/nav_animation"
+        android:name="com.example.movieapp.AnimationFragment"
+        android:label="Animation"
+        tools:layout="@layout/fragment_animation" />
+    <fragment
+        android:id="@+id/nav_documentary"
+        android:name="com.example.movieapp.DocumentaryFragment"
+        android:label="Documentary"
+        tools:layout="@layout/fragment_documentary" />
+
+</navigation>

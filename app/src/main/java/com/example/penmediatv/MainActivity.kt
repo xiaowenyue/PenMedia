@@ -3,8 +3,6 @@ package com.example.penmediatv
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.penmediatv.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,27 +14,29 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 设置默认Fragment
-        if (savedInstanceState == null) {
-            loadFragment(ContentFragment())
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> replaceFragment(HomeFragment())
+                R.id.nav_movies -> replaceFragment(HomeFragment())
+                R.id.nav_tv_series -> replaceFragment(HomeFragment())
+                R.id.nav_animation -> replaceFragment(HomeFragment())
+                R.id.nav_documentary -> replaceFragment(HomeFragment())
+                R.id.nav_mine -> replaceFragment(MineFragment())
+                R.id.nav_search -> replaceFragment(HomeFragment())
+                R.id.nav_history -> replaceFragment(HomeFragment())
+            }
+            true
         }
 
-        // 设置导航栏点击事件
-        binding.navView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    loadFragment(ContentFragment())
-                    true
-                }
-                // 添加其他导航项
-                else -> false
-            }
+        if (savedInstanceState == null) {
+            binding.navView.setCheckedItem(R.id.nav_home)
+            replaceFragment(HomeFragment())
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.commit()
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 }
