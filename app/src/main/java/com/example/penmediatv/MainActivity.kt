@@ -36,6 +36,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        navButtons.forEach { button ->
+            button.setOnClickListener { view ->
+                    onNavButtonFocused(view)
+            }
+        }
+
         if (savedInstanceState == null) {
             binding.navHome.performClick()
         }
