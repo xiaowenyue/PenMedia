@@ -4,26 +4,28 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
-    android:layout_margin="4dp"
     android:background="@drawable/movie_item_background"
-    android:layout_gravity="center">
+    android:layout_margin="24dp"
+    android:layout_gravity="center"
+    android:id="@+id/movie_item"
+    >
 
     <ImageView
         android:id="@+id/movie_image"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_width="164dp"
+        android:layout_height="246dp"
         android:scaleType="fitXY"
-        android:contentDescription="@string/mine" />
+        android:src="@drawable/movie"/>
 
     <TextView
         android:id="@+id/movie_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@android:color/white"
+        android:text="Movie Title"
+        android:textColor="#ffb3c0e7"
         android:textSize="14sp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp" />
+        android:paddingTop="10dp"
+        android:paddingBottom="4dp"/>
 
 </LinearLayout>

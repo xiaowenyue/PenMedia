@@ -12,6 +12,9 @@ class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Movie
         fun bind(movie: Movie) {
             binding.movieTitle.text = movie.name
             binding.movieImage.setImageResource(movie.imageResId)
+            binding.movieItem.setOnClickListener {
+                // Handle movie item click
+            }
         }
     }
 
