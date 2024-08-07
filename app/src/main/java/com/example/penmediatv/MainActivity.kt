@@ -1,6 +1,7 @@
 package com.example.penmediatv
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.penmediatv.databinding.ActivityMainBinding
@@ -14,24 +15,43 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_home -> replaceFragment(HomeFragment())
-                R.id.nav_movies -> replaceFragment(HomeFragment())
-                R.id.nav_tv_series -> replaceFragment(HomeFragment())
-                R.id.nav_animation -> replaceFragment(HomeFragment())
-                R.id.nav_documentary -> replaceFragment(HomeFragment())
-                R.id.nav_mine -> replaceFragment(MineFragment())
-                R.id.nav_search -> replaceFragment(HomeFragment())
-                R.id.nav_history -> replaceFragment(HomeFragment())
+        val navButtons = listOf(
+            binding.navMine,
+            binding.navSearch,
+            binding.navHistory,
+            binding.navHome,
+            binding.navMovies,
+            binding.navTvSeries,
+            binding.navAnimation,
+            binding.navDocumentary
+        )
+
+        navButtons.forEach { button ->
+            button.setOnFocusChangeListener { view, hasFocus ->
+                if (hasFocus) {
+                    onNavButtonFocused(view)
+                }
             }
-            true
         }
 
         if (savedInstanceState == null) {
-            binding.navView.setCheckedItem(R.id.nav_home)
-            replaceFragment(HomeFragment())
+            binding.navHome.performClick()
         }
+    }
+
+    private fun onNavButtonFocused(view: View) {
+        val fragment: Fragment = when (view.id) {
+            R.id.nav_mine -> MineFragment()
+            R.id.nav_search -> MineFragment()
+            R.id.nav_history -> MineFragment()
+            R.id.nav_home -> HomeFragment()
+            R.id.nav_movies -> MineFragment()
+            R.id.nav_tv_series -> MineFragment()
+            R.id.nav_animation -> MineFragment()
+            R.id.nav_documentary -> MineFragment()
+            else -> HomeFragment()
+        }
+        replaceFragment(fragment)
     }
 
     private fun replaceFragment(fragment: Fragment) {

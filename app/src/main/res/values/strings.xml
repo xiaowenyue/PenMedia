@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Penmedia TV</string>
-    <string name="mine">mine</string>
-    <string name="search">search</string>
-    <string name="history">history</string>
-    <string name="home">home</string>
-    <string name="movies">movies</string>
+    <string name="mine">Mine</string>
+    <string name="search">Search</string>
+    <string name="history">History</string>
+    <string name="home">Home</string>
+    <string name="movies">Movies</string>
     <string name="tv_series">TV series</string>
-    <string name="animation">animation</string>
-    <string name="documentary">documentary</string>
+    <string name="animation">Animation</string>
+    <string name="documentary">Documentary</string>
 </resources>

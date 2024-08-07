@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    // Navigator
+    <color name="left_nav">#1A3D7EFF</color>
+    <color name="button_pressed">#ff4b63ff</color>
 </resources>
