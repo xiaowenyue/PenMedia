@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.layoutManager = GridLayoutManager(context, 4)
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
         binding.recyclerView.adapter = MovieAdapter(getMovies())
     }
 
