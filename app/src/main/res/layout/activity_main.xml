@@ -15,7 +15,7 @@
         android:background="@color/left_nav"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingTop="30dp">
+        android:paddingTop="@dimen/card_navigation_padding">
 
         <ImageView
             android:id="@+id/app_logo"
@@ -29,84 +29,84 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/app_name"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textColor="@color/text"
+            android:textSize="@dimen/app_name_size" />
 
         <TextView
             android:id="@+id/nav_mine"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="20dp"
+            android:layout_height="@dimen/navigation_item_height"
+            android:layout_marginHorizontal="@dimen/navigation_margin"
+            android:layout_marginTop="35dp"
             android:background="@drawable/selected_background"
-            android:drawablePadding="20dp"
+            android:drawablePadding="@dimen/icon_text_padding"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center_vertical"
-            android:paddingStart="45dp"
+            android:paddingStart="@dimen/item_start_padding"
             android:text="@string/mine"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
+            android:textColor="@color/nav_text"
+            android:textSize="@dimen/navigation_size"
             app:drawableLeftCompat="@drawable/ic_mine_selector" />
 
-        <Button
+        <TextView
             android:id="@+id/nav_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:drawableLeft="@drawable/ic_search"
-            android:drawablePadding="8dp"
-            android:text="Search"
-            android:textColor="@android:color/white" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_item_height"
+            android:layout_marginHorizontal="@dimen/navigation_margin"
+            android:layout_marginTop="@dimen/item_padding"
+            android:background="@drawable/selected_background"
+            android:drawablePadding="@dimen/icon_text_padding"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/item_start_padding"
+            android:text="@string/search"
+            android:textColor="@color/nav_text"
+            android:textSize="@dimen/navigation_size"
+            app:drawableLeftCompat="@drawable/ic_search_selector" />
 
-        <Button
+        <TextView
             android:id="@+id/nav_history"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:drawableLeft="@drawable/ic_history_selector"
-            android:drawablePadding="8dp"
-            android:text="History"
-            android:textColor="@android:color/white" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_item_height"
+            android:layout_marginHorizontal="@dimen/navigation_margin"
+            android:layout_marginTop="@dimen/item_padding"
+            android:background="@drawable/selected_background"
+            android:drawablePadding="@dimen/icon_text_padding"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/item_start_padding"
+            android:text="@string/history"
+            android:textColor="@color/nav_text"
+            android:textSize="@dimen/navigation_size"
+            app:drawableLeftCompat="@drawable/ic_history_selector" />
 
-        <Button
+        <TextView
             android:id="@+id/nav_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:text="Home"
-            android:textColor="@android:color/white" />
+            style="@style/NavigationItem"
+            android:text="@string/home" />
 
-        <Button
+        <TextView
             android:id="@+id/nav_movies"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:text="Movies"
-            android:textColor="@android:color/white" />
+            style="@style/NavigationItem"
+            android:text="@string/movies" />
 
-        <Button
+        <TextView
             android:id="@+id/nav_tv_series"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:text="TV Series"
-            android:textColor="@android:color/white" />
+            style="@style/NavigationItem"
+            android:text="@string/tv_series" />
 
-        <Button
+        <TextView
             android:id="@+id/nav_animation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:text="Animation"
-            android:textColor="@android:color/white" />
+            style="@style/NavigationItem"
+            android:text="@string/animation" />
 
-        <Button
+        <TextView
             android:id="@+id/nav_documentary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:text="Documentary"
-            android:textColor="@android:color/white" />
+            style="@style/NavigationItem"
+            android:text="@string/documentary" />
     </LinearLayout>
     <!--右侧主体页-->
     <FrameLayout

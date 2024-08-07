@@ -15,4 +15,18 @@
     </style>
 
     <style name="Theme.PenmediaTV" parent="Theme.MaterialComponents.Light.NoActionBar" />
+
+    <style name="NavigationItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/navigation_item_height</item>
+        <item name="android:layout_marginStart">@dimen/navigation_margin</item>
+        <item name="android:layout_marginEnd">@dimen/navigation_margin</item>
+        <item name="android:layout_marginTop">@dimen/item_padding</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/selected_background</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:textColor">@color/nav_text</item>
+        <item name="android:textSize">@dimen/navigation_size</item>
+    </style>
 </resources>

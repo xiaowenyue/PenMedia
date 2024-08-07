@@ -2,7 +2,9 @@ package com.example.penmediatv
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.penmediatv.databinding.ActivityMainBinding
 
@@ -37,6 +39,21 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             binding.navHome.performClick()
         }
+
+        val width = 30 // 设置你想要的宽度
+        val height = 30 // 设置你想要的高度
+        val textViewMine: TextView = findViewById(R.id.nav_mine)
+        val drawableMine = ContextCompat.getDrawable(this, R.drawable.ic_mine_selector)!!
+        drawableMine.setBounds(0, 0, width, height)
+        textViewMine.setCompoundDrawables(drawableMine, null, null, null)
+        val textViewSearch: TextView = findViewById(R.id.nav_search)
+        val drawableSearch = ContextCompat.getDrawable(this, R.drawable.ic_search_selector)!!
+        drawableSearch.setBounds(0, 0, width, height)
+        textViewSearch.setCompoundDrawables(drawableSearch, null, null, null)
+        val textViewHistory: TextView = findViewById(R.id.nav_history)
+        val drawableHistory = ContextCompat.getDrawable(this, R.drawable.ic_history_selector)!!
+        drawableHistory.setBounds(0, 0, width, height)
+        textViewHistory.setCompoundDrawables(drawableHistory, null, null, null)
     }
 
     private fun onNavButtonFocused(view: View) {

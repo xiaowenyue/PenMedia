@@ -11,4 +11,6 @@
     // Navigator
     <color name="left_nav">#1A3D7EFF</color>
     <color name="button_pressed">#ff4b63ff</color>
+    <color name="text">#ffb3c0e7</color>
+    <color name="text_focused">#ffffffff</color>
 </resources>
