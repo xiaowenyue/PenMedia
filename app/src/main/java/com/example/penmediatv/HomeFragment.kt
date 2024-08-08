@@ -34,6 +34,9 @@ class HomeFragment : Fragment() {
         binding.imageView6.setOnClickListener {
             // Handle image click event
         }
+        binding.cardView.setOnClickListener {
+            // Handle image click event
+        }
         return binding.root
     }
 

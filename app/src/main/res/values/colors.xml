@@ -7,6 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FFBDBDBD</color>
+    <color name="gray_dark">#FF757575</color>
+    <color name="gray_light">#FFE0E0E0</color>
+    <color name="orange">#fff7c944</color>
 
     // Navigator
     <color name="left_nav">#1A3D7EFF</color>
