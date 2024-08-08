@@ -18,6 +18,22 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.imageView.setOnClickListener(View.OnClickListener {})
+        binding.imageView2.setOnClickListener {
+            // Handle image click event
+        }
+        binding.imageView3.setOnClickListener {
+            // Handle image click event
+        }
+        binding.imageView4.setOnClickListener {
+            // Handle image click event
+        }
+        binding.imageView5.setOnClickListener {
+            // Handle image click event
+        }
+        binding.imageView6.setOnClickListener {
+            // Handle image click event
+        }
         return binding.root
     }
 
