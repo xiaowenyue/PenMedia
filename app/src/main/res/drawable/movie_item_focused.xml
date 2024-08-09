@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 边框层 -->
+    <!-- 选中状态阴影层 -->
     <item>
         <shape android:shape="rectangle">
             <padding android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp" />
-            <solid android:color="@color/purple_200" />
+            <gradient
+                android:startColor="#ff2f4a90"
+                android:endColor="#1a2f4a90"
+                android:angle="0" />
             <corners android:radius="20dp" />
         </shape>
     </item>
-    <!-- 选中状态阴影层 -->
+    <!-- 边框层 -->
     <item android:state_pressed="true" android:state_focused="true">
         <shape android:shape="rectangle">
             <padding android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp" />
