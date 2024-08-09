@@ -47,20 +47,18 @@ class MainActivity : AppCompatActivity() {
             binding.navHome.performClick()
         }
 
+        /// 设置导航栏图标大小
         val width = 30 // 设置你想要的宽度
         val height = 30 // 设置你想要的高度
-        val textViewMine: TextView = findViewById(R.id.nav_mine)
         val drawableMine = ContextCompat.getDrawable(this, R.drawable.ic_mine_selector)!!
         drawableMine.setBounds(0, 0, width, height)
-        textViewMine.setCompoundDrawables(drawableMine, null, null, null)
-        val textViewSearch: TextView = findViewById(R.id.nav_search)
+        binding.navMine.setCompoundDrawables(drawableMine, null, null, null)
         val drawableSearch = ContextCompat.getDrawable(this, R.drawable.ic_search_selector)!!
         drawableSearch.setBounds(0, 0, width, height)
-        textViewSearch.setCompoundDrawables(drawableSearch, null, null, null)
-        val textViewHistory: TextView = findViewById(R.id.nav_history)
+        binding.navSearch.setCompoundDrawables(drawableSearch, null, null, null)
         val drawableHistory = ContextCompat.getDrawable(this, R.drawable.ic_history_selector)!!
         drawableHistory.setBounds(0, 0, width, height)
-        textViewHistory.setCompoundDrawables(drawableHistory, null, null, null)
+        binding.navHistory.setCompoundDrawables(drawableHistory, null, null, null)
     }
 
     private fun onNavButtonFocused(view: View) {
