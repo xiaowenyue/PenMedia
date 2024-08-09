@@ -1,6 +1,7 @@
 package com.example.penmediatv
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         navButtons.forEach { button ->
             button.setOnClickListener { view ->
-                    onNavButtonFocused(view)
+                onNavButtonFocused(view)
             }
         }
 
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     private fun onNavButtonFocused(view: View) {
         val fragment: Fragment = when (view.id) {
             R.id.nav_mine -> HomeFragment()
-            R.id.nav_search -> MineFragment()
+            R.id.nav_search -> HistoryFragment()
             R.id.nav_history -> MineFragment()
             R.id.nav_home -> HomeFragment()
             R.id.nav_movies -> MineFragment()

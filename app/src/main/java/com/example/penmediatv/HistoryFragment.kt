@@ -17,7 +17,6 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
-        binding.firstFocusableElement.requestFocus()
         binding.firstFocusableElement.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 //显示标题和副标题
@@ -39,14 +38,32 @@ class HistoryFragment : Fragment() {
                     AnimatorInflater.loadStateListAnimator(context, R.animator.scale_down)
             }
         }
+        binding.firstFocusableElement.setOnClickListener {}
+
+        binding.firstFocusableElement0.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                //显示标题和副标题
+                binding.title0.visibility = View.VISIBLE
+                binding.subtitle0.visibility = View.VISIBLE
+
+                //放大效果
+                v.animate().setDuration(200).scaleX(1.1f).scaleY(1.1f).start()
+                v.stateListAnimator =
+                    AnimatorInflater.loadStateListAnimator(context, R.animator.scale_up)
+            } else {
+                //隐藏标题和副标题
+                binding.title0.visibility = View.GONE
+                binding.subtitle0.visibility = View.GONE
+
+                //恢复原始大小
+                v.animate().setDuration(200).scaleX(1.0f).scaleY(1.0f).start()
+                v.stateListAnimator =
+                    AnimatorInflater.loadStateListAnimator(context, R.animator.scale_down)
+            }
+        }
+        binding.firstFocusableElement0.setOnClickListener {}
+
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        //确保在Fragment可见时再请求焦点
-        binding.firstFocusableElement.requestFocus()
     }
 
     override fun onDestroy() {
