@@ -40,9 +40,9 @@ class MoviesFragment : Fragment() {
         binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
         binding.recyclerView.adapter = MovieAdapter(getMovies())
         val items = listOf(
-            Movie("0", R.drawable.movie, "Details 1", "Time 1"),
-            Movie("1", R.drawable.ic_search, "Details 2", "Time 2"),
-            Movie("2", R.drawable.ic_history, "Details 3", "Time 3")
+            Movie("Title 0", R.drawable.movie, "Details 1", "Time 1"),
+            Movie("Title 1", R.drawable.ic_search, "Details 2", "Time 2"),
+            Movie("Title 2", R.drawable.ic_history, "Details 3", "Time 3")
         )
         adapter = CarouselAdapter(items)
         binding.viewPager.adapter = adapter
@@ -123,8 +123,8 @@ class MoviesFragment : Fragment() {
 
     private fun setupIndicators(count: Int) {
         val indicators = arrayOfNulls<ImageView>(count)
-        val layoutParams = LinearLayout.LayoutParams(40, 20)
-        layoutParams.setMargins(8, 0, 8, 0)
+        val layoutParams = LinearLayout.LayoutParams(80, 20)
+        layoutParams.setMargins(10, 0, 10, 0)
 
         for (i in indicators.indices) {
             indicators[i] = ImageView(context)
