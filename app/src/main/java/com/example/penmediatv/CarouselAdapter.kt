@@ -34,5 +34,3 @@ class CarouselAdapter(private val items: List<Movie>) :
 
     override fun getItemCount(): Int = items.size
 }
-
-//data class Movie(val imageResId: Int, val movieName: String, val movieDetails: String, val playTime: String)
