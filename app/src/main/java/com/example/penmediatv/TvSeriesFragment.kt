@@ -29,18 +29,18 @@ class TvSeriesFragment : Fragment() {
         binding.listTvSeries.adapter = MovieAdapter(getMovies())
         // 设置默认聚焦第一个卡片
 //        binding.card1.requestFocus()
-        binding.imageView.setImageResource(R.drawable.movie) // 设置第一个卡片对应的图片
+        binding.bgTvSeries.setImageResource(R.drawable.movie) // 设置第一个卡片对应的图片
 
         // 设置焦点变化监听器来切换图片
         binding.card1.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.imageView.setImageResource(R.drawable.movie)
+                binding.bgTvSeries.setImageResource(R.drawable.movie)
             }
         }
 
         binding.card2.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.imageView.setImageResource(R.drawable.ic_mine)
+                binding.bgTvSeries.setImageResource(R.drawable.ic_mine)
             }
         }
 
