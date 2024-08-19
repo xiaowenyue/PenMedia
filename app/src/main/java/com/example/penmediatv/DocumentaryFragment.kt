@@ -30,9 +30,6 @@ class DocumentaryFragment : Fragment() {
         val layoutParams = binding.bgTvSeries.layoutParams
         layoutParams.height = screenHeight
         binding.bgTvSeries.layoutParams = layoutParams
-        val containerParams = binding.container.layoutParams
-        containerParams.height = screenHeight
-        binding.container.layoutParams = containerParams
 
         binding.listTvSeries.layoutManager = GridLayoutManager(context, 5)
         binding.listTvSeries.adapter = MovieAdapter(getMovies())

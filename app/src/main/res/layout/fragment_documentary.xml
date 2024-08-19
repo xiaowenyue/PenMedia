@@ -26,11 +26,35 @@
                 android:layout_height="wrap_content"
                 android:focusable="true"
                 android:focusableInTouchMode="true">
+                <!-- 使用FrameLayout包装bg_tv_series和overlay -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/bg_tv_series"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/movie" />
+
+                    <!-- 半透明的黑色遮罩 -->
+                    <View
+                        android:id="@+id/overlay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#80000000" />
+
+                </FrameLayout>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card1"
                     android:layout_width="400dp"
-                    android:layout_height="215dp"
+                    android:layout_height="200dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="25dp"
                     android:focusable="true"
@@ -40,6 +64,7 @@
                     app:cardElevation="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -49,15 +74,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="16dp"
                         android:text="Card Title"
-                        android:textSize="18sp"
-                        android:padding="16dp" />
+                        android:textSize="18sp" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card2"
                     android:layout_width="400dp"
-                    android:layout_height="215dp"
+                    android:layout_height="200dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="25dp"
                     android:focusable="true"
@@ -77,15 +102,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="16dp"
                         android:text="Card Title"
-                        android:textSize="18sp"
-                        android:padding="16dp" />
+                        android:textSize="18sp" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card3"
                     android:layout_width="400dp"
-                    android:layout_height="215dp"
+                    android:layout_height="200dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="25dp"
                     android:focusable="true"
@@ -94,7 +119,8 @@
                     app:cardCornerRadius="18dp"
                     app:cardElevation="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/card2">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -104,27 +130,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="16dp"
                         android:text="Card Title"
-                        android:textSize="18sp"
-                        android:padding="16dp" />
+                        android:textSize="18sp" />
                 </androidx.cardview.widget.CardView>
-
-                <ImageView
-                    android:id="@+id/bg_tv_series"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/combined_gradient" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
