@@ -63,9 +63,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun onNavButtonFocused(view: View) {
         val fragment: Fragment = when (view.id) {
-            R.id.nav_mine -> DocumentaryFragment()
-            R.id.nav_search -> HistoryFragment()
-            R.id.nav_history -> MineFragment()
+            R.id.nav_mine -> MineFragment()
+            R.id.nav_search -> MineFragment()
+            R.id.nav_history -> HistoryFragment()
             R.id.nav_home -> HomeFragment()
             R.id.nav_movies -> MoviesFragment()
             R.id.nav_tv_series -> TvSeriesFragment()
