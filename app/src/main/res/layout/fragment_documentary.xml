@@ -49,90 +49,247 @@
                         android:layout_height="match_parent"
                         android:background="#80000000" />
 
+                    <!-- 底部的文字内容 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginEnd="152dp"
+                        android:layout_marginBottom="82dp"
+                        android:background="@android:color/transparent"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <!-- 第一行标题 -->
+                        <TextView
+                            android:id="@+id/title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="36dp"
+                            android:layout_marginBottom="16dp"
+                            android:text="阅兵盛典"
+                            android:textColor="@android:color/white"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <!-- 第二行描述 -->
+                        <TextView
+                            android:id="@+id/description_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="军事/记录 已完结/全6集"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
                 </FrameLayout>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card1"
-                    android:layout_width="400dp"
+                    android:id="@+id/card0"
+                    android:layout_width="500dp"
                     android:layout_height="200dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="26dp"
                     android:layout_marginTop="25dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    app:cardBackgroundColor="@color/orange"
+                    app:cardBackgroundColor="#ffffff"
                     app:cardCornerRadius="18dp"
                     app:cardElevation="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/movie" />
+                        android:layout_height="match_parent">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="Card Title"
-                        android:textSize="18sp" />
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/movie_pic_zero"
+                            android:layout_width="250dp"
+                            android:layout_height="170dp"
+                            android:layout_gravity="center_vertical"
+                            android:paddingStart="20dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/movie"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+                        <TextView
+                            android:id="@+id/movie_title_zero"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:text="Card Title"
+                            android:textColor="#252631"
+                            android:textSize="23sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/movie_pic_zero"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/movie_content_zero"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Card Title"
+                            android:textColor="#252631"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/movie_pic_zero"
+                            app:layout_constraintTop_toBottomOf="@id/movie_title_zero" />
+
+                        <TextView
+                            android:id="@+id/movie_details_zero"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="全6集"
+                            android:textColor="#252631"
+                            android:textSize="13sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card1"
+                    android:layout_width="500dp"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="25dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:cardBackgroundColor="#d2e2f1"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card0">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/movie_pic_one"
+                            android:layout_width="250dp"
+                            android:layout_height="170dp"
+                            android:layout_gravity="center_vertical"
+                            android:paddingStart="20dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/movie"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+                        <TextView
+                            android:id="@+id/movie_title_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:text="Card Title"
+                            android:textColor="#252631"
+                            android:textSize="23sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/movie_pic_one"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/movie_content_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Card Title"
+                            android:textColor="#252631"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/movie_pic_one"
+                            app:layout_constraintTop_toBottomOf="@id/movie_title_one" />
+
+                        <TextView
+                            android:id="@+id/movie_details_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="全6集"
+                            android:textColor="#252631"
+                            android:textSize="13sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card2"
-                    android:layout_width="400dp"
+                    android:layout_width="500dp"
                     android:layout_height="200dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="26dp"
                     android:layout_marginTop="25dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    app:cardBackgroundColor="@color/orange"
+                    app:cardBackgroundColor="#d5c69c"
                     app:cardCornerRadius="18dp"
                     app:cardElevation="10dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/card1">
 
-                    <ImageView
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/movie" />
+                        android:layout_height="match_parent">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="Card Title"
-                        android:textSize="18sp" />
-                </androidx.cardview.widget.CardView>
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/movie_pic"
+                            android:layout_width="250dp"
+                            android:layout_height="170dp"
+                            android:layout_gravity="center_vertical"
+                            android:paddingStart="20dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/movie"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card3"
-                    android:layout_width="400dp"
-                    android:layout_height="200dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="25dp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    app:cardBackgroundColor="@color/orange"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="10dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/card2">
+                        <TextView
+                            android:id="@+id/movie_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:text="Card Title"
+                            android:textColor="#252631"
+                            android:textSize="23sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/movie_pic"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/movie" />
+                        <TextView
+                            android:id="@+id/movie_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Card Title"
+                            android:textColor="#252631"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/movie_pic"
+                            app:layout_constraintTop_toBottomOf="@id/movie_title" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="Card Title"
-                        android:textSize="18sp" />
+                        <TextView
+                            android:id="@+id/movie_details"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="全6集"
+                            android:textColor="#252631"
+                            android:textSize="13sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
