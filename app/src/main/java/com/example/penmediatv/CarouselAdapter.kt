@@ -1,6 +1,5 @@
 package com.example.penmediatv
 
-import android.view.LayoutInflater
 import android.view.LayoutInflater.*
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,7 @@ class CarouselAdapter(private val items: List<Movie>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewHolder {
         val view = from(parent.context)
-            .inflate(R.layout.item_carousel, parent, false)
+            .inflate(R.layout.item_carousel_title, parent, false)
         return CarouselViewHolder(view)
     }
 

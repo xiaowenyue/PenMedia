@@ -20,7 +20,7 @@ import com.example.penmediatv.databinding.FragmentAnimationBinding
 class AnimationFragment : Fragment() {
     private var _binding: FragmentAnimationBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: CarouselAdapter
+    private lateinit var adapter: NoTitleCarouselAdapter
     private var handler = Handler(Looper.getMainLooper())
     private var runnable: Runnable? = null
     private val slideInterval: Long = 3000 // 滚动间隔时间，单位为毫秒
@@ -43,7 +43,7 @@ class AnimationFragment : Fragment() {
             Movie("Title 1", R.drawable.ic_search, "Details 2", "Time 2"),
             Movie("Title 2", R.drawable.ic_history, "Details 3", "Time 3")
         )
-        adapter = CarouselAdapter(items)
+        adapter = NoTitleCarouselAdapter(items)
         binding.viewPager.adapter = adapter
         setupIndicators(items.size)
         setCurrentIndicator(0)

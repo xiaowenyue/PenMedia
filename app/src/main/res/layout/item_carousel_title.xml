@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:id="@+id/maskView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/mask_gradient" />
+
+    <LinearLayout
+        android:id="@+id/textContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        android:padding="23dp">
+
+        <TextView
+            android:id="@+id/movieName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Movie Name"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/movieDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Movie Details"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/playTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Play Time"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/button_play"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_bg"
+            android:gravity="center"
+            android:text="Play Now"
+            android:textColor="#3d7eff"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</RelativeLayout>
