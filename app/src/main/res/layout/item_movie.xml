@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/movie_item_background"
     android:layout_gravity="center"
-    android:id="@+id/movie_item"
-    >
+    android:id="@+id/movie_item">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/movie_image"
         android:layout_width="164dp"
         android:layout_height="246dp"
+        app:shapeAppearanceOverlay="@style/RoundedImageView"
         android:scaleType="fitXY"
         android:src="@drawable/movie"/>
 
