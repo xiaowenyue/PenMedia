@@ -28,7 +28,7 @@ class HistoryFragment : Fragment() {
             Movie("Movie 5", R.drawable.ic_search),
             Movie("Movie 6", R.drawable.ic_history),
         )
-        binding.recyclerView.adapter = MovieAdapter(movieList)
+        binding.recyclerView.adapter = HistoryAdapter(movieList)
 
         return binding.root
     }
