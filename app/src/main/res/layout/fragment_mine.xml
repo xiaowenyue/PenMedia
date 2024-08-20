@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
     <!-- Penmedia TV Subscriber -->
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/item1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:background="@color/button_pressed"
-        android:padding="24dp"
-        android:layout_marginBottom="48px"
-        android:layout_marginRight="48px"
         android:gravity="center"
+        android:orientation="vertical"
+        app:cardBackgroundColor="@color/button_pressed"
+        app:cardCornerRadius="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.63"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintHeight_percent="0.7">
+        app:layout_constraintWidth_percent="0.3">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -30,27 +28,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Penmedia TV Subscriber"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:gravity="center"/>
-    </LinearLayout>
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
 
     <!-- My Collection -->
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/item2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:background="#81c79c"
-        android:padding="24dp"
-        android:layout_marginBottom="48px"
-        android:layout_marginRight="48px"
         android:gravity="center"
+        android:orientation="vertical"
+        app:cardBackgroundColor="#81c79c"
+        app:cardCornerRadius="18dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/item1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintHeight_percent="0.3">
+        app:layout_constraintTop_toTopOf="@id/item1"
+        app:layout_constraintWidth_percent="0.3">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -60,26 +57,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="My Collection"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:gravity="center"/>
-    </LinearLayout>
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
 
     <!-- User Agreement -->
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/item3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:background="#e7cca2"
-        android:padding="24dp"
-        android:layout_marginBottom="48px"
         android:gravity="center"
+        android:orientation="vertical"
+        app:cardBackgroundColor="#e7cca2"
+        app:cardCornerRadius="18dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/item2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintHeight_percent="0.3">
+        app:layout_constraintTop_toTopOf="@id/item2"
+        app:layout_constraintWidth_percent="0.3">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -89,26 +86,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="User Agreement"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:gravity="center"/>
-    </LinearLayout>
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
 
     <!-- Recently Reviewed -->
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/item4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:background="#81afff"
-        android:padding="24dp"
-        android:layout_marginRight="48px"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item1"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintHeight_percent="0.3">
+        android:orientation="vertical"
+        app:cardBackgroundColor="#81afff"
+        app:cardCornerRadius="18dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toEndOf="@id/item1"
+        app:layout_constraintTop_toBottomOf="@id/item2"
+        app:layout_constraintWidth_percent="0.3">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -118,25 +116,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Recently Reviewed"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:gravity="center"/>
-    </LinearLayout>
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
 
     <!-- About Us -->
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/item5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:background="#596fff"
-        android:padding="24dp"
         android:gravity="center"
+        android:orientation="vertical"
+        app:cardBackgroundColor="#596fff"
+        app:cardCornerRadius="18dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/item4"
-        app:layout_constraintTop_toBottomOf="@id/item2"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintHeight_percent="0.3">
+        app:layout_constraintTop_toBottomOf="@id/item3"
+        app:layout_constraintWidth_percent="0.3">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -146,10 +146,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="About Us"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:gravity="center"/>
-    </LinearLayout>
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
