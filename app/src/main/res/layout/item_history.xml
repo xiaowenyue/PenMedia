@@ -1,45 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="290dp"
-        android:layout_height="220dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="20dp"
-        android:background="@android:color/transparent"
-        android:orientation="vertical">
+    android:id="@+id/item"
+    android:layout_width="290dp"
+    android:layout_height="230dp"
+    android:layout_marginStart="22dp"
+    android:layout_marginEnd="20dp"
+    android:background="@drawable/movie_item_background"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/play"
+    <FrameLayout
+        android:id="@+id/play"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/pic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="175dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/movie"
+            app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/pic"
-                android:layout_width="match_parent"
-                android:layout_height="175dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/movie"
-                app:shapeAppearanceOverlay="@style/RoundedImageView" />
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_play" />
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:text="MovieName"
-            android:textAlignment="center"
-            android:textColor="#b3c0e7"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:layout_gravity="center"
+            android:src="@drawable/ic_play" />
+    </FrameLayout>
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="MovieName"
+        android:textAlignment="center"
+        android:textColor="#b3c0e7"
+        android:textSize="20sp" />
 </LinearLayout>
