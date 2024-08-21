@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 设置渐入渐出动画
-        val fadeInOutAnimation = AlphaAnimation(0.0f, 1.0f).apply {
+        val fadeInOutAnimation = AlphaAnimation(1.0f, 0.0f).apply {
             duration = 1000 // 持续时间
             repeatMode = AlphaAnimation.REVERSE
             repeatCount = AlphaAnimation.INFINITE
@@ -32,8 +32,14 @@ class SplashActivity : AppCompatActivity() {
     private fun simulateLoading() {
         // 这里模拟进度条加载，您可以根据实际需求加载数据
         Handler(Looper.getMainLooper()).postDelayed({
+            binding.progressBar.progress = 25
+        }, 750)
+        Handler(Looper.getMainLooper()).postDelayed({
             binding.progressBar.progress = 50
         }, 1500)
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.progressBar.progress = 75
+        }, 2250)
 
         Handler(Looper.getMainLooper()).postDelayed({
             binding.progressBar.progress = 100
