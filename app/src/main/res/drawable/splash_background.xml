@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="@android:color/black"/>
+    </item>
+    <!-- 可以添加其他背景元素，例如星空图案等 -->
+</layer-list>
