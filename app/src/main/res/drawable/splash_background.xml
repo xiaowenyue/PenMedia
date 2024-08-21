@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <color android:color="@android:color/black"/>
+        <bitmap
+            android:src="@drawable/img_bg"
+            android:gravity="center"/>
     </item>
-    <!-- 可以添加其他背景元素，例如星空图案等 -->
 </layer-list>
