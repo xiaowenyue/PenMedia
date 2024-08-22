@@ -24,73 +24,78 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
+                android:orientation="horizontal"
                 android:paddingLeft="14dp"
-                android:paddingRight="14dp"
-                android:orientation="horizontal">
+                android:paddingTop="20dp"
+                android:paddingRight="14dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView"
                     android:layout_width="0dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
                     android:background="@drawable/movie_item_background"
                     android:scaleType="fitXY"
-                    android:src="@drawable/movie" />
+                    android:src="@drawable/movie"
+                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView2"
                     android:layout_width="0dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
                     android:background="@drawable/movie_item_background"
                     android:scaleType="fitXY"
-                    android:src="@drawable/movie" />
+                    android:src="@drawable/movie"
+                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:paddingLeft="14dp"
-                android:paddingRight="14dp"
-                android:orientation="horizontal">
+                android:paddingRight="14dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView3"
                     android:layout_width="100dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
                     android:background="@drawable/movie_item_background"
+                    android:scaleType="fitXY"
                     android:src="@drawable/movie"
-                    android:scaleType="fitXY"/>
+                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView4"
                     android:layout_width="100dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
                     android:background="@drawable/movie_item_background"
+                    android:scaleType="fitXY"
                     android:src="@drawable/movie"
-                    android:scaleType="fitXY"/>
+                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView5"
                     android:layout_width="100dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
-                    android:background="@drawable/movie_item_background"
+                    android:scaleType="fitXY"
                     android:src="@drawable/movie"
-                    android:scaleType="fitXY"/>
+                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView6"
                     android:layout_width="100dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
                     android:background="@drawable/movie_item_background"
+                    android:scaleType="fitXY"
                     android:src="@drawable/movie"
-                    android:scaleType="fitXY"/>
+                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
             </LinearLayout>
 
             <com.example.penmediatv.NonScrollableRecyclerView

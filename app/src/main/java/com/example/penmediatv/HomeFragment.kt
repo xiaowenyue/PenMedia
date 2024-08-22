@@ -31,6 +31,13 @@ class HomeFragment : Fragment() {
         binding.imageView5.setOnClickListener {
             // Handle image click event
         }
+        binding.imageView5.setOnFocusChangeListener{_, hasFocus ->
+            if (hasFocus){
+                binding.imageView5.setImageResource(R.color.purple_200)
+            } else {
+                binding.imageView5.setImageResource(R.color.white)
+            }
+        }
         binding.imageView6.setOnClickListener {
             // Handle image click event
         }
