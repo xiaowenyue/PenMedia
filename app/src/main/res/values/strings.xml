@@ -8,4 +8,8 @@
     <string name="tv_series">TV series</string>
     <string name="animation">Animation</string>
     <string name="documentary">Documentary</string>
+    <string name="company">TV Company Introduction</string>
+    <string name="software">Software Information</string>
+    <string name="related_software">Related Software Information</string>
+    <string name="version">Current Version</string>
 </resources>
