@@ -12,6 +12,8 @@
         android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:cardCornerRadius="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.63"
@@ -75,6 +77,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -121,6 +125,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -168,6 +174,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -212,8 +220,12 @@
             android:clipToOutline="true" />
 
         <LinearLayout
+            android:id="@+id/about_us"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:background="@drawable/cardview_selector"
             android:gravity="center"
             android:orientation="vertical">
 
