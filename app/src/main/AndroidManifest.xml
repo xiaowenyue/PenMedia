@@ -27,7 +27,11 @@
         </activity>
         <activity
             android:name=".AboutUsActivity"
-            android:exported="true">
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".UserAgreementActivity"
+            android:exported="false">
         </activity>
         <activity
             android:name=".SplashActivity"
