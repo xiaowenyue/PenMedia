@@ -7,6 +7,7 @@
     android:paddingStart="40dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/img"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,198 +30,238 @@
             android:background="@drawable/mask_gradient_vertical" />
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/tv_movie_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="66dp"
-        android:text="Movie Title"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_movie_region"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:text="中国香港"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
-
-    <TextView
-        android:id="@+id/separator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:text="  |  "
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/tv_movie_region"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
-
-    <TextView
-        android:id="@+id/tv_movie_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:text="2002年"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/separator"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
-
-    <TextView
-        android:id="@+id/separator1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:text="  |  "
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/tv_movie_year"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
-
-    <TextView
-        android:id="@+id/tv_movie_cast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:text="主演：刘德华、梁朝伟、曾志伟"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/separator1"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
-
-    <TextView
-        android:id="@+id/separator2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:text="  |  "
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/tv_movie_cast"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
-
-    <TextView
-        android:id="@+id/tv_movie_genre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:text="动作/犯罪"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/separator2"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bt_watch_now"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_watch_now"
-        android:drawableLeft="@drawable/ic_play_small"
-        android:drawablePadding="8dp"
-        android:paddingHorizontal="12dp"
-        android:text="Watch Now"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_region" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_collect"
-        style="@style/CollectButtonText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_collect"
-        android:drawableLeft="@drawable/ic_heart"
-        android:drawablePadding="8dp"
-        android:paddingHorizontal="12dp"
-        android:text="Collect"
-        android:textAllCaps="false"
-        android:textSize="18dp"
-        app:layout_constraintStart_toEndOf="@id/bt_watch_now"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_region" />
-
-    <TextView
-        android:id="@+id/tv_movie_introduction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="8dp"
-        android:text="Introduction"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bt_watch_now" />
-
-    <TextView
-        android:id="@+id/tv_movie_introduction_content"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:maxLines="2"
-        android:text="1991年，香港黑帮三合会会员刘健明听从老大韩琛的吩咐，加入警察部队成为黑帮卧底，韩琛许诺刘健明会帮其在七年后晋升为见习督察。1992年，警察训练…. 更多"
-        android:textColor="#99ffffff"
-        android:textSize="18sp"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_introduction"
-        app:layout_constraintWidth_percent="0.55" />
-
-    <TextView
-        android:id="@+id/tv_title_recommend"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:text="Relevant recommendation"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_introduction_content" />
+        app:layout_constraintEnd_toStartOf="@id/img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_percent="0.6">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_recommend"
-        app:layout_constraintWidth_percent="0.12"
-        app:layout_constraintHeight_percent="0.39">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/iv_movie_recommend"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_movie_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="66dp"
+                android:text="Movie Title"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_movie_region"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:text="中国香港"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
+
+            <TextView
+                android:id="@+id/separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:text="  |  "
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/tv_movie_region"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
+
+            <TextView
+                android:id="@+id/tv_movie_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:text="2002年"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/separator"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
+
+            <TextView
+                android:id="@+id/separator1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:text="  |  "
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/tv_movie_year"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
+
+            <TextView
+                android:id="@+id/tv_movie_cast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:text="主演：刘德华、梁朝伟、曾志伟"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/separator1"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
+
+            <TextView
+                android:id="@+id/separator2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:text="  |  "
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/tv_movie_cast"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
+
+            <TextView
+                android:id="@+id/tv_movie_genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:text="动作/犯罪"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/separator2"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_watch_now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="@drawable/button_watch_now"
+                android:drawableLeft="@drawable/ic_play_small"
+                android:drawablePadding="8dp"
+                android:paddingHorizontal="12dp"
+                android:text="Watch Now"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_region" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_collect"
+                style="@style/CollectButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_collect"
+                android:drawableLeft="@drawable/ic_heart"
+                android:drawablePadding="8dp"
+                android:paddingHorizontal="12dp"
+                android:text="Collect"
+                android:textAllCaps="false"
+                android:textSize="18dp"
+                app:layout_constraintStart_toEndOf="@id/bt_watch_now"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_region" />
+
+            <TextView
+                android:id="@+id/tv_movie_introduction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="8dp"
+                android:text="Introduction"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bt_watch_now" />
+
+            <TextView
+                android:id="@+id/tv_movie_introduction_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:text="1991年，香港黑帮三合会会员刘健明听从老大韩琛的吩咐，加入警察部队成为黑帮卧底，韩琛许诺刘健明会帮其在七年后晋升为见习督察。1992年，警察训练…. 更多"
+                android:textColor="#99ffffff"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_introduction"/>
+
+            <TextView
+                android:id="@+id/tv_title_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:text="Relevant recommendation"
+                android:textColor="@android:color/white"
+                android:textSize="23sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_introduction_content" />
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="12dp"
+                app:cardBackgroundColor="#99252631"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintHeight_percent="0.43"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="1.0"
-               app:layout_constraintHeight_percent="0.78"
-                android:src="@drawable/movie"
-                android:scaleType="fitXY"
-            />
+                app:layout_constraintTop_toBottomOf="@id/tv_title_recommend"
+                app:layout_constraintWidth_percent="0.24">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/iv_movie_recommend"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/movie"
+                        app:layout_constraintHeight_percent="0.75"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="1.0" />
+
+                    <TextView
+                        android:id="@+id/tv_movie_recommend_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="The Matrix"
+                        android:textColor="#b3c0e7"
+                        android:textSize="19sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_movie_recommend" />
+
+                    <TextView
+                        android:id="@+id/tv_movie_recommend_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="中国香港 ｜ 2003"
+                        android:textColor="#66ffffff"
+                        android:textSize="19sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_movie_recommend_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
