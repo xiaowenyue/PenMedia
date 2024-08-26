@@ -1,0 +1,5 @@
+<!-- bg_item_movie_recommend.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#99252631" />
+    <corners android:radius="16dp" />
+</shape>

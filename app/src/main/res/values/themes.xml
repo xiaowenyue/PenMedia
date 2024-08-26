@@ -29,21 +29,33 @@
         <item name="android:textColor">@color/nav_text</item>
         <item name="android:textSize">@dimen/navigation_size</item>
     </style>
+
     <style name="MovieCardStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">8dp</item>
         <item name="cardBackgroundColor">@color/black</item>
         <item name="strokeColor">@color/white</item>
         <item name="strokeWidth">2dp</item>
     </style>
+
     <style name="RoundedImageView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">12dp</item>
     </style>
+
+    <style name="RecommendImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
     <style name="CollectButtonText">
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">16sp</item>
