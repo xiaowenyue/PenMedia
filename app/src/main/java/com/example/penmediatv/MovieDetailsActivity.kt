@@ -17,7 +17,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             Toast.makeText(this, "Watch Now", Toast.LENGTH_SHORT).show()
         }
         binding.recyclerView.layoutManager = GridLayoutManager(this, 4)
-        binding.recyclerView.adapter = MovieAdapter(getMovies())
+        binding.recyclerView.adapter = RelevantRecommendationAdapter(getMovies())
     }
 
     private fun getMovies(): List<Movie> {
