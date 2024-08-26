@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,9 @@ class RelevantRecommendationAdapter(private val movies: List<Movie>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.itemMovieRecommend.setOnClickListener {
+                val context = binding.root.context
+                val intent = Intent(context,AboutUsActivity::class.java)
+                context.startActivity(intent)
             }
         }
     }
