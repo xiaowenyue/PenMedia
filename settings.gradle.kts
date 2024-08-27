@@ -28,4 +28,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Penmedia TV"
 include(":app")
+include(":superplayerkit")
  
