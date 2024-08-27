@@ -82,4 +82,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    // implementation 'com.tencent.liteav:LiteAVSDK_Player:latest.release'
+    implementation("com.tencent.liteav:LiteAVSDK_Player:latest.release")
+    //  implementation project(':superplayerkit')
+    implementation(project(":superplayerkit"))
+    //  // 播放器组件弹幕集成的第三方库
+    //  implementation 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
+    implementation("com.github.ctiao:DanmakuFlameMaster:0.5.3")
+
 }
