@@ -48,6 +48,10 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".MoviePlayActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
