@@ -1,7 +1,6 @@
 package com.example.penmediatv
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.penmediatv.databinding.ActivityMoviePlayBinding
@@ -48,6 +47,7 @@ class MoviePlayActivity : AppCompatActivity() {
 
         binding.clView.requestFocus()
         mVodPlayer.startVodPlay(mainVideoUrl)
+        playAd()
         binding.clView.setOnClickListener{
             if (mVodPlayer.isPlaying) {
                 mVodPlayer.pause()
