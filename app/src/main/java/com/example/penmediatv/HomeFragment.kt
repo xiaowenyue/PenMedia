@@ -20,7 +20,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-//        binding.imageView.setOnClickListener(View.OnClickListener {})
+        //binding.imageView.setOnClickListener(View.OnClickListener {})
         val model = SuperPlayerModel()
         model.appId = 1400329073 // 配置 AppId
         model.url = "http://vjs.zencdn.net/v/oceans.mp4" // 配置您的播放视频 url
