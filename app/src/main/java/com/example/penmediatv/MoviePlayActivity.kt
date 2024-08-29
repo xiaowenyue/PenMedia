@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.penmediatv.databinding.ActivityMoviePlayBinding
 import com.tencent.rtmp.ITXVodPlayListener
 import com.tencent.rtmp.TXLiveConstants
-import com.tencent.rtmp.TXPlayInfoParams
 import com.tencent.rtmp.TXVodPlayConfig
 import com.tencent.rtmp.TXVodPlayer
 
@@ -15,6 +14,9 @@ import com.tencent.rtmp.TXVodPlayer
 class MoviePlayActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMoviePlayBinding
     private lateinit var mVodPlayer: TXVodPlayer
+    private var isAdPlaying = false
+    private var mainVideoUrl = "http://vjs.zencdn.net/v/oceans.mp4"  // The main video URL
+    private var adVideoUrl = "https://cdn.coverr.co/videos/coverr-serene-surfer-gazing-at-the-sea/720p.mp4"  // Replace with your ad video URL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,8 @@ class MoviePlayActivity : AppCompatActivity() {
         val playConfig = TXVodPlayConfig()
         // 设置配置
         mVodPlayer.setConfig(playConfig)
+        //关联 player 对象与视频渲染 view
+        mVodPlayer.setPlayerView(binding.videoView)
 
         // 设置监听器
         mVodPlayer.setVodListener(object : ITXVodPlayListener {
@@ -46,17 +50,12 @@ class MoviePlayActivity : AppCompatActivity() {
             }
         })
 
-        //关联 player 对象与视频渲染 view
-        mVodPlayer.setPlayerView(binding.videoView)
-
-        //播放 URL 视频资源
-//        val url = "https://cdn.coverr.co/videos/coverr-serene-surfer-gazing-at-the-sea/720p.mp4"
-        val url = "http://vjs.zencdn.net/v/oceans.mp4"
-        mVodPlayer.startVodPlay(url)
-
+//        mVodPlayer.setAutoPlay(false);  // 设置为非自动播放
+        mVodPlayer.startVodPlay(mainVideoUrl);
+//        playAd()
 
         // 推荐使用下面的新接口
-// psign 即播放器签名，签名介绍和生成方式参见链接：https://cloud.tencent.com/document/product/266/42436
+        // psign 即播放器签名，签名介绍和生成方式参见链接：https://cloud.tencent.com/document/product/266/42436
 //        val playInfoParam = TXPlayInfoParams(
 //            1329031633,  // 腾讯云账户的appId
 //            "1397757891767785731",  // 视频的fileId
