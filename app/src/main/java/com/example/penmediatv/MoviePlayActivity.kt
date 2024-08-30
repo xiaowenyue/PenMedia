@@ -2,6 +2,8 @@ package com.example.penmediatv
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.example.penmediatv.databinding.ActivityMoviePlayBinding
 import com.tencent.rtmp.ITXVodPlayListener
@@ -14,8 +16,7 @@ class MoviePlayActivity : AppCompatActivity() {
     private lateinit var mVodPlayer: TXVodPlayer
     private var isAdPlaying = false
     private var mainVideoUrl = "http://vjs.zencdn.net/v/oceans.mp4"
-    private var adVideoUrl =
-        "https://cdn.coverr.co/videos/coverr-serene-surfer-gazing-at-the-sea/720p.mp4"
+    private var adVideoUrl = "https://cdn.coverr.co/videos/coverr-serene-surfer-gazing-at-the-sea/720p.mp4"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,22 +42,71 @@ class MoviePlayActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onNetStatus(player: TXVodPlayer?, status: Bundle?) {
-            }
+            override fun onNetStatus(player: TXVodPlayer?, status: Bundle?) {}
         })
 
         binding.clView.requestFocus()
         mVodPlayer.startVodPlay(mainVideoUrl)
         playAd()
-        binding.clView.setOnClickListener{
+
+        // Click listener to toggle pause/play
+        binding.clView.setOnClickListener {
             if (mVodPlayer.isPlaying) {
-                mVodPlayer.pause()
-                binding.pauseOverlay.visibility = View.VISIBLE
+                pauseVideo()
             } else {
-                mVodPlayer.resume()
-                binding.pauseOverlay.visibility = View.GONE
+                resumeVideo()
             }
         }
+
+        // Set up playback controls
+        setupPlaybackControls()
+    }
+
+    private fun setupPlaybackControls() {
+        // Play/Pause button
+        binding.playPauseButton.setOnClickListener {
+            if (mVodPlayer.isPlaying) {
+                pauseVideo()
+            } else {
+                resumeVideo()
+            }
+        }
+
+        // Previous button
+        binding.prevButton.setOnClickListener {
+            // Implement the logic to play the previous video or seek back
+        }
+
+        // Next button
+        binding.nextButton.setOnClickListener {
+            // Implement the logic to play the next video or seek forward
+        }
+
+        // Speed spinner
+        val speedOptions = arrayOf(0.5f, 0.75f, 1.0f, 1.25f, 1.5f, 2.0f)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, speedOptions)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.speedSpinner.adapter = adapter
+        binding.speedSpinner.setSelection(2) // Default to 1.0x speed
+        binding.speedSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                mVodPlayer.setRate(speedOptions[position])
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
+    private fun pauseVideo() {
+        mVodPlayer.pause()
+        binding.pauseOverlay.visibility = View.VISIBLE
+        binding.bottomControls.visibility = View.VISIBLE
+    }
+
+    private fun resumeVideo() {
+        mVodPlayer.resume()
+        binding.pauseOverlay.visibility = View.GONE
+        binding.bottomControls.visibility = View.GONE
     }
 
     private fun playAd() {
@@ -72,8 +122,7 @@ class MoviePlayActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onNetStatus(player: TXVodPlayer?, status: Bundle?) {
-            }
+            override fun onNetStatus(player: TXVodPlayer?, status: Bundle?) {}
         })
     }
 
