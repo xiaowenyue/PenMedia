@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/ic_previous_focus" android:state_focused="true" />
-    <item android:drawable="@drawable/ic_previous_focus" android:state_pressed="true" />
+    <item android:drawable="@drawable/ic_next_focus" android:state_focused="true" />
+    <item android:drawable="@drawable/ic_next_focus" android:state_pressed="true" />
     <item>
         <bitmap
-            android:src="@drawable/ic_previous"
+            android:src="@drawable/ic_next"
             android:gravity="center"
             android:width="50dp"
             android:height="50dp" />
