@@ -42,58 +42,80 @@
             android:layout_gravity="bottom"
             android:background="@drawable/bg_movie_play"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="20dp"
+            android:orientation="vertical"
             android:visibility="visible">
+            <!-- 播放进度条 -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="9dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="35dp"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/progress_bar_drawable" />
 
-            <!-- Previous button -->
-            <ImageButton
-                android:id="@+id/prevButton"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:background="@drawable/selector_previous"
-                android:scaleType="fitXY" />
-
-            <!-- Play/Pause button -->
-            <ImageButton
-                android:id="@+id/playPauseButton"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:background="@drawable/selector_pause"
-                android:scaleType="fitXY" />
-
-            <!-- Next button -->
-            <ImageButton
-                android:id="@+id/nextButton"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:background="@drawable/selector_next"
-                android:scaleType="fitXY" />
-            <!-- 当前播放时长与总时长 -->
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="00:00/1:30:20"
-                android:textColor="@android:color/white"
-                android:textSize="25sp" />
-            <!-- Filler view to push Spinner to the right -->
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_gravity="bottom"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:visibility="visible">
+                <!-- Previous button -->
+                <ImageButton
+                    android:id="@+id/prevButton"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:background="@drawable/selector_previous"
+                    android:scaleType="fitXY" />
 
-            <!-- Speed Dropdown -->
-            <Spinner
-                android:id="@+id/speedSpinner"
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/movie_play_speed"
-                android:dropDownWidth="wrap_content"
-                android:dropDownVerticalOffset="8dp"
-                android:entries="@array/playback_speeds"
-                android:textAlignment="center" />
+                <!-- Play/Pause button -->
+                <ImageButton
+                    android:id="@+id/playPauseButton"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:background="@drawable/selector_pause"
+                    android:scaleType="fitXY" />
+
+                <!-- Next button -->
+                <ImageButton
+                    android:id="@+id/nextButton"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:background="@drawable/selector_next"
+                    android:scaleType="fitXY" />
+                <!-- 当前播放时长与总时长 -->
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00/1:30:20"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp" />
+                <!-- Filler view to push Spinner to the right -->
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <!-- Speed Dropdown -->
+                <Spinner
+                    android:id="@+id/speedSpinner"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="35dp"
+                    android:background="@drawable/movie_play_speed"
+                    android:dropDownWidth="wrap_content"
+                    android:dropDownVerticalOffset="8dp"
+                    android:entries="@array/playback_speeds"
+                    android:textAlignment="center" />
+            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
