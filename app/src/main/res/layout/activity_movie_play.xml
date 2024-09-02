@@ -69,6 +69,14 @@
                 android:layout_height="110dp"
                 android:background="@drawable/selector_next"
                 android:scaleType="fitXY" />
+            <!-- 当前播放时长与总时长 -->
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00/1:30:20"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
             <!-- Filler view to push Spinner to the right -->
             <View
                 android:layout_width="wrap_content"
@@ -81,10 +89,11 @@
                 android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="16dp"
-                android:background="@color/white"
+                android:background="@drawable/movie_play_speed"
                 android:dropDownWidth="wrap_content"
                 android:dropDownVerticalOffset="8dp"
-                android:entries="@array/playback_speeds" />
+                android:entries="@array/playback_speeds"
+                android:textAlignment="center" />
         </LinearLayout>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
