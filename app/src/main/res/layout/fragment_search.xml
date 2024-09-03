@@ -7,14 +7,15 @@
 
     <EditText
         android:id="@+id/et_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/popular_movies_list"
         app:layout_constraintBottom_toTopOf="@+id/keyboard"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@+id/popular_movies_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.4" />
     <!-- 软键盘 -->
     <GridLayout
         android:id="@+id/keyboard"
@@ -23,97 +24,111 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
+        android:background="@color/orange"
         android:columnCount="6"
         android:rowCount="5"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/popular_movies_list"
         app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.4">
-        <Button
-            style="@style/KeyboardButton"
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/keyA"
+            style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
-            style="@style/KeyboardButton"
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/keyB"
+            style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="A" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/KeyboardButton"
             android:text="B" />
 
@@ -127,23 +142,28 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@color/purple_200"
         android:padding="8dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/search_results"
+        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toEndOf="@+id/keyboard"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.2" />
 
     <!-- 右侧搜索结果 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_results"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginEnd="24dp"
+        android:background="@color/gray"
         android:padding="8dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/popular_movies_list"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.4" />
 
