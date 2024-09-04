@@ -9,14 +9,26 @@
         android:id="@+id/et_search"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="24dp"
         android:background="@android:color/holo_green_dark"
-        app:layout_constraintBottom_toTopOf="@+id/keyboard"
+        android:hint="Please enter what you are searching for"
+        app:layout_constraintBottom_toTopOf="@+id/view_underline"
         app:layout_constraintEnd_toStartOf="@+id/cl_result"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.4" />
+        app:layout_constraintWidth_percent="0.38" />
+
+    <View
+        android:id="@+id/view_underline"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="24dp"
+        android:background="#383a45"
+        app:layout_constraintBottom_toTopOf="@id/keyboard"
+        app:layout_constraintEnd_toStartOf="@id/cl_result"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_search"
+        app:layout_constraintWidth_percent="0.38" />
     <!-- 软键盘 -->
     <GridLayout
         android:id="@+id/keyboard"
@@ -30,9 +42,8 @@
         android:rowCount="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/cl_result"
-        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_underline"
         app:layout_constraintWidth_percent="0.38">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -141,6 +152,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
+        android:background="#252630"
         app:layout_constraintStart_toEndOf="@+id/keyboard"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.62">
