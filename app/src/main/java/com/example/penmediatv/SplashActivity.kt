@@ -44,7 +44,7 @@ class SplashActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             binding.progressBar.progress = 100
             // 跳转到主页面
-//            startActivity(Intent(this, MovieDetailsActivity::class.java))
+//            startActivity(Intent(this, TestActivity::class.java))
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, 3000)
