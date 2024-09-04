@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -53,6 +54,40 @@ class MainActivity : AppCompatActivity() {
         binding.navHistory.setCompoundDrawables(drawableHistory, null, null, null)
 
         binding.navHome.requestFocus()
+    }
+
+    private fun canMoveFocusLeft(view: View): Boolean {
+        val leftNeighbor = view.focusSearch(View.FOCUS_LEFT)
+        return leftNeighbor != null && leftNeighbor.isFocusable && leftNeighbor.parent === view.parent
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && binding.fragmentContainer.hasFocus()) {
+            // 获取当前fragment中的可见视图
+            val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+            val currentFocusedView = currentFragment?.view?.findFocus()
+
+            // 检查当前Fragment中是否有其他可聚焦的左边组件
+            if (currentFocusedView != null && canMoveFocusLeft(currentFocusedView)) {
+                Toast.makeText(
+                    this,
+                    "FragmentContainer中还有可聚焦组件，返回的navButton是$lastFocusedNavButtonId",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false // 允许Fragment处理焦点移动
+            } else {
+                Toast.makeText(
+                    this,
+                    "FragmentContainer中没有可聚焦组件，现在返回的navButton是$lastFocusedNavButtonId",
+                    Toast.LENGTH_SHORT
+                ).show()
+                // 否则将焦点返回给导航按钮
+                val lastFocusedButton = findViewById<TextView>(lastFocusedNavButtonId)
+                lastFocusedButton.requestFocus()
+                return true
+            }
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     private fun onNavButtonFocused(view: View) {
