@@ -12,6 +12,7 @@ import com.example.penmediatv.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var lastFocusedNavButtonId: Int = R.id.nav_home  // 默认焦点是nav_home
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,19 +33,11 @@ class MainActivity : AppCompatActivity() {
         navButtons.forEach { button ->
             button.setOnFocusChangeListener { view, hasFocus ->
                 if (hasFocus) {
+                    lastFocusedNavButtonId = view.id
                     onNavButtonFocused(view)
+//                    binding.fragmentContainer.requestFocus()
                 }
             }
-        }
-
-        navButtons.forEach { button ->
-            button.setOnClickListener { view ->
-                onNavButtonFocused(view)
-            }
-        }
-
-        if (savedInstanceState == null) {
-            binding.navHome.performClick()
         }
 
         /// 设置导航栏图标大小
@@ -59,6 +52,15 @@ class MainActivity : AppCompatActivity() {
         val drawableHistory = ContextCompat.getDrawable(this, R.drawable.ic_history_selector)!!
         drawableHistory.setBounds(0, 0, width, height)
         binding.navHistory.setCompoundDrawables(drawableHistory, null, null, null)
+
+        binding.fragmentContainer.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                // 焦点回到上一个聚焦的navButton
+                findViewById<View>(lastFocusedNavButtonId).requestFocus()
+                return@setOnKeyListener true
+            }
+            false
+        }
     }
 
     private fun onNavButtonFocused(view: View) {
@@ -80,5 +82,10 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
+//        binding.fragmentContainer.requestFocus()
+        //在Fragment加载后请求焦点
+//        binding.fragmentContainer.post{
+//            binding.fragmentContainer.requestFocus()
+//        }
     }
 }

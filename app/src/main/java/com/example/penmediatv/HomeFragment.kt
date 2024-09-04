@@ -7,24 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.penmediatv.databinding.FragmentHomeBinding
-import com.tencent.liteav.demo.superplayer.SuperPlayerModel
-
-
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        //binding.imageView.setOnClickListener(View.OnClickListener {})
-        val model = SuperPlayerModel()
-        model.appId = 1400329073 // 配置 AppId
-        model.url = "http://vjs.zencdn.net/v/oceans.mp4" // 配置您的播放视频 url
-        binding.superVodPlayerView.playWithModelNeedLicence(model)
+        binding.imageView.setOnClickListener(View.OnClickListener {})
         binding.imageView2.setOnClickListener {
             // Handle image click event
         }
@@ -83,3 +77,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+
