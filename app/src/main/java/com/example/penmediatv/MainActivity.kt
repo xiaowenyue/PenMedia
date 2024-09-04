@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
                 if (hasFocus) {
                     lastFocusedNavButtonId = view.id
                     onNavButtonFocused(view)
-//                    binding.fragmentContainer.requestFocus()
                 }
             }
         }
@@ -53,14 +52,7 @@ class MainActivity : AppCompatActivity() {
         drawableHistory.setBounds(0, 0, width, height)
         binding.navHistory.setCompoundDrawables(drawableHistory, null, null, null)
 
-        binding.fragmentContainer.setOnKeyListener { _, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-                // 焦点回到上一个聚焦的navButton
-                findViewById<View>(lastFocusedNavButtonId).requestFocus()
-                return@setOnKeyListener true
-            }
-            false
-        }
+        binding.navHome.requestFocus()
     }
 
     private fun onNavButtonFocused(view: View) {
@@ -82,10 +74,5 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
-//        binding.fragmentContainer.requestFocus()
-        //在Fragment加载后请求焦点
-//        binding.fragmentContainer.post{
-//            binding.fragmentContainer.requestFocus()
-//        }
     }
 }
