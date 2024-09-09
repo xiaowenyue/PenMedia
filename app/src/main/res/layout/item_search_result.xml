@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="350dp"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:background="@drawable/bg_search_result"
     android:orientation="horizontal"
     android:padding="8dp">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/movie_poster"
         android:layout_width="100dp"
         android:layout_height="150dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitXY"
+        android:src="@drawable/movie"
+        app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -23,16 +27,16 @@
             android:id="@+id/movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Movie Title"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:text="Movie Title" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/movie_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
             android:paddingTop="4dp"
-            android:text="Movie description..." />
+            android:text="1991年，香港黑帮三合会会员刘健明听从老大韩琛的吩咐，加入警察部队成为黑帮卧底，韩琛许诺刘健明会帮其在七年后晋升为见习督察。1992年，警察训练…. 更多"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>
