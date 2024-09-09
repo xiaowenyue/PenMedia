@@ -18,7 +18,8 @@ class SearchFragment : Fragment() {
 
     private lateinit var popularMoviesAdapter: PopularMoviesAdapter
     private lateinit var searchResultsAdapter: SearchResultsAdapter
-
+    val details: String =
+        "1991年，香港黑帮三合会会员刘健明听从老大韩琛的吩咐，加入警察部队成为黑帮卧底，韩琛许诺刘健明会帮其在七年后晋升为见习督察。1992年，警察训练…. 更多"
     private val popularMovies = listOf(
         Movie("无双", R.drawable.movie, "电影描述..."),
         Movie("扫毒", R.drawable.movie, "电影描述..."),
@@ -30,6 +31,10 @@ class SearchFragment : Fragment() {
     )
 
     private val searchResults = listOf(
+        Movie("无双", R.drawable.movie, details),
+        Movie("无双", R.drawable.movie, details),
+        Movie("无双", R.drawable.movie, details),
+        Movie("无双", R.drawable.movie, details),
         Movie("无双", R.drawable.movie, "电影描述..."),
         Movie("扫毒", R.drawable.movie, "电影描述..."),
         // 添加更多电影数据

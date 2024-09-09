@@ -5,11 +5,12 @@
     <string name="history">History</string>
     <string name="home">Home</string>
     <string name="movies">Movies</string>
-    <string name="tv_series">TV series</string>
-    <string name="animation">Animation</string>
+    <string name="tv_series" translatable="false">TV series</string>
+    <string name="animation" translatable="false">Animation</string>
     <string name="documentary">Documentary</string>
     <string name="company">TV Company Introduction</string>
     <string name="software">Software Information</string>
     <string name="related_software">Related Software Information</string>
     <string name="version">Current Version</string>
+    <string name="details">1991年，香港黑帮三合会会员刘健明听从老大韩琛的吩咐，加入警察部队成为黑帮卧底，韩琛许诺刘健明会帮其在七年后晋升为见习督察。1992年，警察训练…. 更多</string>
 </resources>
