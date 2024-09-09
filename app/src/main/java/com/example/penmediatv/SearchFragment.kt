@@ -38,7 +38,7 @@ class SearchFragment : Fragment() {
         Movie("无双", R.drawable.movie, "电影描述..."),
         Movie("扫毒", R.drawable.movie, "电影描述..."),
         // 添加更多电影数据
-    )
+    ).toMutableList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,7 +100,7 @@ class SearchFragment : Fragment() {
             // 添加更多搜索结果
         )
 
-        (searchResults as ArrayList<Movie>).clear()
+        searchResults.clear()
         searchResults.addAll(results)
         searchResultsAdapter.notifyDataSetChanged()
     }
