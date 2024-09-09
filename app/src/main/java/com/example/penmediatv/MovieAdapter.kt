@@ -1,19 +1,24 @@
 package com.example.penmediatv
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.penmediatv.databinding.ItemMovieBinding
 
-class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val movies: List<Movie>) :
+    RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    class MovieViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MovieViewHolder(private val binding: ItemMovieBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.movieTitle.text = movie.name
             binding.movieImage.setImageResource(movie.imageResId)
             binding.movieItem.setOnClickListener {
-                // Handle movie item click
+                val context = binding.root.context
+                val intent = Intent(context, MovieDetailsActivity::class.java)
+                context.startActivity(intent)
             }
         }
     }

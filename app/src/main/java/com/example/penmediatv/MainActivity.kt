@@ -69,18 +69,18 @@ class MainActivity : AppCompatActivity() {
 
             // 检查当前Fragment中是否有其他可聚焦的左边组件
             if (currentFocusedView != null && canMoveFocusLeft(currentFocusedView)) {
-                Toast.makeText(
-                    this,
-                    "FragmentContainer中还有可聚焦组件，返回的navButton是$lastFocusedNavButtonId",
-                    Toast.LENGTH_SHORT
-                ).show()
+//                Toast.makeText(
+//                    this,
+//                    "FragmentContainer中还有可聚焦组件，返回的navButton是$lastFocusedNavButtonId",
+//                    Toast.LENGTH_SHORT
+//                ).show()
                 return false // 允许Fragment处理焦点移动
             } else {
-                Toast.makeText(
-                    this,
-                    "FragmentContainer中没有可聚焦组件，现在返回的navButton是$lastFocusedNavButtonId",
-                    Toast.LENGTH_SHORT
-                ).show()
+//                Toast.makeText(
+//                    this,
+//                    "FragmentContainer中没有可聚焦组件，现在返回的navButton是$lastFocusedNavButtonId",
+//                    Toast.LENGTH_SHORT
+//                ).show()
                 // 否则将焦点返回给导航按钮
                 val lastFocusedButton = findViewById<TextView>(lastFocusedNavButtonId)
                 lastFocusedButton.requestFocus()
