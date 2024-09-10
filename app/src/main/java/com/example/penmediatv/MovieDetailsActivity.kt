@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.penmediatv.databinding.ActivityMovieDetailsBinding
 
@@ -28,7 +29,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
         binding.recyclerView.layoutManager = GridLayoutManager(this, 4)
         binding.recyclerView.adapter = RelevantRecommendationAdapter(getMovies())
-        binding.btnCollect.setOnClickListener{
+        binding.btnCollect.setOnClickListener {
             val dialog = Dialog(this)
             dialog.setContentView(R.layout.dialog_collected)
             dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -38,12 +39,28 @@ class MovieDetailsActivity : AppCompatActivity() {
             val subTextView = dialog.findViewById<TextView>(R.id.tv_content)
             if (!isCollected) {
                 // 未收藏时，点击收藏
+                ContextCompat.getDrawable(this, R.drawable.ic_connect)?.let {
+                    binding.btnCollect.setCompoundDrawablesWithIntrinsicBounds(
+                        it,
+                        null,
+                        null,
+                        null
+                    )
+                }
                 imageView.setImageResource(R.drawable.ic_connected)  // 设定图片
                 titleTextView.text = "Collected"
                 subTextView.text = "View at the personal center"
                 isCollected = true  // 更新收藏状态为已收藏
             } else {
                 // 已收藏时，点击修改弹窗内容
+                ContextCompat.getDrawable(this, R.drawable.ic_heart)?.let {
+                    binding.btnCollect.setCompoundDrawablesWithIntrinsicBounds(
+                        it,
+                        null,
+                        null,
+                        null
+                    )
+                }
                 imageView.setImageResource(R.drawable.ic_unconnected)  // 替换图片
                 titleTextView.text = "Uncollected"
                 subTextView.visibility = TextView.GONE
