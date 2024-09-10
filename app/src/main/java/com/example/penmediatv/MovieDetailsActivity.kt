@@ -24,7 +24,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         binding.recyclerView.adapter = RelevantRecommendationAdapter(getMovies())
         binding.btnCollect.setOnClickListener{
             val dialog = Dialog(this)
-            dialog.setContentView(R.layout.dialog_network_disconnect)
+            dialog.setContentView(R.layout.dialog_collected)
             dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
             dialog.show()
         }
