@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -21,6 +22,12 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
         binding.recyclerView.layoutManager = GridLayoutManager(this, 4)
         binding.recyclerView.adapter = RelevantRecommendationAdapter(getMovies())
+        binding.btnCollect.setOnClickListener{
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.dialog_network_disconnect)
+            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            dialog.show()
+        }
     }
 
     private fun getMovies(): List<Movie> {

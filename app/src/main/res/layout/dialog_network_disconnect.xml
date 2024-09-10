@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="150dp"
+    android:id="@+id/networkDialogLayout"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_network_disconnect"
+    android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingStart="35dp"
+    android:paddingTop="24dp"
+    android:paddingEnd="35dp"
+    android:paddingBottom="24dp">
+
+    <ImageView
+        android:id="@+id/wifiIcon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_network_disconnect" />
 
     <TextView
-        android:id="@+id/dialog_title"
-        android:layout_width="match_parent"
+        android:id="@+id/dialogMessage"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="自定义弹窗标题"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/dialog_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="这是自定义弹窗的消息内容"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp" />
-
-    <Button
-        android:id="@+id/dialog_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="确定"
-        android:layout_marginTop="16dp" />
-
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Please connect network"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 </LinearLayout>
