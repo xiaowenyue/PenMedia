@@ -52,6 +52,10 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".NetworkDisconnectActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".TestActivity"
             android:exported="false">
         </activity>
