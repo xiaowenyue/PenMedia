@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 按钮未按下时的状态 -->
+    <item android:state_focused="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#252630" />
+            <corners android:radius="25dp" />
+        </shape>
+    </item>
+    <!-- 按钮按下时的状态 -->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/button_pressed" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+</selector>
