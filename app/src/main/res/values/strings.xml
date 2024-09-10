@@ -16,4 +16,5 @@
     <string name="exit_content">There\'s a lot of exciting content,don\'t quit in a hurry~</string>
     <string name="network_disconnect">Network is disconnected</string>
     <string name="retry">Reconnect</string>
+    <string name="history_empty">The historical record is empty\nlet\'s go and watch some.</string>
 </resources>
