@@ -3,6 +3,10 @@ package com.example.penmediatv
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,6 +14,8 @@ import com.example.penmediatv.databinding.ActivityMovieDetailsBinding
 
 class MovieDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMovieDetailsBinding
+    private var isCollected = false  // 用于记录是否收藏
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
@@ -26,7 +32,27 @@ class MovieDetailsActivity : AppCompatActivity() {
             val dialog = Dialog(this)
             dialog.setContentView(R.layout.dialog_collected)
             dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            // 根据是否已经收藏，设置弹窗内容
+            val imageView = dialog.findViewById<ImageView>(R.id.iv_connected)
+            val titleTextView = dialog.findViewById<TextView>(R.id.tv_title)
+            val subTextView = dialog.findViewById<TextView>(R.id.tv_content)
+            if (!isCollected) {
+                // 未收藏时，点击收藏
+                imageView.setImageResource(R.drawable.ic_connected)  // 设定图片
+                titleTextView.text = "Collected"
+                subTextView.text = "View at the personal center"
+                isCollected = true  // 更新收藏状态为已收藏
+            } else {
+                // 已收藏时，点击修改弹窗内容
+                imageView.setImageResource(R.drawable.ic_unconnected)  // 替换图片
+                titleTextView.text = "Uncollected"
+                subTextView.visibility = TextView.GONE
+            }
             dialog.show()
+            // 使用 Handler 使弹窗在3秒后自动消失
+            Handler(Looper.getMainLooper()).postDelayed({
+                dialog.dismiss()
+            }, 2000)
         }
     }
 

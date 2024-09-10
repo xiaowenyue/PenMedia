@@ -11,12 +11,14 @@
     android:paddingVertical="28dp">
 
     <ImageView
+        android:id="@+id/iv_connected"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_connected" />
 
     <TextView
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -27,6 +29,7 @@
         android:textSize="23sp" />
 
     <TextView
+        android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
