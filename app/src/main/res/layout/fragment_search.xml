@@ -235,6 +235,48 @@
             android:src="@drawable/ic_delete_search" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/bg_search"
+        android:orientation="horizontal"
+        android:paddingStart="23dp"
+        android:paddingTop="25dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@+id/keyboard"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.62">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/ic_panda"
+            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="378dp"
+                android:layout_height="84dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_text"
+                app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+            <TextView
+                android:layout_width="318dp"
+                android:layout_height="84dp"
+                android:gravity="center"
+                android:layout_marginStart="40dp"
+                android:text="Unable to locate it.Shall we search for\nan alternative"
+                android:textColor="#b3c0e7"
+                android:textSize="18sp" />
+        </FrameLayout>
+    </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_result"
         android:layout_width="0dp"
@@ -243,6 +285,7 @@
         android:background="@drawable/bg_search"
         android:paddingStart="23dp"
         android:paddingTop="25dp"
+        android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/keyboard"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.62">
