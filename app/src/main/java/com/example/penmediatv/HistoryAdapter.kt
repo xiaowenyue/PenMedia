@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -13,7 +14,6 @@ class HistoryAdapter(private val movies: List<Movie>) :
         fun bind(movie: Movie) {
             binding.title.text = movie.name
             binding.pic.setImageResource(movie.imageResId)
-            binding.item.setOnClickListener{}
             binding.item.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
                     Toast.makeText(
@@ -24,6 +24,11 @@ class HistoryAdapter(private val movies: List<Movie>) :
                 } else {
                     println("no focus")
                 }
+            }
+            binding.item.setOnClickListener {
+                val context = binding.root.context
+                val intent = Intent(context, TvDetailsActivity::class.java)
+                context.startActivity(intent)
             }
         }
     }
