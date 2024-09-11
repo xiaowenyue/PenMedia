@@ -23,7 +23,7 @@ class MyCollectionActivity : AppCompatActivity() {
             Movie("Movie 4", R.drawable.movie),
             Movie("Movie 5", R.drawable.ic_search),
             Movie("Movie 6", R.drawable.ic_history),
-            Movie("Movie 6", R.drawable.ic_history),
+            Movie("Movie 7", R.drawable.ic_history),
         )
 
         // 设置适配器
