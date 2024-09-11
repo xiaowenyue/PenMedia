@@ -10,10 +10,10 @@
         android:id="@+id/item1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center"
-        android:orientation="vertical"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="vertical"
         app:cardCornerRadius="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.63"
@@ -53,12 +53,16 @@
 
     <!-- My Collection -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/item2"
+        android:id="@+id/my_collection"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
+        android:background="@drawable/selector_item_collection"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="2dp"
         app:cardCornerRadius="18dp"
         app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/item1"
@@ -77,8 +81,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -101,17 +103,21 @@
 
     <!-- User Agreement -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/item3"
+        android:id="@+id/user_agreement"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
+        android:background="@drawable/selector_item_collection"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="2dp"
         app:cardBackgroundColor="#e7cca2"
         app:cardCornerRadius="18dp"
         app:layout_constraintHeight_percent="0.3"
-        app:layout_constraintStart_toEndOf="@id/item2"
-        app:layout_constraintTop_toTopOf="@id/item2"
+        app:layout_constraintStart_toEndOf="@id/my_collection"
+        app:layout_constraintTop_toTopOf="@id/my_collection"
         app:layout_constraintWidth_percent="0.3">
 
         <View
@@ -125,8 +131,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -149,18 +153,22 @@
 
     <!-- Recently Reviewed -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/item4"
+        android:id="@+id/recently_reviewed"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/selector_item_collection"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="2dp"
         app:cardBackgroundColor="#81afff"
         app:cardCornerRadius="18dp"
         app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/item1"
-        app:layout_constraintTop_toBottomOf="@id/item2"
+        app:layout_constraintTop_toBottomOf="@id/my_collection"
         app:layout_constraintWidth_percent="0.3">
 
         <View
@@ -174,8 +182,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -203,12 +209,13 @@
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/cardview_selector"
         android:orientation="vertical"
         app:cardBackgroundColor="#596fff"
         app:cardCornerRadius="18dp"
         app:layout_constraintHeight_percent="0.3"
-        app:layout_constraintStart_toEndOf="@id/item4"
-        app:layout_constraintTop_toBottomOf="@id/item3"
+        app:layout_constraintStart_toEndOf="@id/recently_reviewed"
+        app:layout_constraintTop_toBottomOf="@id/user_agreement"
         app:layout_constraintWidth_percent="0.3">
 
         <View
@@ -223,9 +230,6 @@
             android:id="@+id/about_us"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:background="@drawable/cardview_selector"
             android:gravity="center"
             android:orientation="vertical">
 
