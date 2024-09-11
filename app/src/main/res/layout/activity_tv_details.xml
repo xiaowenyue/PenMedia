@@ -46,7 +46,7 @@
                 android:id="@+id/tv_movie_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="66dp"
+                android:layout_marginTop="36dp"
                 android:text="Movie Title"
                 android:textColor="@color/white"
                 android:textSize="28sp"
@@ -201,12 +201,69 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_movie_introduction_content">
 
                 <androidx.appcompat.widget.AppCompatButton
                     style="@style/KeyboardButton"
-                    android:text="C" />
+                    android:text="1" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardButton"
+                    android:text="2" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardButton"
+                    android:text="3" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardButton"
+                    android:text="4" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardButton"
+                    android:text="5" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardButton"
+                    android:text="6" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardButton"
+                    android:text="7" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardButton"
+                    android:text="8" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardButton"
+                    android:text="9" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardButton"
+                    android:text="10" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_num_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_num">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardListButton"
+                    android:text="1-10" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardListButton"
+                    android:text="11-20" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/KeyboardListButton"
+                    android:text="21-30" />
             </LinearLayout>
 
             <TextView
@@ -219,7 +276,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="23sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_num" />
+                app:layout_constraintTop_toBottomOf="@id/ll_num_list" />
 
             <com.example.penmediatv.NonScrollableRecyclerView
                 android:id="@+id/recycler_view"
