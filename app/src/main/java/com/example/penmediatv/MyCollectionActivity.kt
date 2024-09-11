@@ -13,7 +13,7 @@ class MyCollectionActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 设置 RecyclerView 的布局管理器
-        binding.rvCollection.layoutManager = GridLayoutManager(this, 3)
+        binding.rvCollection.layoutManager = GridLayoutManager(this, 6)
 
         // 创建电影列表
         val movieList = listOf(
@@ -23,9 +23,10 @@ class MyCollectionActivity : AppCompatActivity() {
             Movie("Movie 4", R.drawable.movie),
             Movie("Movie 5", R.drawable.ic_search),
             Movie("Movie 6", R.drawable.ic_history),
+            Movie("Movie 6", R.drawable.ic_history),
         )
 
         // 设置适配器
-        binding.rvCollection.adapter = HistoryAdapter(movieList)
+        binding.rvCollection.adapter = CollectionAdapter(movieList)
     }
 }
