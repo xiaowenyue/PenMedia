@@ -7,8 +7,9 @@
 
     <ImageView
         android:id="@+id/iv_my_collection"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_my_collection"
         app:layout_constraintBottom_toTopOf="@id/rv_collection"
@@ -21,9 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
         android:text="@string/my_collection"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@id/rv_collection"
         app:layout_constraintStart_toEndOf="@id/iv_my_collection"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +34,6 @@
         android:id="@+id/rv_collection"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/white"
         android:padding="30dp"
         android:scrollbars="vertical"
         android:visibility="visible"
