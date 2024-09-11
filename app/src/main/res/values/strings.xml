@@ -17,7 +17,7 @@
     <string name="network_disconnect">Network is disconnected</string>
     <string name="retry">Reconnect</string>
     <string name="history_empty">The historical record is empty\nlet\'s go and watch some.</string>
-    <string name="collection_null">The collection is empty,hurry\\nup and collect some.</string>
+    <string name="collection_null">The collection is empty,hurry\nup and collect some.</string>
     <string name="go_watch">Go watch</string>
     <string name="my_collection">My Colllection</string>
 </resources>
