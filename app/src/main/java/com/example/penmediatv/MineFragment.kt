@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -50,7 +51,9 @@ class MineFragment : Fragment() {
         }
 
         binding.myCollection.setOnClickListener {
-
+            Toast.makeText(context, "My collection", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, MyCollectionActivity::class.java)
+            startActivity(intent)
         }
 
         binding.userAgreement.setOnClickListener {}

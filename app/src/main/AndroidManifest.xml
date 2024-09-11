@@ -56,6 +56,10 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".MyCollectionActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".TestActivity"
             android:exported="false">
         </activity>
