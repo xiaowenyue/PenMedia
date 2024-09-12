@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.penmediatv.databinding.ActivityMovieDetailsBinding
 import com.example.penmediatv.databinding.ActivityTvDetailsBinding
 
 class TvDetailsActivity : AppCompatActivity() {
@@ -89,21 +88,14 @@ class TvDetailsActivity : AppCompatActivity() {
     private fun generateEpisodeRangeButtons(totalEpisodes: Int) {
         val rangesContainer = binding.llEpisodeRanges
         rangesContainer.removeAllViews() // 清空已有的范围按钮
-
         // 每个范围 10 集
         val numRanges = (totalEpisodes + 9) / 10
-
         for (i in 0 until numRanges) {
             val start = i * 10 + 1
             val end = minOf((i + 1) * 10, totalEpisodes)
-
-            val contextThemeWrapper = ContextThemeWrapper(this, R.style.KeyboardButton)
-
-            // 创建剧集范围按钮
-            val rangeButton = AppCompatButton(contextThemeWrapper).apply {
+            val rangeButton = AppCompatButton(ContextThemeWrapper(this, R.style.EpisodeRangeButton), null, R.style.EpisodeRangeButton).apply {
                 text = "$start-$end"
                 setOnClickListener {
-                    // 当点击范围按钮时，更新具体剧集按钮
                     updateEpisodes(start, end)
                 }
             }
@@ -115,20 +107,14 @@ class TvDetailsActivity : AppCompatActivity() {
     private fun updateEpisodes(start: Int, end: Int) {
         val episodesContainer = binding.llEpisodes
         episodesContainer.removeAllViews() // 清空已有的剧集按钮
-
         for (i in start..end) {
-            // 使用 ContextThemeWrapper 应用自定义样式
-            val contextThemeWrapper = ContextThemeWrapper(this, R.style.KeyboardButton)
-
             // 创建具体剧集按钮
-            val episodeButton = AppCompatButton(contextThemeWrapper).apply {
+            val episodeButton = AppCompatButton(ContextThemeWrapper(this, R.style.EpisodeButton), null, R.style.EpisodeButton).apply {
                 text = i.toString()
                 setOnClickListener {
-                    // 点击剧集后的操作，比如播放该集
                     Toast.makeText(this@TvDetailsActivity, "点击第 $i 集", Toast.LENGTH_SHORT).show()
                 }
             }
-
             // 将按钮添加到容器中
             episodesContainer.addView(episodeButton)
         }
