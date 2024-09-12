@@ -38,6 +38,9 @@ class MainActivity : AppCompatActivity() {
                     onNavButtonFocused(view)
                 }
             }
+            button.setOnClickListener {
+                onNavButtonClicked(button)
+            }
         }
 
         /// 设置导航栏图标大小
@@ -91,6 +94,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onNavButtonFocused(view: View) {
+        val fragment: Fragment = when (view.id) {
+            R.id.nav_mine -> MineFragment()
+            R.id.nav_search -> com.example.penmediatv.SearchFragment()
+            R.id.nav_history -> HistoryFragment()
+            R.id.nav_home -> HomeFragment()
+            R.id.nav_movies -> MoviesFragment()
+            R.id.nav_tv_series -> TvSeriesFragment()
+            R.id.nav_animation -> AnimationFragment()
+            R.id.nav_documentary -> DocumentaryFragment()
+            else -> HomeFragment()
+        }
+        replaceFragment(fragment)
+    }
+
+    private fun onNavButtonClicked(view: View) {
         val fragment: Fragment = when (view.id) {
             R.id.nav_mine -> MineFragment()
             R.id.nav_search -> com.example.penmediatv.SearchFragment()
