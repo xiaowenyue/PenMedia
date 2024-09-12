@@ -32,6 +32,13 @@ class HistoryFragment : Fragment() {
 
         return binding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.recyclerView.post{
+            binding.recyclerView.findViewHolderForAdapterPosition(0)?.itemView?.requestFocus()
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
