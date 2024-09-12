@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.ContextThemeWrapper
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -99,7 +100,19 @@ class TvDetailsActivity : AppCompatActivity() {
                     updateEpisodes(start, end)
                 }
             }
+            // 设置按钮的布局参数，增加间距
+            val layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            layoutParams.setMargins(8, 0, 8, 0) // 设置按钮的上下左右间距
+            rangeButton.layoutParams = layoutParams
             rangesContainer.addView(rangeButton)
+
+            // 如果是第一个范围按钮，默认展示对应的剧集
+            if (i == 0) {
+                updateEpisodes(start, end) // 默认展示第一个范围的剧集
+            }
         }
     }
 
@@ -115,6 +128,12 @@ class TvDetailsActivity : AppCompatActivity() {
                     Toast.makeText(this@TvDetailsActivity, "点击第 $i 集", Toast.LENGTH_SHORT).show()
                 }
             }
+            val layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            layoutParams.setMargins(8, 0, 8, 0) // 设置按钮的上下左右间距
+            episodeButton.layoutParams = layoutParams
             // 将按钮添加到容器中
             episodesContainer.addView(episodeButton)
         }
