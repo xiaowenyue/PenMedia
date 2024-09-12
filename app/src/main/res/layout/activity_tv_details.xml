@@ -195,76 +195,24 @@
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_movie_introduction" />
-
+            <!-- 用于显示剧集的按钮容器 -->
             <LinearLayout
-                android:id="@+id/ll_num"
+                android:id="@+id/ll_episodes"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_height="48dp"
                 android:layout_marginTop="5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_movie_introduction_content">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardButton"
-                    android:text="1" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardButton"
-                    android:text="2" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardButton"
-                    android:text="3" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardButton"
-                    android:text="4" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardButton"
-                    android:text="5" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardButton"
-                    android:text="6" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardButton"
-                    android:text="7" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardButton"
-                    android:text="8" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardButton"
-                    android:text="9" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardButton"
-                    android:text="10" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ll_num_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_num">
+                app:layout_constraintTop_toBottomOf="@id/tv_movie_introduction_content" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardListButton"
-                    android:text="1-10" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardListButton"
-                    android:text="11-20" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/KeyboardListButton"
-                    android:text="21-30" />
-            </LinearLayout>
+            <!-- 用于显示具体剧集范围按钮的容器 -->
+            <LinearLayout
+                android:id="@+id/ll_episode_ranges"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_episodes" />
 
             <TextView
                 android:id="@+id/tv_title_recommend"
@@ -276,7 +224,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="23sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_num_list" />
+                app:layout_constraintTop_toBottomOf="@id/ll_episode_ranges" />
 
             <com.example.penmediatv.NonScrollableRecyclerView
                 android:id="@+id/recycler_view"
