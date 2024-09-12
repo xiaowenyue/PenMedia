@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.ContextThemeWrapper
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.penmediatv.databinding.ActivityMovieDetailsBinding
@@ -16,12 +18,19 @@ import com.example.penmediatv.databinding.ActivityTvDetailsBinding
 
 class TvDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTvDetailsBinding
+    private lateinit var movie: Movie
     private var isCollected = false  // 用于记录是否收藏
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTvDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        movie = intent.getParcelableExtra("MOVIE_DATA") ?: Movie(
+            "movieName",
+            R.drawable.movie,
+            episodes = 50
+        )
 
         binding.btWatchNow.setOnClickListener {
             Toast.makeText(this, "Watch Now", Toast.LENGTH_SHORT).show()
@@ -71,6 +80,57 @@ class TvDetailsActivity : AppCompatActivity() {
             Handler(Looper.getMainLooper()).postDelayed({
                 dialog.dismiss()
             }, 2000)
+        }
+        // 动态生成剧集范围按钮
+        generateEpisodeRangeButtons(movie.episodes)
+    }
+
+    // 动态生成剧集范围按钮 (1-10, 11-20,...)
+    private fun generateEpisodeRangeButtons(totalEpisodes: Int) {
+        val rangesContainer = binding.llEpisodeRanges
+        rangesContainer.removeAllViews() // 清空已有的范围按钮
+
+        // 每个范围 10 集
+        val numRanges = (totalEpisodes + 9) / 10
+
+        for (i in 0 until numRanges) {
+            val start = i * 10 + 1
+            val end = minOf((i + 1) * 10, totalEpisodes)
+
+            val contextThemeWrapper = ContextThemeWrapper(this, R.style.KeyboardButton)
+
+            // 创建剧集范围按钮
+            val rangeButton = AppCompatButton(contextThemeWrapper).apply {
+                text = "$start-$end"
+                setOnClickListener {
+                    // 当点击范围按钮时，更新具体剧集按钮
+                    updateEpisodes(start, end)
+                }
+            }
+            rangesContainer.addView(rangeButton)
+        }
+    }
+
+    // 动态生成具体剧集按钮
+    private fun updateEpisodes(start: Int, end: Int) {
+        val episodesContainer = binding.llEpisodes
+        episodesContainer.removeAllViews() // 清空已有的剧集按钮
+
+        for (i in start..end) {
+            // 使用 ContextThemeWrapper 应用自定义样式
+            val contextThemeWrapper = ContextThemeWrapper(this, R.style.KeyboardButton)
+
+            // 创建具体剧集按钮
+            val episodeButton = AppCompatButton(contextThemeWrapper).apply {
+                text = i.toString()
+                setOnClickListener {
+                    // 点击剧集后的操作，比如播放该集
+                    Toast.makeText(this@TvDetailsActivity, "点击第 $i 集", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            // 将按钮添加到容器中
+            episodesContainer.addView(episodeButton)
         }
     }
 
