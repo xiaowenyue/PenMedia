@@ -90,6 +90,18 @@ class MainActivity : AppCompatActivity() {
                 firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.imageView)
             } else if (currentFragment?.javaClass?.simpleName == "HistoryFragment") {
                 firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.recyclerView)
+            } else if (currentFragment?.javaClass?.simpleName == "MineFragment") {
+                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.my_collection)
+            } else if (currentFragment?.javaClass?.simpleName == "SearchFragment") {
+                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.et_search)
+            } else if (currentFragment?.javaClass?.simpleName == "MoviesFragment") {
+                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.viewPagerLayout)
+            } else if (currentFragment?.javaClass?.simpleName == "TvSeriesFragment") {
+                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.card1)
+            } else if (currentFragment?.javaClass?.simpleName == "DocumentaryFragment") {
+                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.card0)
+            } else if (currentFragment?.javaClass?.simpleName == "AnimationFragment") {
+                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.vpm_animation)
             }
 
             // 手动将焦点转移到Fragment的第一个控件

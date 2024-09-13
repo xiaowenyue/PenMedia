@@ -19,6 +19,9 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.imageView.setOnClickListener(View.OnClickListener {})
+        binding.imageView.setOnFocusChangeListener{ _, hasFocus ->
+
+        }
         binding.imageView2.setOnClickListener {
             // Handle image click event
         }
