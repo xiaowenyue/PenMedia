@@ -1,6 +1,7 @@
 package com.example.penmediatv
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
@@ -72,23 +73,28 @@ class MainActivity : AppCompatActivity() {
 
             // 检查当前Fragment中是否有其他可聚焦的左边组件
             if (currentFocusedView != null && canMoveFocusLeft(currentFocusedView)) {
-//                Toast.makeText(
-//                    this,
-//                    "FragmentContainer中还有可聚焦组件，返回的navButton是$lastFocusedNavButtonId",
-//                    Toast.LENGTH_SHORT
-//                ).show()
                 return false // 允许Fragment处理焦点移动
             } else {
-//                Toast.makeText(
-//                    this,
-//                    "FragmentContainer中没有可聚焦组件，现在返回的navButton是$lastFocusedNavButtonId",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-                // 否则将焦点返回给导航按钮
                 val lastFocusedButton = findViewById<TextView>(lastFocusedNavButtonId)
                 lastFocusedButton.requestFocus()
                 return true
             }
+        }
+        // 如果按下右键，焦点从导航按钮移到Fragment中的第一个可聚焦控件
+        if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && findViewById<View>(lastFocusedNavButtonId).hasFocus()) {
+            val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+            Log.d("FragmentName", "currentFragment: ${currentFragment?.javaClass?.simpleName}")
+            // 确定Fragment中的第一个可聚焦控件
+            var firstFocusableView: View? = null
+            if (currentFragment?.javaClass?.simpleName == "HomeFragment") {
+                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.imageView)
+            } else if (currentFragment?.javaClass?.simpleName == "HistoryFragment") {
+                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.recyclerView)
+            }
+
+            // 手动将焦点转移到Fragment的第一个控件
+            firstFocusableView?.requestFocus()
+            return true
         }
         return super.onKeyDown(keyCode, event)
     }
