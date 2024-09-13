@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,6 +62,15 @@ class MineFragment : Fragment() {
                 binding.bgAbout.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.about_us_bg)
             }
+        }
+        binding.aboutUs.setOnKeyListener { view, keyCode, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                // 查找焦点的目标View
+                val nextFocusView = view.focusSearch(View.FOCUS_LEFT)
+                nextFocusView?.requestFocus()
+                return@setOnKeyListener true
+            }
+            false
         }
         binding.myCollection.setOnClickListener {
             Toast.makeText(context, "My collection", Toast.LENGTH_SHORT).show()
