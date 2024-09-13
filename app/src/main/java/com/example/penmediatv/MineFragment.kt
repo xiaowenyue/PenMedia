@@ -25,7 +25,8 @@ class MineFragment : Fragment() {
     ): View? {
         _binding = FragmentMineBinding.inflate(inflater, container, false)
         binding.aboutUs.setOnClickListener {
-            Toast.makeText(context, "About Us", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, AboutUsActivity::class.java)
+            startActivity(intent)
         }
         binding.myCollection.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
@@ -73,13 +74,13 @@ class MineFragment : Fragment() {
             false
         }
         binding.myCollection.setOnClickListener {
-            Toast.makeText(context, "My collection", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, MyCollectionActivity::class.java)
             startActivity(intent)
         }
-
-        binding.userAgreement.setOnClickListener {}
-        binding.recentlyReviewed.setOnClickListener {}
+        binding.userAgreement.setOnClickListener {
+            val intent = Intent(context, UserAgreementActivity::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 

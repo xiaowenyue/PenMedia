@@ -13,14 +13,9 @@ class CollectionAdapter(private val movies: List<Movie>) :
         fun bind(movie: Movie) {
             binding.title.text = movie.name
             binding.pic.setImageResource(movie.imageResId)
-            binding.item.setOnClickListener{}
+            binding.item.setOnClickListener {}
             binding.item.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
-                    Toast.makeText(
-                        binding.root.context,
-                        "Focused on ${movie.name}",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 } else {
                     println("no focus")
                 }
@@ -29,7 +24,8 @@ class CollectionAdapter(private val movies: List<Movie>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectionViewHolder {
-        val binding = ItemCollectionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemCollectionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CollectionViewHolder(binding)
     }
 
