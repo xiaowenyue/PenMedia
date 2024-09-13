@@ -23,14 +23,45 @@ class MineFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMineBinding.inflate(inflater, container, false)
-        binding.aboutUs.setOnFocusChangeListener { view, hasFocus ->
-
-        }
-
         binding.aboutUs.setOnClickListener {
             Toast.makeText(context, "About Us", Toast.LENGTH_SHORT).show()
         }
-
+        binding.myCollection.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                binding.bgCollection.background =
+                    ContextCompat.getDrawable(requireContext(), R.color.purple_500)
+            } else {
+                binding.bgCollection.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.collection_bg)
+            }
+        }
+        binding.userAgreement.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                binding.bgAgreement.background =
+                    ContextCompat.getDrawable(requireContext(), R.color.purple_500)
+            } else {
+                binding.bgAgreement.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.agreement_bg)
+            }
+        }
+        binding.recentlyReviewed.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                binding.bgRecently.background =
+                    ContextCompat.getDrawable(requireContext(), R.color.purple_500)
+            } else {
+                binding.bgRecently.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.recently_bg)
+            }
+        }
+        binding.aboutUs.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                binding.bgAbout.background =
+                    ContextCompat.getDrawable(requireContext(), R.color.purple_500)
+            } else {
+                binding.bgAbout.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.about_us_bg)
+            }
+        }
         binding.myCollection.setOnClickListener {
             Toast.makeText(context, "My collection", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, MyCollectionActivity::class.java)
