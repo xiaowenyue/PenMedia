@@ -31,8 +31,10 @@ class HomeFragment : Fragment() {
             if (hasFocus) {
                 binding.cv0.strokeWidth = 6
                 binding.cv0.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
+                binding.llContent0.visibility = View.VISIBLE
             } else {
                 binding.cv0.strokeWidth = 0
+                binding.llContent0.visibility = View.GONE
             }
         }
         binding.cv2.setOnFocusChangeListener { _, hasFocus ->
