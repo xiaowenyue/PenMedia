@@ -37,12 +37,49 @@ class HomeFragment : Fragment() {
                 binding.llContent0.visibility = View.GONE
             }
         }
+        binding.cv1.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.cv1.strokeWidth = 6
+                binding.cv1.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
+                binding.llContent1.visibility = View.VISIBLE
+            } else {
+                binding.cv1.strokeWidth = 0
+                binding.llContent1.visibility = View.GONE
+            }
+        }
         binding.cv2.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.cv2.strokeWidth = 6
                 binding.cv2.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
             } else {
                 binding.cv2.strokeWidth = 0
+            }
+        }
+        binding.cv3.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.cv3.strokeWidth = 6
+                binding.cv3.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
+
+            } else {
+                binding.cv3.strokeWidth = 0
+            }
+        }
+        binding.cv4.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.cv4.strokeWidth = 6
+                binding.cv4.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
+
+            } else {
+                binding.cv4.strokeWidth = 0
+            }
+        }
+        binding.cv5.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.cv5.strokeWidth = 6
+                binding.cv5.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
+
+            } else {
+                binding.cv5.strokeWidth = 0
             }
         }
     }

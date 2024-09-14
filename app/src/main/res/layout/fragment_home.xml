@@ -101,28 +101,9 @@
                     </FrameLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_weight="1"
-                    android:padding="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/movie"
-                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="14dp"
-                android:paddingRight="14dp">
-
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_2"
-                    android:layout_width="100dp"
+                    android:id="@+id/cv_1"
+                    android:layout_width="0dp"
                     android:layout_height="300dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
@@ -136,7 +117,7 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/imageView3"
+                            android:id="@+id/imageView1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="fitXY"
@@ -148,48 +129,263 @@
                             android:layout_height="30dp"
                             android:background="@drawable/bg_exit_type"
                             android:gravity="center"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="5dp"
                             android:text="movieType"
                             android:textColor="#b3c0e7"
                             android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_content1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_margin="15dp"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:text="movieName"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="6dp"
+                                android:text="movieSubtitle"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="10dp"
+                                android:text="movieTime"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+                        </LinearLayout>
                     </FrameLayout>
                 </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="100dp"
-                    android:layout_height="300dp"
-                    android:layout_weight="1"
-                    android:padding="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/movie"
-                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageView5"
+                <LinearLayout
                     android:layout_width="100dp"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:padding="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/movie"
-                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                    android:orientation="vertical">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageView6"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="12dp">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/movie"
+                                app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:background="@drawable/bg_exit_type"
+                                android:gravity="center"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="5dp"
+                                android:text="movieType"
+                                android:textColor="#b3c0e7"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="movieName"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="100dp"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:padding="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/movie"
-                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="12dp">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/movie"
+                                app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:background="@drawable/bg_exit_type"
+                                android:gravity="center"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="5dp"
+                                android:text="movieType"
+                                android:textColor="#b3c0e7"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="movieName"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="12dp">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/imageView4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/movie"
+                                app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:background="@drawable/bg_exit_type"
+                                android:gravity="center"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="5dp"
+                                android:text="movieType"
+                                android:textColor="#b3c0e7"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="movieName"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="12dp">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/imageView5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/movie"
+                                app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:background="@drawable/bg_exit_type"
+                                android:gravity="center"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="5dp"
+                                android:text="movieType"
+                                android:textColor="#b3c0e7"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        android:text="movieName"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <com.example.penmediatv.NonScrollableRecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:paddingHorizontal="16dp"
                 app:spanCount="4" />
         </LinearLayout>
     </ScrollView>
