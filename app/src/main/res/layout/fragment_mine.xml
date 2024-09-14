@@ -52,7 +52,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     <!-- My Collection -->
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/my_collection"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -98,10 +98,10 @@
                 android:textSize="23sp"
                 android:textStyle="bold" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- User Agreement -->
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/user_agreement"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -147,10 +147,10 @@
                 android:textSize="23sp"
                 android:textStyle="bold" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- Recently Reviewed -->
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/recently_reviewed"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -197,16 +197,15 @@
                 android:textSize="23sp"
                 android:textStyle="bold" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- About Us -->
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/item5"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/cardview_selector"
         android:orientation="vertical"
         app:cardCornerRadius="18dp"
         app:layout_constraintHeight_percent="0.3"
@@ -245,6 +244,6 @@
                 android:textSize="23sp"
                 android:textStyle="bold" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

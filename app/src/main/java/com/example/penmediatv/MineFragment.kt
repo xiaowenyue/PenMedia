@@ -31,37 +31,54 @@ class MineFragment : Fragment() {
         binding.myCollection.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 binding.bgCollection.background =
-                    ContextCompat.getDrawable(requireContext(), R.color.purple_500)
+                    ContextCompat.getDrawable(requireContext(), R.color.button_pressed)
+                binding.myCollection.strokeColor =
+                    ContextCompat.getColor(requireContext(), R.color.white)
+                binding.myCollection.strokeWidth = 6
             } else {
                 binding.bgCollection.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.collection_bg)
+                binding.myCollection.strokeWidth = 0
             }
         }
         binding.userAgreement.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 binding.bgAgreement.background =
-                    ContextCompat.getDrawable(requireContext(), R.color.purple_500)
+                    ContextCompat.getDrawable(requireContext(), R.color.button_pressed)
+                binding.userAgreement.strokeWidth = 6
+                binding.userAgreement.strokeColor =
+                    ContextCompat.getColor(requireContext(), R.color.white)
             } else {
                 binding.bgAgreement.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.agreement_bg)
+                binding.userAgreement.strokeWidth = 0
             }
         }
         binding.recentlyReviewed.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 binding.bgRecently.background =
-                    ContextCompat.getDrawable(requireContext(), R.color.purple_500)
+                    ContextCompat.getDrawable(requireContext(), R.color.button_pressed)
+                binding.recentlyReviewed.strokeColor = ContextCompat.getColor(
+                    requireContext(),
+                    R.color.white
+                )
+                binding.recentlyReviewed.strokeWidth = 6
             } else {
                 binding.bgRecently.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.recently_bg)
+                binding.recentlyReviewed.strokeWidth = 0
             }
         }
         binding.aboutUs.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 binding.bgAbout.background =
-                    ContextCompat.getDrawable(requireContext(), R.color.purple_500)
+                    ContextCompat.getDrawable(requireContext(), R.color.button_pressed)
+                binding.item5.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
+                binding.item5.strokeWidth = 6
             } else {
                 binding.bgAbout.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.about_us_bg)
+                binding.item5.strokeWidth = 0
             }
         }
         binding.aboutUs.setOnKeyListener { view, keyCode, keyEvent ->
