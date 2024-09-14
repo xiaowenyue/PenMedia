@@ -41,13 +41,26 @@ class DocumentaryFragment : Fragment() {
         binding.card0.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 // 设置背景颜色和边框
-                binding.card0.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.orange)) // 设置背景颜色
-                binding.card0.strokeColor = ContextCompat.getColor(requireContext(), R.color.white) // 设置白色边框
-                binding.card0.strokeWidth = 4 // 设置边框宽度为4dp
+                binding.card0.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.button_pressed
+                    )
+                ) // 恢复背景颜色
+                binding.card0.strokeColor =
+                    ContextCompat.getColor(requireContext(), R.color.white) // 设置白色边框
+                binding.card0.strokeWidth = 6 // 设置边框宽度为4dp
+                binding.bgTvSeries.setImageResource(R.drawable.movie)
             } else {
                 // 恢复默认背景颜色和移除边框
-                binding.card0.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white)) // 恢复背景颜色
-                binding.card0.strokeColor = ContextCompat.getColor(requireContext(), android.R.color.transparent) // 移除边框
+                binding.card0.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.white
+                    )
+                ) // 恢复背景颜色
+                binding.card0.strokeColor =
+                    ContextCompat.getColor(requireContext(), android.R.color.transparent) // 移除边框
                 binding.card0.strokeWidth = 0 // 无边框
             }
         }
@@ -63,20 +76,23 @@ class DocumentaryFragment : Fragment() {
 
         binding.card1.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.card1.setBackgroundColor(
+                binding.card1.setCardBackgroundColor(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.orange
+                        R.color.button_pressed
                     )
-                )
+                ) // 恢复背景颜色
+                binding.card1.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
+                binding.card1.strokeWidth = 6
                 binding.bgTvSeries.setImageResource(R.drawable.ic_mine)
             } else {
-                binding.card1.setBackgroundColor(
+                binding.card1.setCardBackgroundColor(
                     ContextCompat.getColor(
                         requireContext(),
                         R.color.card1
                     )
-                )
+                ) // 恢复背景颜色
+                binding.card1.strokeWidth = 0
             }
         }
         binding.card1.setOnKeyListener { view, keyCode, keyEvent ->
@@ -91,20 +107,23 @@ class DocumentaryFragment : Fragment() {
 
         binding.card2.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.card2.setBackgroundColor(
+                binding.card2.setCardBackgroundColor(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.orange
+                        R.color.button_pressed
                     )
-                )
+                ) // 恢复背景颜色
+                binding.card2.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
+                binding.card2.strokeWidth = 6
                 binding.bgTvSeries.setImageResource(R.drawable.ic_history)
             } else {
-                binding.card2.setBackgroundColor(
+                binding.card2.setCardBackgroundColor(
                     ContextCompat.getColor(
                         requireContext(),
                         R.color.card2
                     )
-                )
+                ) // 恢复背景颜色
+                binding.card2.strokeWidth = 0
             }
         }
 
