@@ -26,31 +26,52 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="true"
+                android:focusable="false"
                 android:orientation="horizontal"
                 android:paddingLeft="14dp"
                 android:paddingTop="20dp"
                 android:paddingRight="14dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageView"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_0"
                     android:layout_width="0dp"
                     android:layout_height="300dp"
-                    android:padding="5dp"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/movie_item_background"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/movie"
-                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="12dp">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/imageView0"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/movie"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:background="@drawable/bg_exit_type"
+                            android:gravity="center"
+                            android:text="movieType"
+                            android:textColor="#b3c0e7"
+                            android:textSize="16sp" />
+                    </FrameLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView2"
                     android:layout_width="0dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
-                    android:background="@drawable/movie_item_background"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/movie"
                     app:shapeAppearanceOverlay="@style/RoundedImageView" />
@@ -64,22 +85,44 @@
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageView3"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_2"
                     android:layout_width="100dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
-                    android:background="@drawable/movie_item_background"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/movie"
-                    app:shapeAppearanceOverlay="@style/RoundedImageView" />
+                    app:cardBackgroundColor="@android:color/transparent">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="5dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/movie"
+                            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/bg_exit_type"
+                            android:gravity="center"
+                            android:text="movieType"
+                            android:textColor="#b3c0e7"
+                            android:textSize="16sp" />
+                    </FrameLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView4"
                     android:layout_width="100dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
-                    android:background="@drawable/movie_item_background"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/movie"
                     app:shapeAppearanceOverlay="@style/RoundedImageView" />
@@ -89,6 +132,7 @@
                     android:layout_width="100dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/movie"
                     app:shapeAppearanceOverlay="@style/RoundedImageView" />
@@ -98,7 +142,7 @@
                     android:layout_width="100dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
-                    android:background="@drawable/movie_item_background"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/movie"
                     app:shapeAppearanceOverlay="@style/RoundedImageView" />
@@ -112,6 +156,5 @@
                 app:spanCount="4" />
         </LinearLayout>
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

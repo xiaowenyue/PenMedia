@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.penmediatv.databinding.FragmentHomeBinding
@@ -18,32 +19,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.imageView.setOnClickListener(View.OnClickListener {})
-        binding.imageView.setOnFocusChangeListener{ _, hasFocus ->
-
-        }
-        binding.imageView2.setOnClickListener {
-            // Handle image click event
-        }
-        binding.imageView3.setOnClickListener {
-            // Handle image click event
-        }
-        binding.imageView4.setOnClickListener {
-            // Handle image click event
-        }
-        binding.imageView5.setOnClickListener {
-            // Handle image click event
-        }
-        binding.imageView5.setOnFocusChangeListener{_, hasFocus ->
-            if (hasFocus){
-                binding.imageView5.setImageResource(R.color.purple_200)
-            } else {
-                binding.imageView5.setImageResource(R.color.white)
-            }
-        }
-        binding.imageView6.setOnClickListener {
-            // Handle image click event
-        }
         return binding.root
     }
 
@@ -51,6 +26,23 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
         binding.recyclerView.adapter = MovieAdapter(getMovies())
+
+        binding.cv0.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.cv0.strokeWidth = 6
+                binding.cv0.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
+            } else {
+                binding.cv0.strokeWidth = 0
+            }
+        }
+        binding.cv2.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.cv2.strokeWidth = 6
+                binding.cv2.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
+            } else {
+                binding.cv2.strokeWidth = 0
+            }
+        }
     }
 
     private fun getMovies(): List<Movie> {

@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             // 确定Fragment中的第一个可聚焦控件
             var firstFocusableView: View? = null
             if (currentFragment?.javaClass?.simpleName == "HomeFragment") {
-                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.imageView)
+                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.cv_0)
             } else if (currentFragment?.javaClass?.simpleName == "HistoryFragment") {
                 firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.recyclerView)
             } else if (currentFragment?.javaClass?.simpleName == "MineFragment") {
