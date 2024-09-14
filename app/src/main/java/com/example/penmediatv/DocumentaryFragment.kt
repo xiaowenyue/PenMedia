@@ -1,9 +1,12 @@
 package com.example.penmediatv
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.penmediatv.databinding.FragmentDocumentaryBinding
@@ -33,20 +36,76 @@ class DocumentaryFragment : Fragment() {
 
         binding.listTvSeries.layoutManager = GridLayoutManager(context, 5)
         binding.listTvSeries.adapter = MovieAdapter(getMovies())
-        // 设置默认聚焦第一个卡片
-//        binding.card1.requestFocus()
         binding.bgTvSeries.setImageResource(R.drawable.movie) // 设置第一个卡片对应的图片
-
         // 设置焦点变化监听器来切换图片
+        binding.card0.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                val color = ContextCompat.getColor(requireContext(), R.color.orange)
+                binding.card0.setBackgroundColor(color)
+                binding.bgTvSeries.setImageResource(R.drawable.movie)
+            } else {
+                binding.card0.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.white
+                    )
+                )
+            }
+        }
+        binding.card0.setOnKeyListener { view, keyCode, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                // 查找焦点的目标View
+                val nextFocusView = view.focusSearch(View.FOCUS_DOWN)
+                nextFocusView?.requestFocus()
+                return@setOnKeyListener true
+            }
+            false
+        }
+
         binding.card1.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.bgTvSeries.setImageResource(R.drawable.movie)
+                binding.card1.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.orange
+                    )
+                )
+                binding.bgTvSeries.setImageResource(R.drawable.ic_mine)
+            } else {
+                binding.card1.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.card1
+                    )
+                )
             }
+        }
+        binding.card1.setOnKeyListener { view, keyCode, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                // 查找焦点的目标View
+                val nextFocusView = view.focusSearch(View.FOCUS_DOWN)
+                nextFocusView?.requestFocus()
+                return@setOnKeyListener true
+            }
+            false
         }
 
         binding.card2.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.bgTvSeries.setImageResource(R.drawable.ic_mine)
+                binding.card2.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.orange
+                    )
+                )
+                binding.bgTvSeries.setImageResource(R.drawable.ic_history)
+            } else {
+                binding.card2.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.card2
+                    )
+                )
             }
         }
 
