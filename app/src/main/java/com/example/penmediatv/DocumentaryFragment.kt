@@ -40,16 +40,15 @@ class DocumentaryFragment : Fragment() {
         // 设置焦点变化监听器来切换图片
         binding.card0.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                val color = ContextCompat.getColor(requireContext(), R.color.orange)
-                binding.card0.setBackgroundColor(color)
-                binding.bgTvSeries.setImageResource(R.drawable.movie)
+                // 设置背景颜色和边框
+                binding.card0.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.orange)) // 设置背景颜色
+                binding.card0.strokeColor = ContextCompat.getColor(requireContext(), R.color.white) // 设置白色边框
+                binding.card0.strokeWidth = 4 // 设置边框宽度为4dp
             } else {
-                binding.card0.setBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.white
-                    )
-                )
+                // 恢复默认背景颜色和移除边框
+                binding.card0.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white)) // 恢复背景颜色
+                binding.card0.strokeColor = ContextCompat.getColor(requireContext(), android.R.color.transparent) // 移除边框
+                binding.card0.strokeWidth = 0 // 无边框
             }
         }
         binding.card0.setOnKeyListener { view, keyCode, keyEvent ->
