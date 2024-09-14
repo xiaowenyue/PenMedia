@@ -1,6 +1,7 @@
 package com.example.penmediatv
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,6 +65,14 @@ class HomeFragment : Fragment() {
                 binding.cv3.strokeWidth = 0
             }
         }
+        binding.cv3.setOnKeyListener { view, keyCode, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                val nextFocusView = view.focusSearch(View.FOCUS_LEFT)
+                nextFocusView?.requestFocus()
+                return@setOnKeyListener true
+            }
+            false
+        }
         binding.cv4.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.cv4.strokeWidth = 6
@@ -73,6 +82,14 @@ class HomeFragment : Fragment() {
                 binding.cv4.strokeWidth = 0
             }
         }
+        binding.cv4.setOnKeyListener { view, keyCode, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                val nextFocusView = view.focusSearch(View.FOCUS_LEFT)
+                nextFocusView?.requestFocus()
+                return@setOnKeyListener true
+            }
+            false
+        }
         binding.cv5.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.cv5.strokeWidth = 6
@@ -81,6 +98,14 @@ class HomeFragment : Fragment() {
             } else {
                 binding.cv5.strokeWidth = 0
             }
+        }
+        binding.cv5.setOnKeyListener { view, keyCode, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                val nextFocusView = view.focusSearch(View.FOCUS_LEFT)
+                nextFocusView?.requestFocus()
+                return@setOnKeyListener true
+            }
+            false
         }
     }
 
