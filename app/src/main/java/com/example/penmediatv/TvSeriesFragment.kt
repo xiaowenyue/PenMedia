@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.penmediatv.databinding.FragmentTvserivesBinding
@@ -34,13 +35,21 @@ class TvSeriesFragment : Fragment() {
         // 设置焦点变化监听器来切换图片
         binding.card1.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
+                binding.card1.strokeWidth = 6
+                binding.card1.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
                 binding.bgTvSeries.setImageResource(R.drawable.movie)
+            } else {
+                binding.card1.strokeWidth = 0
             }
         }
 
         binding.card2.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
+                binding.card2.strokeWidth = 6
+                binding.card2.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
                 binding.bgTvSeries.setImageResource(R.drawable.ic_mine)
+            } else {
+                binding.card2.strokeWidth = 0
             }
         }
 
