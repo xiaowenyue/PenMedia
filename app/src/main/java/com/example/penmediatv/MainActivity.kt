@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             } else if (currentFragment?.javaClass?.simpleName == "MineFragment") {
                 firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.my_collection)
             } else if (currentFragment?.javaClass?.simpleName == "SearchFragment") {
-                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.et_search)
+                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.keyA)
             } else if (currentFragment?.javaClass?.simpleName == "MoviesFragment") {
                 firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.viewPagerLayout)
             } else if (currentFragment?.javaClass?.simpleName == "TvSeriesFragment") {
