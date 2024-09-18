@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,11 @@ class SearchResultsAdapter(private val movies: List<Movie>) :
             binding.movieTitle.text = movie.name
             binding.movieDescription.text = movie.details
             binding.moviePoster.setImageResource(movie.imageResId)
+            binding.btnWatch.setOnClickListener {
+                val intent = Intent(binding.root.context, MovieDetailsActivity::class.java)
+                intent.putExtra("movie", movie)
+                binding.root.context.startActivity(intent)
+            }
         }
     }
 
