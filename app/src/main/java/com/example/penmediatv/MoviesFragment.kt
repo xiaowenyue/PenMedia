@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -56,7 +57,7 @@ class MoviesFragment : Fragment() {
             }
         })
 
-        binding.viewPager.setOnFocusChangeListener { view, hasFocus ->
+        binding.viewPagerLayout.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 Log.v("MoviesFragment", "viewPager has focus")
                 Toast.makeText(context, "viewPager has focus", Toast.LENGTH_SHORT).show()
@@ -99,6 +100,10 @@ class MoviesFragment : Fragment() {
             }
         }
         startAutoSlide()
+        binding.viewPagerLayout.setOnClickListener{
+            val intent = Intent(context, MovieDetailsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun startAutoSlide() {

@@ -29,16 +29,6 @@ class CarouselAdapter(private val items: List<Movie>) :
         holder.binding.movieName.text = item.name
         holder.binding.movieDetails.text = item.details
         holder.binding.playTime.text = item.minorDetails
-        // 为 playTime 添加焦点事件监听
-        holder.binding.playTime.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                // 处理获得焦点时的逻辑
-                holder.binding.playTime.setBackgroundColor(holder.itemView.context.getColor(R.color.orange))
-            } else {
-                // 处理失去焦点时的逻辑#f2f6f8
-                holder.binding.playTime.setBackgroundColor(holder.itemView.context.getColor(R.color.play))
-            }
-        }
     }
 
     override fun getItemCount(): Int = items.size
