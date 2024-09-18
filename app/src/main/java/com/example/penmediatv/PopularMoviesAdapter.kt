@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,11 @@ class PopularMoviesAdapter(private val movies: List<Movie>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.btnMovieName.text = movie.name
+            binding.btnMovieName.setOnClickListener {
+                val intent = Intent(binding.root.context, MovieDetailsActivity::class.java)
+                intent.putExtra("movie", movie)
+                binding.root.context.startActivity(intent)
+            }
         }
     }
 
