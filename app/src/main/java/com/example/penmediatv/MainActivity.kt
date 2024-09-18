@@ -108,6 +108,14 @@ class MainActivity : AppCompatActivity() {
             firstFocusableView?.requestFocus()
             return true
         }
+        if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && binding.navDocumentary.hasFocus()) {
+            binding.navMine.requestFocus()
+            return true
+        }
+        if (keyCode == KeyEvent.KEYCODE_DPAD_UP && binding.navMine.hasFocus()) {
+            binding.navDocumentary.requestFocus()
+            return true
+        }
         return super.onKeyDown(keyCode, event)
     }
 
