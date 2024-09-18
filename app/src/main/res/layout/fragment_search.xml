@@ -17,13 +17,17 @@
         app:layout_constraintStart_toStartOf="@id/keyboard"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
+        <TextView
             android:id="@+id/et_search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="15"
             android:focusable="true"
-            android:hint="Please enter what you are searching for" />
+            android:gravity="start|center_vertical"
+            android:hint="Please enter what you are searching for"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
+            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="0dp"
@@ -68,98 +72,122 @@
             android:text="B" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyC"
             style="@style/KeyboardButton"
             android:text="C" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyD"
             style="@style/KeyboardButton"
             android:text="D" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyE"
             style="@style/KeyboardButton"
             android:text="E" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyF"
             style="@style/KeyboardButton"
             android:text="F" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyG"
             style="@style/KeyboardButton"
             android:text="G" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyH"
             style="@style/KeyboardButton"
             android:text="H" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyI"
             style="@style/KeyboardButton"
             android:text="I" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyJ"
             style="@style/KeyboardButton"
             android:text="J" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyK"
             style="@style/KeyboardButton"
             android:text="K" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyL"
             style="@style/KeyboardButton"
             android:text="L" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyM"
             style="@style/KeyboardButton"
             android:text="M" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyN"
             style="@style/KeyboardButton"
             android:text="N" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyO"
             style="@style/KeyboardButton"
             android:text="O" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyP"
             style="@style/KeyboardButton"
             android:text="P" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyQ"
             style="@style/KeyboardButton"
             android:text="Q" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyR"
             style="@style/KeyboardButton"
             android:text="R" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyS"
             style="@style/KeyboardButton"
             android:text="S" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyT"
             style="@style/KeyboardButton"
             android:text="T" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyU"
             style="@style/KeyboardButton"
             android:text="U" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyV"
             style="@style/KeyboardButton"
             android:text="V" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyW"
             style="@style/KeyboardButton"
             android:text="W" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyX"
             style="@style/KeyboardButton"
             android:text="X" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyY"
             style="@style/KeyboardButton"
             android:text="Y" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/keyZ"
             style="@style/KeyboardButton"
             android:text="Z" />
     </GridLayout>
@@ -177,26 +205,32 @@
         app:layout_constraintWidth_percent="0.38">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/key1"
             style="@style/KeyboardButton"
             android:text="1" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/key2"
             style="@style/KeyboardButton"
             android:text="2" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/key3"
             style="@style/KeyboardButton"
             android:text="3" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/key4"
             style="@style/KeyboardButton"
             android:text="4" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/key5"
             style="@style/KeyboardButton"
             android:text="5" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/key6"
             style="@style/KeyboardButton"
             android:text="6" />
     </GridLayout>
@@ -213,22 +247,27 @@
         app:layout_constraintWidth_percent="0.38">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/key7"
             style="@style/KeyboardButton"
             android:text="7" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/key8"
             style="@style/KeyboardButton"
             android:text="8" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/key9"
             style="@style/KeyboardButton"
             android:text="9" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/key0"
             style="@style/KeyboardButton"
             android:text="0" />
 
         <ImageView
+            android:id="@+id/btn_delete"
             android:layout_width="112dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
@@ -318,6 +357,7 @@
                 android:scrollbars="vertical" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_more"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:focusable="true"

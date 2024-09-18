@@ -28,7 +28,7 @@ class SearchFragment : Fragment() {
         Movie("无双", R.drawable.movie, "电影描述..."),
         Movie("扫毒", R.drawable.movie, "电影描述..."),
         Movie("无双", R.drawable.movie, "电影描述...")
-    )
+    ).toMutableList()
 
     private val searchResults = listOf(
         Movie("无双", R.drawable.movie, details),
@@ -70,7 +70,41 @@ class SearchFragment : Fragment() {
     private fun setupKeyboard() {
         val buttons = listOf<Button>(
             binding.keyA,
-            // 继续添加其他键盘按钮
+            binding.keyB,
+            binding.keyC,
+            binding.keyD,
+            binding.keyE,
+            binding.keyF,
+            binding.keyG,
+            binding.keyH,
+            binding.keyI,
+            binding.keyJ,
+            binding.keyK,
+            binding.keyL,
+            binding.keyM,
+            binding.keyN,
+            binding.keyO,
+            binding.keyP,
+            binding.keyQ,
+            binding.keyR,
+            binding.keyS,
+            binding.keyT,
+            binding.keyU,
+            binding.keyV,
+            binding.keyW,
+            binding.keyX,
+            binding.keyY,
+            binding.keyZ,
+            binding.key0,
+            binding.key1,
+            binding.key2,
+            binding.key3,
+            binding.key4,
+            binding.key5,
+            binding.key6,
+            binding.key7,
+            binding.key8,
+            binding.key9,
         )
 
         for (button in buttons) {
@@ -103,6 +137,15 @@ class SearchFragment : Fragment() {
         searchResults.clear()
         searchResults.addAll(results)
         searchResultsAdapter.notifyDataSetChanged()
+
+        val resultsSimple = listOf(
+            Movie("搜索结果1", R.drawable.movie, "描述..."),
+            // 添加更多搜索结果
+        )
+        popularMovies.clear()
+        popularMovies.addAll(resultsSimple)
+        popularMoviesAdapter.notifyDataSetChanged()
+        binding.cvMore.visibility = if (results.size > 7) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {
