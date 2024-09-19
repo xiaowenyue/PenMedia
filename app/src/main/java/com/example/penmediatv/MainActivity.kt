@@ -13,7 +13,7 @@ import com.example.penmediatv.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private var lastFocusedNavButtonId: Int = R.id.nav_home  // 默认焦点是nav_home
 
     override fun onCreate(savedInstanceState: Bundle?) {

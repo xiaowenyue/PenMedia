@@ -98,6 +98,10 @@ class MineFragment : Fragment() {
             val intent = Intent(context, UserAgreementActivity::class.java)
             startActivity(intent)
         }
+        binding.recentlyReviewed.setOnClickListener {
+            val mainActivity = activity as MainActivity
+            mainActivity?.binding?.navHistory?.requestFocus()
+        }
         return binding.root
     }
 
