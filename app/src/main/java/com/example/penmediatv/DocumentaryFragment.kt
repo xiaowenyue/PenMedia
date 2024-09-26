@@ -6,6 +6,8 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -40,28 +42,32 @@ class DocumentaryFragment : Fragment() {
         // 设置焦点变化监听器来切换图片
         binding.card0.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                // 设置背景颜色和边框
-                binding.card0.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.button_pressed
-                    )
-                ) // 恢复背景颜色
-                binding.card0.strokeColor =
-                    ContextCompat.getColor(requireContext(), R.color.white) // 设置白色边框
-                binding.card0.strokeWidth = 6 // 设置边框宽度为4dp
+                // 增加卡片的Elevation来增加阴影效果
+                binding.card0.cardElevation = 15f
                 binding.bgTvSeries.setImageResource(R.drawable.movie)
+                // 使用ScaleAnimation使卡片尺寸变大
+                val scaleUp = ScaleAnimation(
+                    1f, 1.1f, 1f, 1.1f,  // x, y方向放大到1.1倍
+                    Animation.RELATIVE_TO_SELF, 0.5f,  // X轴中心点为卡片自身的中心
+                    Animation.RELATIVE_TO_SELF, 0.5f   // Y轴中心点为卡片自身的中心
+                )
+                scaleUp.fillAfter = true // 动画结束后保持放大的状态
+                scaleUp.duration = 300 // 动画持续时间300ms
+                binding.card0.startAnimation(scaleUp)
             } else {
-                // 恢复默认背景颜色和移除边框
-                binding.card0.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.white
-                    )
-                ) // 恢复背景颜色
-                binding.card0.strokeColor =
-                    ContextCompat.getColor(requireContext(), android.R.color.transparent) // 移除边框
-                binding.card0.strokeWidth = 0 // 无边框
+//                binding.card0.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+                // 恢复默认Elevation
+                binding.card0.cardElevation = 6f // 恢复到默认的阴影高度
+
+                // 使用ScaleAnimation使卡片恢复原始尺寸
+                val scaleDown = ScaleAnimation(
+                    1.1f, 1f, 1.1f, 1f,  // 从1.1倍恢复到原始大小
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleDown.fillAfter = true
+                scaleDown.duration = 300
+                binding.card0.startAnimation(scaleDown)
             }
         }
         binding.card0.setOnKeyListener { view, keyCode, keyEvent ->
@@ -76,23 +82,31 @@ class DocumentaryFragment : Fragment() {
 
         binding.card1.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.card1.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.button_pressed
-                    )
-                ) // 恢复背景颜色
-                binding.card1.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
-                binding.card1.strokeWidth = 6
                 binding.bgTvSeries.setImageResource(R.drawable.ic_mine)
+                // 增加卡片的Elevation来增加阴影效果
+                binding.card1.cardElevation = 15f
+
+                val scaleUp = ScaleAnimation(
+                    1f, 1.1f, 1f, 1.1f,  // x, y方向放大到1.1倍
+                    Animation.RELATIVE_TO_SELF, 0.5f,  // X轴中心点为卡片自身的中心
+                    Animation.RELATIVE_TO_SELF, 0.5f   // Y轴中心点为卡片自身的中心
+                )
+                scaleUp.fillAfter = true // 动画结束后保持放大的状态
+                scaleUp.duration = 300 // 动画持续时间300ms
+                binding.card1.startAnimation(scaleUp)
             } else {
-                binding.card1.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.card1
-                    )
-                ) // 恢复背景颜色
-                binding.card1.strokeWidth = 0
+                // 恢复默认Elevation
+                binding.card1.cardElevation = 6f // 恢复到默认的阴影高度
+
+                // 使用ScaleAnimation使卡片恢复原始尺寸
+                val scaleDown = ScaleAnimation(
+                    1.1f, 1f, 1.1f, 1f,  // 从1.1倍恢复到原始大小
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleDown.fillAfter = true
+                scaleDown.duration = 300
+                binding.card1.startAnimation(scaleDown)
             }
         }
         binding.card1.setOnKeyListener { view, keyCode, keyEvent ->
@@ -107,23 +121,31 @@ class DocumentaryFragment : Fragment() {
 
         binding.card2.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.card2.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.button_pressed
-                    )
-                ) // 恢复背景颜色
-                binding.card2.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
-                binding.card2.strokeWidth = 6
                 binding.bgTvSeries.setImageResource(R.drawable.ic_history)
+                // 增加卡片的Elevation来增加阴影效果
+                binding.card2.cardElevation = 15f
+
+                val scaleUp = ScaleAnimation(
+                    1f, 1.1f, 1f, 1.1f,  // x, y方向放大到1.1倍
+                    Animation.RELATIVE_TO_SELF, 0.5f,  // X轴中心点为卡片自身的中心
+                    Animation.RELATIVE_TO_SELF, 0.5f   // Y轴中心点为卡片自身的中心
+                )
+                scaleUp.fillAfter = true // 动画结束后保持放大的状态
+                scaleUp.duration = 300 // 动画持续时间300ms
+                binding.card2.startAnimation(scaleUp)
             } else {
-                binding.card2.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.card2
-                    )
-                ) // 恢复背景颜色
-                binding.card2.strokeWidth = 0
+                // 恢复默认Elevation
+                binding.card2.cardElevation = 6f // 恢复到默认的阴影高度
+
+                // 使用ScaleAnimation使卡片恢复原始尺寸
+                val scaleDown = ScaleAnimation(
+                    1.1f, 1f, 1.1f, 1f,  // 从1.1倍恢复到原始大小
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleDown.fillAfter = true
+                scaleDown.duration = 300
+                binding.card2.startAnimation(scaleDown)
             }
         }
 
