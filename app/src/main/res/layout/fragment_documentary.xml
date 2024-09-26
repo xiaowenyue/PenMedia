@@ -34,8 +34,7 @@
                     <ImageView
                         android:id="@+id/bg_tv_series"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
                         android:scaleType="fitXY"
                         android:src="@drawable/movie" />
 
@@ -81,7 +80,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginLeft="26dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="22dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     app:cardBackgroundColor="#ffffff"
@@ -151,7 +150,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginLeft="26dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="22dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     app:cardBackgroundColor="#d2e2f1"
@@ -221,7 +220,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginLeft="26dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="22dp"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     app:cardBackgroundColor="#d5c69c"
