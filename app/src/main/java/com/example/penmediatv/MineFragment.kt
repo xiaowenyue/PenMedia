@@ -8,6 +8,8 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -30,39 +32,103 @@ class MineFragment : Fragment() {
         }
         binding.myCollection.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
+                val scaleUp = ScaleAnimation(
+                    1f, 1.1f, 1f, 1.1f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleUp.duration = 300
+                scaleUp.fillAfter = true
                 binding.myCollection.strokeColor =
                     ContextCompat.getColor(requireContext(), R.color.white)
                 binding.myCollection.strokeWidth = 6
+                binding.myCollection.startAnimation(scaleUp)
             } else {
+                val scaleDown = ScaleAnimation(
+                    1.1f, 1f, 1.1f, 1f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleDown.duration = 300
+                scaleDown.fillAfter = true
                 binding.myCollection.strokeWidth = 0
+                binding.myCollection.startAnimation(scaleDown)
             }
         }
         binding.userAgreement.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
+                val scaleUp = ScaleAnimation(
+                    1f, 1.1f, 1f, 1.1f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleUp.duration = 300
+                scaleUp.fillAfter = true
                 binding.userAgreement.strokeWidth = 6
                 binding.userAgreement.strokeColor =
                     ContextCompat.getColor(requireContext(), R.color.white)
+                binding.userAgreement.startAnimation(scaleUp)
             } else {
+                val scaleDown = ScaleAnimation(
+                    1.1f, 1f, 1.1f, 1f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleDown.duration = 300
+                scaleDown.fillAfter = true
                 binding.userAgreement.strokeWidth = 0
+                binding.userAgreement.startAnimation(scaleDown)
             }
         }
         binding.recentlyReviewed.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
+                val scaleUp = ScaleAnimation(
+                    1f, 1.1f, 1f, 1.1f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleUp.duration = 300
+                scaleUp.fillAfter = true
                 binding.recentlyReviewed.strokeColor = ContextCompat.getColor(
                     requireContext(),
                     R.color.white
                 )
                 binding.recentlyReviewed.strokeWidth = 6
+                binding.recentlyReviewed.startAnimation(scaleUp)
             } else {
+                val scaleDown = ScaleAnimation(
+                    1.1f, 1f, 1.1f, 1f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleDown.duration = 300
+                scaleDown.fillAfter = true
                 binding.recentlyReviewed.strokeWidth = 0
+                binding.recentlyReviewed.startAnimation(scaleDown)
             }
         }
         binding.aboutUs.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
+                val scaleUp = ScaleAnimation(
+                    1f, 1.1f, 1f, 1.1f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleUp.duration = 300
+                scaleUp.fillAfter = true
                 binding.item5.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
                 binding.item5.strokeWidth = 6
+                binding.item5.startAnimation(scaleUp)
             } else {
                 binding.item5.strokeWidth = 0
+                val scaleDown = ScaleAnimation(
+                    1.1f, 1f, 1.1f, 1f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleDown.duration = 300
+                scaleDown.fillAfter = true
+                binding.item5.startAnimation(scaleDown)
             }
         }
         binding.aboutUs.setOnKeyListener { view, keyCode, keyEvent ->
