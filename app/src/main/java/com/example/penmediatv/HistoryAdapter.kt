@@ -3,7 +3,10 @@ package com.example.penmediatv
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.penmediatv.databinding.ItemHistoryBinding
 
@@ -16,13 +19,27 @@ class HistoryAdapter(private val movies: List<Movie>) :
             binding.pic.setImageResource(movie.imageResId)
             binding.item.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
-                    Toast.makeText(
-                        binding.root.context,
-                        "Focused on ${movie.name}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    binding.mcvPic.strokeWidth = 6
+                    binding.mcvPic.strokeColor =
+                        ContextCompat.getColor(binding.root.context, R.color.white)
+                    val scaleUp = ScaleAnimation(
+                        1f, 1.1f, 1f, 1.1f,
+                        Animation.RELATIVE_TO_SELF, 0.5f,
+                        Animation.RELATIVE_TO_SELF, 0.5f
+                    )
+                    scaleUp.duration = 300
+                    scaleUp.fillAfter = true
+                    binding.item.startAnimation(scaleUp)
                 } else {
-                    println("no focus")
+                    binding.mcvPic.strokeWidth = 0
+                    val scaleDown = ScaleAnimation(
+                        1.1f, 1f, 1.1f, 1f,
+                        Animation.RELATIVE_TO_SELF, 0.5f,
+                        Animation.RELATIVE_TO_SELF, 0.5f
+                    )
+                    scaleDown.duration = 300
+                    scaleDown.fillAfter = true
+                    binding.item.startAnimation(scaleDown)
                 }
             }
             binding.item.setOnClickListener {
