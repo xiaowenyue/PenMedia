@@ -4,7 +4,9 @@
     android:id="@+id/movie_item"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="11dp"
+    android:layout_marginHorizontal="11dp"
+    android:layout_marginBottom="11dp"
+    android:layout_marginTop="13dp"
     app:cardBackgroundColor="@android:color/transparent"
     app:cardCornerRadius="18dp"
     app:cardElevation="0dp">
@@ -20,7 +22,6 @@
             android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:outlineSpotShadowColor="@color/button_pressed"
             app:cardCornerRadius="18dp"
             app:cardElevation="0dp">
 

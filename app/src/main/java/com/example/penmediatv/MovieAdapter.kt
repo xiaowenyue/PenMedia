@@ -24,7 +24,6 @@ class MovieAdapter(private val movies: List<Movie>) :
                     binding.mcvPic.strokeWidth = 6
                     binding.mcvPic.strokeColor =
                         ContextCompat.getColor(binding.root.context, R.color.white)
-                    binding.mcvPic.cardElevation = 15f
                     val scaleUp = ScaleAnimation(
                         1f, 1.1f, 1f, 1.1f,
                         Animation.RELATIVE_TO_SELF, 0.5f,
@@ -35,7 +34,6 @@ class MovieAdapter(private val movies: List<Movie>) :
                     binding.movieItem.startAnimation(scaleUp)
                 } else {
                     binding.mcvPic.strokeWidth = 0
-                    binding.mcvPic.cardElevation = 0f
                     val scaleDown = ScaleAnimation(
                         1.1f, 1f, 1.1f, 1f,
                         Animation.RELATIVE_TO_SELF, 0.5f,
