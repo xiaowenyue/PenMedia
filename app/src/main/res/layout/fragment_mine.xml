@@ -65,7 +65,8 @@
         app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/item1"
         app:layout_constraintTop_toTopOf="@id/item1"
-        app:layout_constraintWidth_percent="0.3">
+        app:layout_constraintWidth_percent="0.3"
+        app:rippleColor="@android:color/transparent">
 
         <!-- Gradient background view -->
         <View
@@ -115,7 +116,8 @@
         app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/my_collection"
         app:layout_constraintTop_toTopOf="@id/my_collection"
-        app:layout_constraintWidth_percent="0.3">
+        app:layout_constraintWidth_percent="0.3"
+        app:rippleColor="@android:color/transparent">
 
         <View
             android:id="@+id/bg_agreement"
@@ -165,7 +167,8 @@
         app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/item1"
         app:layout_constraintTop_toBottomOf="@id/my_collection"
-        app:layout_constraintWidth_percent="0.3">
+        app:layout_constraintWidth_percent="0.3"
+        app:rippleColor="@android:color/transparent">
 
         <View
             android:id="@+id/bg_recently"
@@ -211,7 +214,8 @@
         app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toEndOf="@id/recently_reviewed"
         app:layout_constraintTop_toBottomOf="@id/user_agreement"
-        app:layout_constraintWidth_percent="0.3">
+        app:layout_constraintWidth_percent="0.3"
+        app:rippleColor="@android:color/transparent">
 
         <View
             android:id="@+id/bg_about"
