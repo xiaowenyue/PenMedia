@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.ScaleAnimation
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -38,8 +39,24 @@ class TvSeriesFragment : Fragment() {
                 binding.card1.strokeWidth = 6
                 binding.card1.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
                 binding.bgTvSeries.setImageResource(R.drawable.movie)
+                val scaleUp = ScaleAnimation(
+                    1f, 1.1f, 1f, 1.1f,
+                    ScaleAnimation.RELATIVE_TO_SELF, 0.5f,
+                    ScaleAnimation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleUp.duration = 300
+                scaleUp.fillAfter = true
+                binding.card1.startAnimation(scaleUp)
             } else {
                 binding.card1.strokeWidth = 0
+                val scaleDown = ScaleAnimation(
+                    1.1f, 1f, 1.1f, 1f,
+                    ScaleAnimation.RELATIVE_TO_SELF, 0.5f,
+                    ScaleAnimation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleDown.duration = 300
+                scaleDown.fillAfter = true
+                binding.card1.startAnimation(scaleDown)
             }
         }
 
@@ -48,8 +65,24 @@ class TvSeriesFragment : Fragment() {
                 binding.card2.strokeWidth = 6
                 binding.card2.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
                 binding.bgTvSeries.setImageResource(R.drawable.ic_mine)
+                val scaleUp = ScaleAnimation(
+                    1f, 1.1f, 1f, 1.1f,
+                    ScaleAnimation.RELATIVE_TO_SELF, 0.4f,
+                    ScaleAnimation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleUp.duration = 300
+                scaleUp.fillAfter = true
+                binding.card2.startAnimation(scaleUp)
             } else {
                 binding.card2.strokeWidth = 0
+                val scaleDown = ScaleAnimation(
+                    1.1f, 1f, 1.1f, 1f,
+                    ScaleAnimation.RELATIVE_TO_SELF, 0.4f,
+                    ScaleAnimation.RELATIVE_TO_SELF, 0.5f
+                )
+                scaleDown.duration = 300
+                scaleDown.fillAfter = true
+                binding.card2.startAnimation(scaleDown)
             }
         }
 
