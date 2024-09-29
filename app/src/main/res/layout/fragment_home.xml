@@ -183,7 +183,6 @@
                 <LinearLayout
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -191,6 +190,7 @@
                         android:id="@+id/cv_2"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
+                        android:layout_margin="10dp"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
                         app:cardBackgroundColor="@android:color/transparent"
@@ -234,7 +234,6 @@
                 <LinearLayout
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -242,6 +241,7 @@
                         android:id="@+id/cv_3"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
+                        android:layout_margin="10dp"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
                         app:cardBackgroundColor="@android:color/transparent"
@@ -285,7 +285,6 @@
                 <LinearLayout
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -293,6 +292,7 @@
                         android:id="@+id/cv_4"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
+                        android:layout_margin="10dp"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
                         app:cardBackgroundColor="@android:color/transparent"
@@ -336,7 +336,6 @@
                 <LinearLayout
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -344,6 +343,7 @@
                         android:id="@+id/cv_5"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
+                        android:layout_margin="10dp"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
                         app:cardBackgroundColor="@android:color/transparent"

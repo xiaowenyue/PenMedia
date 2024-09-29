@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
                 binding.cv2.strokeWidth = 6
                 binding.cv2.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
                 val scaleUp = ScaleAnimation(
-                    1f, 1.1f, 1f, 1.1f,
+                    1f, 1.1f, 1f, 1.05f,
                     ScaleAnimation.RELATIVE_TO_SELF, 0.5f,
                     ScaleAnimation.RELATIVE_TO_SELF, 0.5f
                 )
@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
             } else {
                 binding.cv2.strokeWidth = 0
                 val scaleDown = ScaleAnimation(
-                    1.1f, 1f, 1.1f, 1f,
+                    1.1f, 1f, 1.05f, 1f,
                     ScaleAnimation.RELATIVE_TO_SELF, 0.5f,
                     ScaleAnimation.RELATIVE_TO_SELF, 0.5f
                 )
@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
                 binding.cv3.strokeWidth = 6
                 binding.cv3.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
                 val scaleUp = ScaleAnimation(
-                    1f,1.1f,1f,1.1f,
+                    1f,1.1f,1f,1.05f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f
                 )
@@ -88,7 +88,7 @@ class HomeFragment : Fragment() {
             } else {
                 binding.cv3.strokeWidth = 0
                 val scaleDown = ScaleAnimation(
-                    1.1f,1f,1.1f,1f,
+                    1.1f,1f,1.05f,1f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f
                 )
@@ -110,7 +110,7 @@ class HomeFragment : Fragment() {
                 binding.cv4.strokeWidth = 6
                 binding.cv4.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
                 val scaleUp = ScaleAnimation(
-                    1f,1.1f,1f,1.1f,
+                    1f,1.1f,1f,1.05f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f
                 )
@@ -120,7 +120,7 @@ class HomeFragment : Fragment() {
             } else {
                 binding.cv4.strokeWidth = 0
                 val scaleDown = ScaleAnimation(
-                    1.1f,1f,1.1f,1f,
+                    1.1f,1f,1.05f,1f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f
                 )
@@ -142,7 +142,7 @@ class HomeFragment : Fragment() {
                 binding.cv5.strokeWidth = 6
                 binding.cv5.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
                 val scaleUp = ScaleAnimation(
-                    1f,1.1f,1f,1.1f,
+                    1f,1.1f,1f,1.05f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f
                 )
@@ -152,7 +152,7 @@ class HomeFragment : Fragment() {
             } else {
                 binding.cv5.strokeWidth = 0
                 val scaleDown = ScaleAnimation(
-                    1.1f,1f,1.1f,1f,
+                    1.1f,1f,1.05f,1f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f,
                     ScaleAnimation.RELATIVE_TO_SELF,0.5f
                 )
