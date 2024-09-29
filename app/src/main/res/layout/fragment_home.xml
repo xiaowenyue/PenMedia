@@ -181,8 +181,10 @@
                 android:paddingRight="14dp">
 
                 <LinearLayout
+                    android:id="@+id/ll_2"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -224,7 +226,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_marginTop="6dp"
                         android:gravity="center"
                         android:text="movieName"
                         android:textColor="@color/white"
@@ -232,8 +233,10 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_3"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -275,7 +278,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_marginTop="6dp"
                         android:gravity="center"
                         android:text="movieName"
                         android:textColor="@color/white"
@@ -283,8 +285,10 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_4"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -326,7 +330,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_marginTop="6dp"
                         android:gravity="center"
                         android:text="movieName"
                         android:textColor="@color/white"
@@ -334,8 +337,10 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_5"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -377,7 +382,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_marginTop="6dp"
                         android:gravity="center"
                         android:text="movieName"
                         android:textColor="@color/white"
