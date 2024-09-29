@@ -33,26 +33,10 @@ class HomeFragment : Fragment() {
             if (hasFocus) {
                 binding.cv0.strokeWidth = 6
                 binding.cv0.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
-                val scaleUp = ScaleAnimation(
-                    1f, 1.1f, 1f, 1.1f,
-                    ScaleAnimation.RELATIVE_TO_SELF, 0.35f,
-                    ScaleAnimation.RELATIVE_TO_SELF, 0.53f
-                )
-                scaleUp.duration = 300
-                scaleUp.fillAfter = true
-                binding.cv0.startAnimation(scaleUp)
                 binding.llContent0.visibility = View.VISIBLE
             } else {
                 binding.cv0.strokeWidth = 0
                 binding.llContent0.visibility = View.GONE
-                val scaleDown = ScaleAnimation(
-                    1.1f, 1f, 1.1f, 1f,
-                    ScaleAnimation.RELATIVE_TO_SELF, 0.7f,
-                    ScaleAnimation.RELATIVE_TO_SELF, 0.53f
-                )
-                scaleDown.duration = 300
-                scaleDown.fillAfter = true
-                binding.cv0.startAnimation(scaleDown)
             }
         }
         binding.cv1.setOnFocusChangeListener { _, hasFocus ->
@@ -60,25 +44,9 @@ class HomeFragment : Fragment() {
                 binding.cv1.strokeWidth = 6
                 binding.cv1.strokeColor = ContextCompat.getColor(requireContext(), R.color.white)
                 binding.llContent1.visibility = View.VISIBLE
-                val scaleUp = ScaleAnimation(
-                    1f, 1.1f, 1f, 1.1f,
-                    ScaleAnimation.RELATIVE_TO_SELF, 0.5f,
-                    ScaleAnimation.RELATIVE_TO_SELF, 0.5f
-                )
-                scaleUp.duration = 300
-                scaleUp.fillAfter = true
-                binding.cv1.startAnimation(scaleUp)
             } else {
                 binding.cv1.strokeWidth = 0
                 binding.llContent1.visibility = View.GONE
-                val scaleDown = ScaleAnimation(
-                    1.1f,1f,1.1f,1f,
-                    ScaleAnimation.RELATIVE_TO_SELF,0.5f,
-                    ScaleAnimation.RELATIVE_TO_SELF,0.5f
-                )
-                scaleDown.duration = 300
-                scaleDown.fillAfter = true
-                binding.cv1.startAnimation(scaleDown)
             }
         }
         binding.cv2.setOnFocusChangeListener { _, hasFocus ->
