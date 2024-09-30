@@ -28,7 +28,7 @@ class TvSeriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.listTvSeries.layoutManager = GridLayoutManager(context, 5)
-        binding.listTvSeries.adapter = MovieAdapter(getMovies())
+        binding.listTvSeries.adapter = MovieAdapter(getMovies(), binding.scrollView)
         // 设置默认聚焦第一个卡片
 //        binding.card1.requestFocus()
         binding.bgTvSeries.setImageResource(R.drawable.movie) // 设置第一个卡片对应的图片

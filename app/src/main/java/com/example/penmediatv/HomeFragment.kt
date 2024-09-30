@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
-        binding.recyclerView.adapter = MovieAdapter(getMovies())
+        binding.recyclerView.adapter = MovieAdapter(getMovies(), binding.scrollView)
 
         binding.cv0.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -61,6 +61,12 @@ class HomeFragment : Fragment() {
                 scaleUp.duration = 300
                 scaleUp.fillAfter = true
                 binding.ll2.startAnimation(scaleUp)
+                val location = IntArray(2)
+                binding.cv2.getLocationOnScreen(location)
+                binding.scrollView.smoothScrollTo(
+                    0,
+                    location[1] - binding.scrollView.height / 2 + binding.cv2.height / 2
+                )
             } else {
                 binding.cv2.strokeWidth = 0
                 val scaleDown = ScaleAnimation(

@@ -38,7 +38,7 @@ class AnimationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
-        binding.recyclerView.adapter = MovieAdapter(getMovies())
+        binding.recyclerView.adapter = MovieAdapter(getMovies(),binding.scrollView)
         val items = listOf(
             Movie("Title 0", R.drawable.movie, "Details 1", "Time 1"),
             Movie("Title 1", R.drawable.ic_search, "Details 2", "Time 2"),

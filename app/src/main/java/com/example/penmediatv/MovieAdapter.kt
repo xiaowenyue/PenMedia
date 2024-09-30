@@ -6,17 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
+import android.widget.ScrollView
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.penmediatv.databinding.ItemMovieBinding
 
-class MovieAdapter(private val movies: List<Movie>) :
+class MovieAdapter(private val movies: List<Movie>, private val scrollView: ScrollView) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie) {
+        fun bind(movie: Movie, scrollView: ScrollView) {
             binding.movieTitle.text = movie.name
 //            binding.movieImage.setImageResource(movie.imageResId)
             binding.movieItem.setOnFocusChangeListener { _, hasFocus ->
@@ -32,6 +33,7 @@ class MovieAdapter(private val movies: List<Movie>) :
                     scaleUp.duration = 300
                     scaleUp.fillAfter = true
                     binding.movieItem.startAnimation(scaleUp)
+                    scrollToCenter(binding.movieItem, scrollView)
                 } else {
                     binding.mcvPic.strokeWidth = 0
                     val scaleDown = ScaleAnimation(
@@ -50,6 +52,24 @@ class MovieAdapter(private val movies: List<Movie>) :
                 context.startActivity(intent)
             }
         }
+
+        private fun scrollToCenter(view: View, scrollView: ScrollView) {
+            val location = IntArray(2)
+            view.getLocationOnScreen(location)
+
+            val scrollViewLocation = IntArray(2)
+            scrollView.getLocationOnScreen(scrollViewLocation)
+
+            // 获取 item 的 Y 坐标，并计算它应该滚动的位置
+            val itemY = location[1]
+            val scrollViewY = scrollViewLocation[1]
+
+            // 计算 ScrollView 应该滚动的距离
+            val scrollAmount = itemY - scrollViewY - scrollView.height / 2 + view.height / 2
+
+            // 执行平滑滚动
+            scrollView.smoothScrollBy(0, scrollAmount)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -58,7 +78,7 @@ class MovieAdapter(private val movies: List<Movie>) :
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(movies[position])
+        holder.bind(movies[position], scrollView)
     }
 
     override fun getItemCount(): Int {
