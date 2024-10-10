@@ -56,6 +56,10 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".VideoPlayActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".NetworkDisconnectActivity"
             android:exported="false">
         </activity>
