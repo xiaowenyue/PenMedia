@@ -36,7 +36,7 @@
                 android:hint="Please enter what you are searching for"
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <ImageView
                 android:layout_width="0dp"

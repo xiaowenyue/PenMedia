@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-11T09:22:49.571095Z">
+        <DropdownSelection timestamp="2024-10-12T02:07:01.046033Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/edy/.android/avd/vitural_TV.avd" />
+              <DeviceId pluginId="Default" identifier="serial=192.168.31.128:5555;connection=df7d6da0" />
             </handle>
           </Target>
         </DropdownSelection>
