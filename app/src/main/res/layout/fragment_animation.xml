@@ -22,7 +22,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/vpm_animation"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="400dp"
                 android:background="@color/purple_200"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
