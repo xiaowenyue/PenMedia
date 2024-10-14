@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
-        binding.recyclerView.adapter = MovieAdapter(getMovies(), binding.scrollView)
+//        binding.recyclerView.adapter = MovieAdapter(getMovies(), binding.scrollView)
 
         binding.cv0.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {

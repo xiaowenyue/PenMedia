@@ -37,7 +37,7 @@ class DocumentaryFragment : Fragment() {
         binding.bgTvSeries.layoutParams = layoutParams
 
         binding.listTvSeries.layoutManager = GridLayoutManager(context, 5)
-        binding.listTvSeries.adapter = MovieAdapter(getMovies(), binding.scrollView)
+//        binding.listTvSeries.adapter = MovieAdapter(getMovies(), binding.scrollView)
         binding.bgTvSeries.setImageResource(R.drawable.movie) // 设置第一个卡片对应的图片
         // 设置焦点变化监听器来切换图片
         binding.card0.setOnFocusChangeListener { _, hasFocus ->
