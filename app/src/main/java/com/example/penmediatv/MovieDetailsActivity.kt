@@ -24,7 +24,7 @@ class MovieDetailsActivity : AppCompatActivity() {
 
         binding.btWatchNow.setOnClickListener {
             Toast.makeText(this, "Watch Now", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MoviePlayActivity::class.java)
+            val intent = Intent(this, VideoPlayActivity::class.java)
             startActivity(intent)
         }
         binding.recyclerView.layoutManager = GridLayoutManager(this, 4)
