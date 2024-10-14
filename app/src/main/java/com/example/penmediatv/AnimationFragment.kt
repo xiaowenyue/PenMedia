@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.penmediatv.API.AnimationApi
 import com.example.penmediatv.Data.AnimationResponse
@@ -32,6 +33,11 @@ class AnimationFragment : Fragment() {
     private var handler = Handler(Looper.getMainLooper())
     private var runnable: Runnable? = null
     private val slideInterval: Long = 3000 // 滚动间隔时间，单位为毫秒
+    private var currentPage = 1
+    private var pageSize = 10
+    private var totalPages = 1 // 从服务器获取的总页数
+    private var isLoading = false
+    private lateinit var movieAdapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +50,26 @@ class AnimationFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchAnimations(0, 10)
+        setupRecyclerView()
+        fetchAnimations(currentPage, pageSize)
+        // 设置滚动监听器
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                // 判断是否滑到底部，并且不处于加载状态
+                if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                    && firstVisibleItemPosition >= 0
+                ) {
+                    loadMoreItems()
+                }
+            }
+        })
         //轮播图数据
         val items = listOf(
             Movie("Title 0", R.drawable.movie, "Details 1", "Time 1"),
@@ -111,6 +136,59 @@ class AnimationFragment : Fragment() {
             startActivity(intent)
         }
     }
+    private fun setupRecyclerView() {
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
+        movieAdapter = MovieAdapter(mutableListOf(), binding.scrollView)
+        binding.recyclerView.adapter = movieAdapter
+    }
+
+    private fun loadMoreItems() {
+        // 判断是否还有下一页数据
+        if (currentPage < totalPages) {
+            currentPage++
+            fetchAnimations(currentPage, pageSize)
+        }
+    }
+
+    private fun fetchAnimations(page: Int, pageSize: Int) {
+        isLoading = true
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val animationApi = retrofit.create(AnimationApi::class.java)
+        val call = animationApi.getAnimations(page, pageSize)
+
+        call.enqueue(object : Callback<AnimationResponse> {
+            override fun onResponse(
+                call: Call<AnimationResponse>,
+                response: Response<AnimationResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val animationData = response.body()?.data
+                    if (animationData != null) {
+                        totalPages = (animationData.totalRecords + pageSize - 1) / pageSize
+                        val animationList = animationData.records
+
+                        if (animationList.isNotEmpty()) {
+                            // 将新数据追加到现有数据中
+                            movieAdapter.updateMovies(animationList)
+                        }
+                    }
+                } else {
+                    Log.e("MoviesFragment", "Error: ${response.code()} - ${response.errorBody()?.string()}")
+                }
+                isLoading = false
+            }
+
+            override fun onFailure(call: Call<AnimationResponse>, t: Throwable) {
+                Log.e("MoviesFragment", "Network Error: ${t.message}")
+                isLoading = false
+            }
+        })
+    }
 
     private fun startAutoSlide() {
         runnable = object : Runnable {
@@ -176,49 +254,6 @@ class AnimationFragment : Fragment() {
                 )
             }
         }
-    }
-
-    fun fetchAnimations(page: Int, pageSize: Int) {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://44.208.55.69/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val animationApi = retrofit.create(AnimationApi::class.java)
-        val call = animationApi.getAnimations(page, pageSize)
-
-        call.enqueue(object : Callback<AnimationResponse> {
-            override fun onResponse(
-                call: Call<AnimationResponse>,
-                response: Response<AnimationResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val animationData = response.body()?.data
-                    if (animationData != null) {
-                        val animationList = animationData.records
-                        // 打印获取的数据日志
-                        Log.v("MoviesFragment", "Animation List: $animationList")
-                        if (animationList.isNotEmpty()) {
-                            //列表数据
-                            binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
-                            binding.recyclerView.adapter = MovieAdapter(animationList, binding.scrollView)
-                            // 确保通知 RecyclerView 数据已经更新
-                            binding.recyclerView.adapter?.notifyDataSetChanged()
-                        } else {
-                            Log.e("MoviesFragment", "No items found")
-                        }
-                    } else {
-                        Log.e("MoviesFragment", "No data available")
-                    }
-                } else {
-                    Log.e("MoviesFragment", "Error: ${response.code()} - ${response.errorBody()?.string()}")
-                }
-            }
-
-            override fun onFailure(call: Call<AnimationResponse>, t: Throwable) {
-                Log.e("MoviesFragment", "Network Error: ${t.message}")
-            }
-        })
     }
 
     override fun onDestroyView() {

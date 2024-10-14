@@ -9,6 +9,8 @@ data class AnimationResponse(
 data class AnimationData(
     val currentPage: Int,
     val pageSize: Int,
+    val totalPages: Int,
+    val totalRecords: Int,
     val records: List<AnimationItem>
 )
 

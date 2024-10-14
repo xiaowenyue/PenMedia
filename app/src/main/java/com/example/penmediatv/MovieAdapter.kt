@@ -15,7 +15,7 @@ import com.example.penmediatv.Data.AnimationItem
 import com.example.penmediatv.databinding.ItemMovieBinding
 
 // 修改为 AnimationItem, 使用你从API获取的模型类
-class MovieAdapter(private val movies: List<AnimationItem>, private val scrollView: ScrollView) :
+class MovieAdapter(private val movies: MutableList<AnimationItem>, private val scrollView: ScrollView) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder(private val binding: ItemMovieBinding) :
@@ -100,5 +100,9 @@ class MovieAdapter(private val movies: List<AnimationItem>, private val scrollVi
 
     override fun getItemCount(): Int {
         return movies.size
+    }
+    fun updateMovies(newMovies: List<AnimationItem>) {
+        movies.addAll(newMovies)
+        notifyDataSetChanged()
     }
 }
