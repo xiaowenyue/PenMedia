@@ -33,7 +33,7 @@ class VideoPlayActivity : AppCompatActivity() {
         videoWebView.webViewClient = WebViewClient()
 
         // 这里加载你的Bunny视频链接
-        val videoUrl = "https://iframe.mediadelivery.net/play/314818/60b32cdf-b065-4a7d-af08-affec3f3ea92"
+        val videoUrl = "https://iframe.mediadelivery.net/embed/314818/60b32cdf-b065-4a7d-af08-affec3f3ea92"
         videoWebView.loadUrl(videoUrl)
     }
 }
