@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.penmediatv.API.AnimationApi
 import com.example.penmediatv.Data.AnimationResponse
+import com.example.penmediatv.Data.SwiperResponse
 import com.example.penmediatv.databinding.FragmentAnimationBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,9 +46,9 @@ class AnimationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAnimationBinding.inflate(inflater, container, false)
-        Log.v("MoviesFragment", "onCreateView")
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
@@ -56,12 +57,10 @@ class AnimationFragment : Fragment() {
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-
                 val layoutManager = recyclerView.layoutManager as GridLayoutManager
                 val visibleItemCount = layoutManager.childCount
                 val totalItemCount = layoutManager.itemCount
                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
                 // 判断是否滑到底部，并且不处于加载状态
                 if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                     && firstVisibleItemPosition >= 0
@@ -71,27 +70,10 @@ class AnimationFragment : Fragment() {
             }
         })
         //轮播图数据
-        val items = listOf(
-            Movie("Title 0", R.drawable.movie, "Details 1", "Time 1"),
-            Movie("Title 1", R.drawable.ic_search, "Details 2", "Time 2"),
-            Movie("Title 2", R.drawable.ic_history, "Details 3", "Time 3")
-        )
-        adapter = NoTitleCarouselAdapter(items)
-        binding.viewPager.adapter = adapter
-        setupIndicators(items.size)
-        setCurrentIndicator(0)
-
-        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                setCurrentIndicator(position)
-            }
-        })
-
+        fetchSwiperAnimation()
         binding.vpmAnimation.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 Log.v("MoviesFragment", "viewPager has focus")
-                Toast.makeText(context, "viewPager has focus", Toast.LENGTH_SHORT).show()
                 view.setOnKeyListener { v, keyCode, event ->
                     if (event.action == KeyEvent.ACTION_DOWN) {
                         when (keyCode) {
@@ -130,12 +112,64 @@ class AnimationFragment : Fragment() {
                 view.setOnKeyListener(null)
             }
         }
-        startAutoSlide()
         binding.vpmAnimation.setOnClickListener {
             val intent = Intent(context, TvDetailsActivity::class.java)
             startActivity(intent)
         }
     }
+
+    private fun fetchSwiperAnimation() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val animationApi = retrofit.create(AnimationApi::class.java)
+        val call = animationApi.getSwiperAnimations()
+
+        call.enqueue(object : Callback<SwiperResponse> {
+            override fun onResponse(
+                call: Call<SwiperResponse>,
+                response: Response<SwiperResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val swiperDate = response.body()?.data
+                    if (swiperDate != null && swiperDate.isNotEmpty()) {
+                        //数据适配到轮播图适配器
+                        adapter = NoTitleCarouselAdapter(swiperDate)
+                        binding.viewPager.adapter = adapter
+                        //设置轮播图指示器
+                        setupIndicators(swiperDate.size)
+                        setCurrentIndicator(0)
+
+                        //设置页面更改回调
+                        binding.viewPager.registerOnPageChangeCallback(object :
+                            ViewPager2.OnPageChangeCallback() {
+                            override fun onPageSelected(position: Int) {
+                                super.onPageSelected(position)
+                                setCurrentIndicator(position)
+                            }
+                        })
+
+                        //开始自动播放
+                        startAutoSlide()
+                    } else {
+                        Log.e("AnimationFragment", "No swiper data found")
+                    }
+                } else {
+                    Log.e(
+                        "AnimationFragment",
+                        "Error:${response.code()} - ${response.errorBody()?.string()}"
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<SwiperResponse>, t: Throwable) {
+                Log.e("AnimationFragment", "Network Error: ${t.message}")
+            }
+        })
+    }
+
     private fun setupRecyclerView() {
         binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
         movieAdapter = MovieAdapter(mutableListOf(), binding.scrollView)
@@ -178,7 +212,10 @@ class AnimationFragment : Fragment() {
                         }
                     }
                 } else {
-                    Log.e("MoviesFragment", "Error: ${response.code()} - ${response.errorBody()?.string()}")
+                    Log.e(
+                        "MoviesFragment",
+                        "Error: ${response.code()} - ${response.errorBody()?.string()}"
+                    )
                 }
                 isLoading = false
             }

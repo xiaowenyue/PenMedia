@@ -5,8 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.penmediatv.Data.SwiperItem
 
-class NoTitleCarouselAdapter(private val items: List<Movie>) :
+class NoTitleCarouselAdapter(private val items: List<SwiperItem>) :
     RecyclerView.Adapter<NoTitleCarouselAdapter.NoTitleCarouselViewHolder>() {
 
     class NoTitleCarouselViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -21,7 +23,9 @@ class NoTitleCarouselAdapter(private val items: List<Movie>) :
 
     override fun onBindViewHolder(holder: NoTitleCarouselViewHolder, position: Int) {
         val item = items[position]
-        holder.imageView.setImageResource(item.imageResId)
+        Glide.with(holder.itemView)
+            .load(item.videoCover)
+            .into(holder.imageView)
     }
 
     override fun getItemCount(): Int = items.size
