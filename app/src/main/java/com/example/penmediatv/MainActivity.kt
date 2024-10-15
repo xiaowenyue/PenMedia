@@ -55,19 +55,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 设置导航栏图标大小
-        val width = 30 // 设置你想要的宽度
-        val height = 30 // 设置你想要的高度
-        val drawableMine = ContextCompat.getDrawable(this, R.drawable.ic_mine_selector)!!
-        drawableMine.setBounds(0, 0, width, height)
-        binding.navMine.setCompoundDrawables(drawableMine, null, null, null)
-        val drawableSearch = ContextCompat.getDrawable(this, R.drawable.ic_search_selector)!!
-        drawableSearch.setBounds(0, 0, width, height)
-        binding.navSearch.setCompoundDrawables(drawableSearch, null, null, null)
-        val drawableHistory = ContextCompat.getDrawable(this, R.drawable.ic_history_selector)!!
-        drawableHistory.setBounds(0, 0, width, height)
-        binding.navHistory.setCompoundDrawables(drawableHistory, null, null, null)
+        setNavButtonIcon(binding.navMine, R.drawable.ic_mine_selector, 30, 30)
+        setNavButtonIcon(binding.navSearch, R.drawable.ic_search_selector, 30, 30)
+        setNavButtonIcon(binding.navHistory, R.drawable.ic_history_selector, 30, 30)
 
+        // 设置默认焦点
         binding.navHome.requestFocus()
+    }
+    // 图标设置方法，减少重复代码
+    private fun setNavButtonIcon(button: TextView, iconResId: Int, width: Int, height: Int) {
+        val drawable = ContextCompat.getDrawable(this, iconResId)!!
+        drawable.setBounds(0, 0, width, height)
+        button.setCompoundDrawables(drawable, null, null, null)
     }
 
     // 判断左边是否有可以移动焦点的元素
