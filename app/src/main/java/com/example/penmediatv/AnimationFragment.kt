@@ -244,7 +244,9 @@ class AnimationFragment : Fragment() {
     }
 
     private fun stopAutoSlide() {
-        handler.removeCallbacks(runnable!!)
+        runnable?.let {
+            handler.removeCallbacks(it)
+        }
     }
 
     private fun setupIndicators(count: Int) {
