@@ -15,6 +15,16 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private var lastFocusedNavButtonId: Int = R.id.nav_home  // 默认焦点是nav_home
     private var currentFragmentTag: String? = null  // 用于记录当前显示的Fragment类型
+    private val navButtonIds = setOf(
+        R.id.nav_mine,
+        R.id.nav_search,
+        R.id.nav_history,
+        R.id.nav_home,
+        R.id.nav_movies,
+        R.id.nav_tv_series,
+        R.id.nav_documentary,
+        R.id.nav_animation
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,40 +92,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
         // 焦点从导航栏按钮移到Fragment时
-        if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && findViewById<View>(lastFocusedNavButtonId).hasFocus()) {
-            val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-            Log.d("FragmentName", "currentFragment: ${currentFragment?.javaClass?.simpleName}")
-            var firstFocusableView: View? = null
+        if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+            // 获取当前焦点的视图
+            val currentFocusedView = currentFocus
 
-            // 定位Fragment中第一个可聚焦的控件
-            when (currentFragment?.javaClass?.simpleName) {
-                "HomeFragment" -> firstFocusableView =
-                    currentFragment?.view?.findViewById(R.id.cv_0)
-
-                "HistoryFragment" -> firstFocusableView =
-                    currentFragment?.view?.findViewById(R.id.recyclerView)
-
-                "MineFragment" -> firstFocusableView =
-                    currentFragment?.view?.findViewById(R.id.my_collection)
-
-                "SearchFragment" -> firstFocusableView =
-                    currentFragment?.view?.findViewById(R.id.keyA)
-
-                "MoviesFragment" -> firstFocusableView =
-                    currentFragment?.view?.findViewById(R.id.viewPagerLayout)
-
-                "TvSeriesFragment" -> firstFocusableView =
-                    currentFragment?.view?.findViewById(R.id.card1)
-
-                "DocumentaryFragment" -> firstFocusableView =
-                    currentFragment?.view?.findViewById(R.id.card0)
-
-                "AnimationFragment" -> firstFocusableView =
-                    currentFragment?.view?.findViewById(R.id.vpm_animation)
+            // 判断当前焦点是否在导航栏上，比如R.id.navButtons是你的导航栏布局
+            if (currentFocusedView != null && currentFocusedView.id in navButtonIds) {
+                // 定位到Fragment的第一个可聚焦控件
+                focusFirstViewInCurrentFragment()
+                return true
             }
-
-            firstFocusableView?.requestFocus()
-            return true
         }
         // 在导航栏循环上下切换
         if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && binding.navDocumentary.hasFocus()) {
@@ -143,10 +129,34 @@ class MainActivity : AppCompatActivity() {
             else -> "HomeFragment"
         }
 
-        // 仅在Fragment未显示时才替换
+        // 仅当Fragment未显示时才进行Fragment的显示
         if (currentFragmentTag != fragmentTag) {
-            currentFragmentTag = fragmentTag
-            val fragment: Fragment = when (fragmentTag) {
+            showFragment(fragmentTag)
+        }
+    }
+
+    // 处理导航按钮点击
+    private fun onNavButtonClicked(view: View) {
+        onNavButtonFocused(view) // 点击时也调用聚焦逻辑，确保Fragment刷新
+    }
+
+    private val fragmentMap = mutableMapOf<String, Fragment>()
+
+    // 替换Fragment的方法变成显示和隐藏Fragment的方法
+    private fun showFragment(tag: String) {
+        val transaction = supportFragmentManager.beginTransaction()
+
+        // 如果当前有显示的Fragment，则将其隐藏
+        val currentFragment = supportFragmentManager.findFragmentByTag(currentFragmentTag)
+        if (currentFragment != null) {
+            transaction.hide(currentFragment)
+        }
+
+        // 尝试从缓存中获取Fragment
+        var fragment = fragmentMap[tag]
+        if (fragment == null) {
+            // 如果缓存中不存在Fragment，创建新的Fragment
+            fragment = when (tag) {
                 "MineFragment" -> MineFragment()
                 "SearchFragment" -> SearchFragment()
                 "HistoryFragment" -> HistoryFragment()
@@ -157,19 +167,50 @@ class MainActivity : AppCompatActivity() {
                 "DocumentaryFragment" -> DocumentaryFragment()
                 else -> HomeFragment()
             }
-            replaceFragment(fragment)
+            // 将Fragment添加到FragmentManager，并缓存
+            fragmentMap[tag] = fragment
+            transaction.add(R.id.fragment_container, fragment, tag)
+        } else {
+            // 如果Fragment已经存在，则显示
+            transaction.show(fragment)
         }
+
+        // 提交事务
+        transaction.commit()
+
+        // 更新当前Fragment的Tag
+        currentFragmentTag = tag
     }
 
-    // 处理导航按钮点击
-    private fun onNavButtonClicked(view: View) {
-        onNavButtonFocused(view) // 点击时也调用聚焦逻辑，确保Fragment刷新
-    }
+    private fun focusFirstViewInCurrentFragment() {
+        val currentFragment = supportFragmentManager.findFragmentByTag(currentFragmentTag)
+        if (currentFragment != null) {
+            var firstFocusableView: View? = null
+            when (currentFragment.javaClass.simpleName) {
+                "HomeFragment" -> firstFocusableView = currentFragment.view?.findViewById(R.id.cv_0)
+                "HistoryFragment" -> firstFocusableView =
+                    currentFragment.view?.findViewById(R.id.recyclerView)
 
-    // 替换Fragment
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
+                "MineFragment" -> firstFocusableView =
+                    currentFragment.view?.findViewById(R.id.my_collection)
+
+                "SearchFragment" -> firstFocusableView =
+                    currentFragment.view?.findViewById(R.id.keyA)
+
+                "MoviesFragment" -> firstFocusableView =
+                    currentFragment.view?.findViewById(R.id.viewPagerLayout)
+
+                "TvSeriesFragment" -> firstFocusableView =
+                    currentFragment.view?.findViewById(R.id.card1)
+
+                "DocumentaryFragment" -> firstFocusableView =
+                    currentFragment.view?.findViewById(R.id.card0)
+
+                "AnimationFragment" -> firstFocusableView =
+                    currentFragment.view?.findViewById(R.id.vpm_animation)
+            }
+            // 请求焦点
+            firstFocusableView?.requestFocus()
+        }
     }
 }
