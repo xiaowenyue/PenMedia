@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -15,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private var lastFocusedNavButtonId: Int = R.id.nav_home  // 默认焦点是nav_home
+    private var currentFragmentTag: String? = null  // 用于记录当前显示的Fragment类型
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        /// 设置导航栏图标大小
+        // 设置导航栏图标大小
         val width = 30 // 设置你想要的宽度
         val height = 30 // 设置你想要的高度
         val drawableMine = ContextCompat.getDrawable(this, R.drawable.ic_mine_selector)!!
@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         binding.navHome.requestFocus()
     }
 
+    // 判断左边是否有可以移动焦点的元素
     private fun canMoveFocusLeft(view: View): Boolean {
         val leftNeighbor = view.focusSearch(View.FOCUS_LEFT)
         return leftNeighbor != null && leftNeighbor.isFocusable && leftNeighbor.parent === view.parent
@@ -80,34 +81,43 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         }
-        // 如果按下右键，焦点从导航按钮移到Fragment中的第一个可聚焦控件
+        // 焦点从导航栏按钮移到Fragment时
         if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && findViewById<View>(lastFocusedNavButtonId).hasFocus()) {
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
             Log.d("FragmentName", "currentFragment: ${currentFragment?.javaClass?.simpleName}")
-            // 确定Fragment中的第一个可聚焦控件
             var firstFocusableView: View? = null
-            if (currentFragment?.javaClass?.simpleName == "HomeFragment") {
-                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.cv_0)
-            } else if (currentFragment?.javaClass?.simpleName == "HistoryFragment") {
-                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.recyclerView)
-            } else if (currentFragment?.javaClass?.simpleName == "MineFragment") {
-                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.my_collection)
-            } else if (currentFragment?.javaClass?.simpleName == "SearchFragment") {
-                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.keyA)
-            } else if (currentFragment?.javaClass?.simpleName == "MoviesFragment") {
-                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.viewPagerLayout)
-            } else if (currentFragment?.javaClass?.simpleName == "TvSeriesFragment") {
-                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.card1)
-            } else if (currentFragment?.javaClass?.simpleName == "DocumentaryFragment") {
-                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.card0)
-            } else if (currentFragment?.javaClass?.simpleName == "AnimationFragment") {
-                firstFocusableView = currentFragment?.view?.findViewById<View>(R.id.vpm_animation)
+
+            // 定位Fragment中第一个可聚焦的控件
+            when (currentFragment?.javaClass?.simpleName) {
+                "HomeFragment" -> firstFocusableView =
+                    currentFragment?.view?.findViewById(R.id.cv_0)
+
+                "HistoryFragment" -> firstFocusableView =
+                    currentFragment?.view?.findViewById(R.id.recyclerView)
+
+                "MineFragment" -> firstFocusableView =
+                    currentFragment?.view?.findViewById(R.id.my_collection)
+
+                "SearchFragment" -> firstFocusableView =
+                    currentFragment?.view?.findViewById(R.id.keyA)
+
+                "MoviesFragment" -> firstFocusableView =
+                    currentFragment?.view?.findViewById(R.id.viewPagerLayout)
+
+                "TvSeriesFragment" -> firstFocusableView =
+                    currentFragment?.view?.findViewById(R.id.card1)
+
+                "DocumentaryFragment" -> firstFocusableView =
+                    currentFragment?.view?.findViewById(R.id.card0)
+
+                "AnimationFragment" -> firstFocusableView =
+                    currentFragment?.view?.findViewById(R.id.vpm_animation)
             }
 
-            // 手动将焦点转移到Fragment的第一个控件
             firstFocusableView?.requestFocus()
             return true
         }
+        // 在导航栏循环上下切换
         if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && binding.navDocumentary.hasFocus()) {
             binding.navMine.requestFocus()
             return true
@@ -119,36 +129,44 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
+    // 处理导航按钮聚焦
     private fun onNavButtonFocused(view: View) {
-        val fragment: Fragment = when (view.id) {
-            R.id.nav_mine -> MineFragment()
-            R.id.nav_search -> com.example.penmediatv.SearchFragment()
-            R.id.nav_history -> HistoryFragment()
-            R.id.nav_home -> HomeFragment()
-            R.id.nav_movies -> MoviesFragment()
-            R.id.nav_tv_series -> TvSeriesFragment()
-            R.id.nav_animation -> AnimationFragment()
-            R.id.nav_documentary -> DocumentaryFragment()
-            else -> HomeFragment()
+        val fragmentTag = when (view.id) {
+            R.id.nav_mine -> "MineFragment"
+            R.id.nav_search -> "SearchFragment"
+            R.id.nav_history -> "HistoryFragment"
+            R.id.nav_home -> "HomeFragment"
+            R.id.nav_movies -> "MoviesFragment"
+            R.id.nav_tv_series -> "TvSeriesFragment"
+            R.id.nav_animation -> "AnimationFragment"
+            R.id.nav_documentary -> "DocumentaryFragment"
+            else -> "HomeFragment"
         }
-        replaceFragment(fragment)
+
+        // 仅在Fragment未显示时才替换
+        if (currentFragmentTag != fragmentTag) {
+            currentFragmentTag = fragmentTag
+            val fragment: Fragment = when (fragmentTag) {
+                "MineFragment" -> MineFragment()
+                "SearchFragment" -> SearchFragment()
+                "HistoryFragment" -> HistoryFragment()
+                "HomeFragment" -> HomeFragment()
+                "MoviesFragment" -> MoviesFragment()
+                "TvSeriesFragment" -> TvSeriesFragment()
+                "AnimationFragment" -> AnimationFragment()
+                "DocumentaryFragment" -> DocumentaryFragment()
+                else -> HomeFragment()
+            }
+            replaceFragment(fragment)
+        }
     }
 
+    // 处理导航按钮点击
     private fun onNavButtonClicked(view: View) {
-        val fragment: Fragment = when (view.id) {
-            R.id.nav_mine -> MineFragment()
-            R.id.nav_search -> com.example.penmediatv.SearchFragment()
-            R.id.nav_history -> HistoryFragment()
-            R.id.nav_home -> HomeFragment()
-            R.id.nav_movies -> MoviesFragment()
-            R.id.nav_tv_series -> TvSeriesFragment()
-            R.id.nav_animation -> AnimationFragment()
-            R.id.nav_documentary -> DocumentaryFragment()
-            else -> HomeFragment()
-        }
-        replaceFragment(fragment)
+        onNavButtonFocused(view) // 点击时也调用聚焦逻辑，确保Fragment刷新
     }
 
+    // 替换Fragment
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
