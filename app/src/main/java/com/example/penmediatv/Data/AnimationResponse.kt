@@ -22,10 +22,10 @@ data class AnimationItem(
     val videoId: String,
     val subTitle: String?,
     val videoDesc: String,
-    val otherInfo: OtherInfo
+    val otherInfo: AnimationOtherInfo
 )
 
-data class OtherInfo(
+data class AnimationOtherInfo(
     val region: String,
     val category: String,
     val director: String,
