@@ -82,7 +82,7 @@
                                 android:id="@+id/movie_title_zero"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="50dp"
+                                android:layout_marginTop="20dp"
                                 android:text="Card Title"
                                 android:textColor="#252631"
                                 android:textSize="23sp"
@@ -92,19 +92,25 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/movie_content_zero"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/movie_desc_zero"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="description"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="10dp"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:maxLines="6"
+                                android:text="An American family becomes entangled in a bizarre web of secrets and lies when their hacker son is targeted by the U.S. government, making them all ENEMIES OF THE STATE."
                                 android:textColor="#252631"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
+                                app:layout_constrainedHeight="true"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/movie_pic_zero"
                                 app:layout_constraintTop_toBottomOf="@id/movie_title_zero" />
 
                             <TextView
-                                android:id="@+id/movie_details_zero"
+                                android:id="@+id/movie_episode_zero"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
@@ -152,29 +158,37 @@
                                 android:id="@+id/movie_title_one"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="50dp"
+                                android:layout_marginTop="20dp"
                                 android:text="Card Title"
                                 android:textColor="#252631"
                                 android:textSize="23sp"
                                 android:textStyle="bold"
+                                app:layout_constraintBottom_toTopOf="@id/movie_desc_one"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/movie_pic_one"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/movie_content_one"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/movie_desc_one"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Card Title"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="10dp"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:maxLines="6"
+                                android:text="An American family becomes entangled in a bizarre web of secrets and lies when their hacker son is targeted by the U.S. government, making them all ENEMIES OF THE STATE."
                                 android:textColor="#252631"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
+                                app:layout_constrainedHeight="true"
+                                app:layout_constraintBottom_toTopOf="@id/movie_episode_one"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/movie_pic_one"
                                 app:layout_constraintTop_toBottomOf="@id/movie_title_one" />
 
                             <TextView
-                                android:id="@+id/movie_details_one"
+                                android:id="@+id/movie_episode_one"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
@@ -222,7 +236,7 @@
                                 android:id="@+id/movie_title_two"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="50dp"
+                                android:layout_marginTop="20dp"
                                 android:text="Card Title"
                                 android:textColor="#252631"
                                 android:textSize="23sp"
@@ -232,19 +246,25 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/movie_content_two"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/movie_desc_two"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Description"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="10dp"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:maxLines="6"
+                                android:text="An American family becomes entangled in a bizarre web of secrets and lies when their hacker son is targeted by the U.S. government, making them all ENEMIES OF THE STATE."
                                 android:textColor="#252631"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
+                                app:layout_constrainedHeight="true"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/movie_pic_two"
                                 app:layout_constraintTop_toBottomOf="@+id/movie_title_two" />
 
                             <TextView
-                                android:id="@+id/movie_details"
+                                android:id="@+id/movie_episode_two"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
@@ -277,13 +297,13 @@
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/description_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="军事/记录 已完结/全6集"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp" />
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/description_text"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:text="军事/记录 已完结/全6集"-->
+                    <!--                        android:textColor="@android:color/white"-->
+                    <!--                        android:textSize="16sp" />-->
                 </LinearLayout>
             </FrameLayout>
 
