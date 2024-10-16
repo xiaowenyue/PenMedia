@@ -70,7 +70,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         val collectionResponse = response.body()
-                        if (collectionResponse?.code == "success_code") {
+                        if (collectionResponse?.code == "0000") {
                             // 收藏成功，更新UI
                             imageView.setImageResource(R.drawable.ic_connected)
                             titleTextView.text = "Collected"
