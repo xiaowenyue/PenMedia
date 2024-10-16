@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         // 设置默认焦点
         binding.navHome.requestFocus()
     }
+
     // 图标设置方法，减少重复代码
     private fun setNavButtonIcon(button: TextView, iconResId: Int, width: Int, height: Int) {
         val drawable = ContextCompat.getDrawable(this, iconResId)!!
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && binding.fragmentContainer.hasFocus()) {
+        if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
             // 获取当前fragment中的可见视图
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
             val currentFocusedView = currentFragment?.view?.findFocus()
