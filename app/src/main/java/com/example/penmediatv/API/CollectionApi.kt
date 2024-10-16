@@ -3,6 +3,7 @@ package com.example.penmediatv.API
 import com.example.penmediatv.Data.AnimationResponse
 import com.example.penmediatv.Data.CollectionAddRequest
 import com.example.penmediatv.Data.CollectionAddResponse
+import com.example.penmediatv.Data.CollectionResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -15,7 +16,7 @@ interface CollectionApi {
         @Query("deviceId") deviceId: String,
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
-    ): Call<AnimationResponse>
+    ): Call<CollectionResponse>
 
     @POST("collection/add")
     fun addCollection(

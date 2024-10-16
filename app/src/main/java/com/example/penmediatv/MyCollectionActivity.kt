@@ -1,32 +1,84 @@
 package com.example.penmediatv
 
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.penmediatv.API.AnimationApi
+import com.example.penmediatv.API.CollectionApi
+import com.example.penmediatv.Data.AnimationResponse
+import com.example.penmediatv.Data.CollectionResponse
 import com.example.penmediatv.databinding.ActivityMyCollectionBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MyCollectionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyCollectionBinding
+    private var currentPage = 1
+    private var pageSize = 10
+    private var totalPages = 1 // 从服务器获取的总页数
+    private var isLoading = false
+    private lateinit var adapter: CollectionAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyCollectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 设置 RecyclerView 的布局管理器
-        binding.rvCollection.layoutManager = GridLayoutManager(this, 6)
+        setupRecyclerView()
+        fetchAnimations(currentPage, pageSize)
+    }
 
-        // 创建电影列表
-        val movieList = listOf(
-            Movie("Movie 1", R.drawable.movie),
-            Movie("Movie 2", R.drawable.movie),
-            Movie("Movie 3", R.drawable.movie),
-            Movie("Movie 4", R.drawable.movie),
-            Movie("Movie 5", R.drawable.ic_search),
-            Movie("Movie 6", R.drawable.ic_history),
-            Movie("Movie 7", R.drawable.ic_history),
-        )
+    private fun setupRecyclerView() {
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 5)
+        adapter = CollectionAdapter(mutableListOf())
+        binding.recyclerView.adapter = adapter
+    }
 
-        // 设置适配器
-        binding.rvCollection.adapter = CollectionAdapter(movieList)
+    private fun fetchAnimations(page: Int, pageSize: Int) {
+        val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        isLoading = true
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val collectionApi = retrofit.create(CollectionApi::class.java)
+        val call = collectionApi.getCollection(androidId, page, pageSize)
+
+        call.enqueue(object : Callback<CollectionResponse> {
+            override fun onResponse(
+                call: Call<CollectionResponse>,
+                response: Response<CollectionResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val collectionResponse = response.body()?.data
+                    if (collectionResponse != null) {
+                        totalPages = (collectionResponse.totalRecords + pageSize - 1) / pageSize
+                        val collectionList = collectionResponse.records
+
+                        if (collectionList.isNotEmpty()) {
+                            // 将新数据追加到现有数据中
+                            adapter.updateMovies(collectionList)
+                        }
+                    }
+                } else {
+                    Log.e(
+                        "CollectionActivity",
+                        "Error: ${response.code()} - ${response.errorBody()?.string()}"
+                    )
+                }
+                isLoading = false
+            }
+
+            override fun onFailure(call: Call<CollectionResponse>, t: Throwable) {
+                Log.e("CollectionActivity", "Network Error: ${t.message}")
+                isLoading = false
+            }
+        })
     }
 }

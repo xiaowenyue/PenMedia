@@ -4,20 +4,27 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.penmediatv.Data.AnimationItem
+import com.example.penmediatv.Data.CollectionItem
 import com.example.penmediatv.databinding.ItemCollectionBinding
 
-class CollectionAdapter(private val movies: List<Movie>) :
+class CollectionAdapter(private val movies: MutableList<CollectionItem>) :
     RecyclerView.Adapter<CollectionAdapter.CollectionViewHolder>() {
     class CollectionViewHolder(private val binding: ItemCollectionBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie) {
-            binding.title.text = movie.name
-            binding.pic.setImageResource(movie.imageResId)
+        fun bind(movie: CollectionItem) {
+            binding.title.text = movie.videoNameEn  // 你可以根据需要显示 videoNameEn 或 videoNameZh
+            // 假设你有一个加载图片的方法
+            Glide.with(binding.root)
+                .load(movie.videoCover)
+                .into(binding.pic)
             binding.item.setOnClickListener {}
             binding.item.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
+                    // 处理获取焦点时的逻辑
                 } else {
-                    println("no focus")
+                    // 处理失去焦点时的逻辑
                 }
             }
         }
@@ -35,5 +42,10 @@ class CollectionAdapter(private val movies: List<Movie>) :
 
     override fun getItemCount(): Int {
         return movies.size
+    }
+
+    fun updateMovies(newMovies: List<CollectionItem>) {
+        movies.addAll(newMovies)
+        notifyDataSetChanged()
     }
 }

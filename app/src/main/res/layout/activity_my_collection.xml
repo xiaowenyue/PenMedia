@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@id/iv_my_collection" />
     <!--收藏记录不为空-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_collection"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingStart="35dp"
