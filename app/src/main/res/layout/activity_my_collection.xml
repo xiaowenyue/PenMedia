@@ -58,6 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_my_collection" />
     <!--收藏为空-->
     <LinearLayout
+        android:id="@+id/ll_collection_empty"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"

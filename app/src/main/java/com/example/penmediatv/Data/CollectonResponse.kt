@@ -1,5 +1,7 @@
 package com.example.penmediatv.Data
 
+import java.sql.Timestamp
+
 data class CollectionAddRequest(
     val deviceId: String,
     val videoId: String
@@ -29,4 +31,8 @@ data class CollectionItem(
     val videoNameZh: String,
     val videoCover: String,
     val videoId: String
+)
+
+data class CollectionClearRequest(
+    val deviceId: String
 )

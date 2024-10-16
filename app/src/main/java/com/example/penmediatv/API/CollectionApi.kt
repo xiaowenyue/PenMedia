@@ -1,8 +1,8 @@
 package com.example.penmediatv.API
 
-import com.example.penmediatv.Data.AnimationResponse
 import com.example.penmediatv.Data.CollectionAddRequest
 import com.example.penmediatv.Data.CollectionAddResponse
+import com.example.penmediatv.Data.CollectionClearRequest
 import com.example.penmediatv.Data.CollectionResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -22,4 +22,9 @@ interface CollectionApi {
     fun addCollection(
         @Body collectionRequest: CollectionAddRequest
     ): Call<CollectionAddResponse>
+
+    @POST("collection/clear")
+    fun clearCollection(
+        @Body clearResponse: CollectionClearRequest
+    ): Call<CollectionResponse>
 }

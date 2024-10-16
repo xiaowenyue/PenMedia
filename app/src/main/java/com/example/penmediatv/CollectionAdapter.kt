@@ -9,7 +9,7 @@ import com.example.penmediatv.Data.AnimationItem
 import com.example.penmediatv.Data.CollectionItem
 import com.example.penmediatv.databinding.ItemCollectionBinding
 
-class CollectionAdapter(private val movies: MutableList<CollectionItem>) :
+class CollectionAdapter(private val collectionList: MutableList<CollectionItem>) :
     RecyclerView.Adapter<CollectionAdapter.CollectionViewHolder>() {
     class CollectionViewHolder(private val binding: ItemCollectionBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -37,15 +37,20 @@ class CollectionAdapter(private val movies: MutableList<CollectionItem>) :
     }
 
     override fun onBindViewHolder(holder: CollectionViewHolder, position: Int) {
-        holder.bind(movies[position])
+        holder.bind(collectionList[position])
     }
 
     override fun getItemCount(): Int {
-        return movies.size
+        return collectionList.size
     }
 
     fun updateMovies(newMovies: List<CollectionItem>) {
-        movies.addAll(newMovies)
+        collectionList.addAll(newMovies)
         notifyDataSetChanged()
+    }
+
+    fun clearMovies() {
+        collectionList.clear() // 清空当前列表
+        notifyDataSetChanged() // 通知RecyclerView数据已清空，刷新视图
     }
 }
