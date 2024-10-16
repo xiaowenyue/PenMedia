@@ -3,9 +3,11 @@ package com.example.penmediatv
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.penmediatv.Data.SwiperItem
 import com.example.penmediatv.databinding.ItemCarouselTitleBinding
 
-class CarouselAdapter(private val items: List<Movie>) :
+class CarouselAdapter(private val items: List<SwiperItem>) :
     RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>() {
 
     // 使用 ViewBinding 来替代手动查找视图
@@ -25,10 +27,12 @@ class CarouselAdapter(private val items: List<Movie>) :
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
         val item = items[position]
         // 通过 binding 直接访问视图
-        holder.binding.imageView.setImageResource(item.imageResId)
-        holder.binding.movieName.text = item.name
-        holder.binding.movieDetails.text = item.details
-        holder.binding.playTime.text = item.minorDetails
+        Glide.with(holder.itemView)
+            .load(item.videoCover)
+            .into(holder.binding.imageView)
+        holder.binding.movieName.text = item.videoNameEn
+        holder.binding.movieDetails.text = item.videoDesc
+        holder.binding.playTime.text = item.subTitle
     }
 
     override fun getItemCount(): Int = items.size

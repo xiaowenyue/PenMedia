@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.penmediatv.API.AnimationApi
 import com.example.penmediatv.Data.AnimationResponse
+import com.example.penmediatv.Data.SwiperResponse
 import com.example.penmediatv.databinding.FragmentMoviesBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,22 +53,7 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         fetchAnimations(currentPage, pageSize)
-        val items = listOf(
-            Movie("Title 0", R.drawable.movie, "Details 1", "Time 1"),
-            Movie("Title 1", R.drawable.ic_search, "Details 2", "Time 2"),
-            Movie("Title 2", R.drawable.ic_history, "Details 3", "Time 3")
-        )
-        adapter = CarouselAdapter(items)
-        binding.viewPager.adapter = adapter
-        setupIndicators(items.size)
-        setCurrentIndicator(0)
-
-        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                setCurrentIndicator(position)
-            }
-        })
+        fetchSwiperMovies()
 
         binding.viewPagerLayout.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
@@ -179,11 +165,60 @@ class MoviesFragment : Fragment() {
         }
         handler.postDelayed(runnable!!, slideInterval)
     }
-
     private fun stopAutoSlide() {
         handler.removeCallbacks(runnable!!)
     }
+    private fun fetchSwiperMovies() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
+        val animationApi = retrofit.create(AnimationApi::class.java)
+        val call = animationApi.getSwiperMovie()
+
+        call.enqueue(object : Callback<SwiperResponse> {
+            override fun onResponse(
+                call: Call<SwiperResponse>,
+                response: Response<SwiperResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val swiperDate = response.body()?.data
+                    if (swiperDate != null && swiperDate.isNotEmpty()) {
+                        //数据适配到轮播图适配器
+                        adapter = CarouselAdapter(swiperDate)
+                        binding.viewPager.adapter = adapter
+                        //设置轮播图指示器
+                        setupIndicators(swiperDate.size)
+                        setCurrentIndicator(0)
+
+                        //设置页面更改回调
+                        binding.viewPager.registerOnPageChangeCallback(object :
+                            ViewPager2.OnPageChangeCallback() {
+                            override fun onPageSelected(position: Int) {
+                                super.onPageSelected(position)
+                                setCurrentIndicator(position)
+                            }
+                        })
+
+                        //开始自动播放
+                        startAutoSlide()
+                    } else {
+                        Log.e("AnimationFragment", "No swiper data found")
+                    }
+                } else {
+                    Log.e(
+                        "AnimationFragment",
+                        "Error:${response.code()} - ${response.errorBody()?.string()}"
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<SwiperResponse>, t: Throwable) {
+                Log.e("AnimationFragment", "Network Error: ${t.message}")
+            }
+        })
+    }
     private fun setupIndicators(count: Int) {
         val indicators = arrayOfNulls<ImageView>(count)
         val layoutParams = LinearLayout.LayoutParams(80, 20)
