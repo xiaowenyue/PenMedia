@@ -97,7 +97,6 @@ class MoviesFragment : Fragment() {
                 view.setOnKeyListener(null)
             }
         }
-        startAutoSlide()
         binding.viewPagerLayout.setOnClickListener {
             val intent = Intent(context, MovieDetailsActivity::class.java)
             startActivity(intent)
@@ -185,14 +184,14 @@ class MoviesFragment : Fragment() {
                 if (response.isSuccessful) {
                     val swiperDate = response.body()?.data
                     if (swiperDate != null && swiperDate.isNotEmpty()) {
-                        //数据适配到轮播图适配器
+                        // 数据适配到轮播图适配器
                         adapter = CarouselAdapter(swiperDate)
                         binding.viewPager.adapter = adapter
-                        //设置轮播图指示器
+                        // 设置轮播图指示器
                         setupIndicators(swiperDate.size)
                         setCurrentIndicator(0)
 
-                        //设置页面更改回调
+                        // 设置页面更改回调
                         binding.viewPager.registerOnPageChangeCallback(object :
                             ViewPager2.OnPageChangeCallback() {
                             override fun onPageSelected(position: Int) {
@@ -201,21 +200,21 @@ class MoviesFragment : Fragment() {
                             }
                         })
 
-                        //开始自动播放
+                        // 数据加载完成并设置完 adapter 后，启动自动轮播
                         startAutoSlide()
                     } else {
-                        Log.e("AnimationFragment", "No swiper data found")
+                        Log.e("MoviesFragment", "No swiper data found")
                     }
                 } else {
                     Log.e(
-                        "AnimationFragment",
+                        "MoviesFragment",
                         "Error:${response.code()} - ${response.errorBody()?.string()}"
                     )
                 }
             }
 
             override fun onFailure(call: Call<SwiperResponse>, t: Throwable) {
-                Log.e("AnimationFragment", "Network Error: ${t.message}")
+                Log.e("MoviesFragment", "Network Error: ${t.message}")
             }
         })
     }
