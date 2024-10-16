@@ -58,7 +58,6 @@ class MoviesFragment : Fragment() {
         binding.viewPagerLayout.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 Log.v("MoviesFragment", "viewPager has focus")
-                Toast.makeText(context, "viewPager has focus", Toast.LENGTH_SHORT).show()
                 view.setOnKeyListener { v, keyCode, event ->
                     if (event.action == KeyEvent.ACTION_DOWN) {
                         when (keyCode) {
