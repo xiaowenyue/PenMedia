@@ -9,7 +9,7 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,10 +44,10 @@
                     app:layout_constraintWidth_percent="0.4">
 
                     <ImageView
+                        android:id="@+id/iv_card0"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/movie" />
+                        android:scaleType="fitXY" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -73,10 +73,10 @@
                     app:layout_constraintWidth_percent="0.4">
 
                     <ImageView
+                        android:id="@+id/iv_card1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/movie" />
+                        android:scaleType="fitXY"/>
 
                     <TextView
                         android:layout_width="wrap_content"

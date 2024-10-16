@@ -35,4 +35,7 @@ interface AnimationApi {
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): Call<AnimationResponse>
+
+    @GET("tv/swiper")
+    fun getSwiperTv(): Call<SwiperResponse>
 }
