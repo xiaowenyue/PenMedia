@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
             // 获取当前fragment中的可见视图
-            val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+            val currentFragment = supportFragmentManager.findFragmentByTag(currentFragmentTag)
             val currentFocusedView = currentFragment?.view?.findFocus()
 
             // 检查当前Fragment中是否有其他可聚焦的左边组件
