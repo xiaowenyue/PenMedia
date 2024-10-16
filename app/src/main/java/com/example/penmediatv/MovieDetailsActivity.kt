@@ -55,74 +55,79 @@ class MovieDetailsActivity : AppCompatActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val collectionApi = retrofit.create(CollectionApi::class.java)
-            // 创建请求体
-            val collectionRequest = CollectionAddRequest(
-                deviceId = androidId,
-                videoId = "2024-10-13-20-28-28"  // 根据实际情况设置视频ID
-            )
-            // 调用接口
-            val call = collectionApi.addCollection(collectionRequest)
+            val videoId = intent.getStringExtra("VIDEO_ID")
+            if (videoId != null) {
+                // 创建请求体
+                val collectionRequest = CollectionAddRequest(
+                    deviceId = androidId,
+                    videoId = videoId
+                )
+                // 调用接口
+                val call = collectionApi.addCollection(collectionRequest)
 
-            call.enqueue(object : Callback<CollectionAddResponse> {
-                override fun onResponse(
-                    call: Call<CollectionAddResponse>,
-                    response: Response<CollectionAddResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        val collectionResponse = response.body()
-                        if (collectionResponse?.code == "0000") {
-                            // 收藏成功，更新UI
-                            imageView.setImageResource(R.drawable.ic_connected)
-                            titleTextView.text = "Collected"
-                            subTextView.text = "View at the personal center"
-                            isCollected = true  // 更新收藏状态为已收藏
-                            ContextCompat.getDrawable(
-                                this@MovieDetailsActivity,
-                                R.drawable.ic_connect
-                            )?.let {
-                                binding.btnCollect.setCompoundDrawablesWithIntrinsicBounds(
-                                    it,
-                                    null,
-                                    null,
-                                    null
-                                )
+                call.enqueue(object : Callback<CollectionAddResponse> {
+                    override fun onResponse(
+                        call: Call<CollectionAddResponse>,
+                        response: Response<CollectionAddResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val collectionResponse = response.body()
+                            if (collectionResponse?.code == "0000") {
+                                // 收藏成功，更新UI
+                                imageView.setImageResource(R.drawable.ic_connected)
+                                titleTextView.text = "Collected"
+                                subTextView.text = "View at the personal center"
+                                isCollected = true  // 更新收藏状态为已收藏
+                                ContextCompat.getDrawable(
+                                    this@MovieDetailsActivity,
+                                    R.drawable.ic_connect
+                                )?.let {
+                                    binding.btnCollect.setCompoundDrawablesWithIntrinsicBounds(
+                                        it,
+                                        null,
+                                        null,
+                                        null
+                                    )
+                                }
+                            } else {
+                                // 收藏失败，显示失败提示
+                                imageView.setImageResource(R.drawable.ic_unconnected)
+                                titleTextView.text = "Uncollected"
+                                subTextView.visibility = TextView.GONE
+                                isCollected = false
                             }
                         } else {
-                            // 收藏失败，显示失败提示
+                            // 处理失败响应
                             imageView.setImageResource(R.drawable.ic_unconnected)
                             titleTextView.text = "Uncollected"
                             subTextView.visibility = TextView.GONE
                             isCollected = false
                         }
-                    } else {
-                        // 处理失败响应
+                        dialog.show()
+
+                        // 使用 Handler 使弹窗在3秒后自动消失
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            dialog.dismiss()
+                        }, 2000)
+                    }
+
+                    override fun onFailure(call: Call<CollectionAddResponse>, t: Throwable) {
+                        // 请求失败处理
+                        Log.e("MovieDetailsActivity", "Failed to collect: ${t.message}")
                         imageView.setImageResource(R.drawable.ic_unconnected)
                         titleTextView.text = "Uncollected"
                         subTextView.visibility = TextView.GONE
                         isCollected = false
+                        dialog.show()
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            dialog.dismiss()
+                        }, 2000)
                     }
-                    dialog.show()
-
-                    // 使用 Handler 使弹窗在3秒后自动消失
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        dialog.dismiss()
-                    }, 2000)
-                }
-
-                override fun onFailure(call: Call<CollectionAddResponse>, t: Throwable) {
-                    // 请求失败处理
-                    Log.e("MovieDetailsActivity", "Failed to collect: ${t.message}")
-                    imageView.setImageResource(R.drawable.ic_unconnected)
-                    titleTextView.text = "Uncollected"
-                    subTextView.visibility = TextView.GONE
-                    isCollected = false
-                    dialog.show()
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        dialog.dismiss()
-                    }, 2000)
-                }
-            })
+                })
+            } else {
+                Log.e("MovieDetailsActivity", "Failed to collect: videoId is null")
+            }
         }
     }
 

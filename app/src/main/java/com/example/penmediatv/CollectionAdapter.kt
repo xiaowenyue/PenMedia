@@ -18,6 +18,8 @@ class CollectionAdapter(private val collectionList: MutableList<CollectionItem>)
             // 假设你有一个加载图片的方法
             Glide.with(binding.root)
                 .load(movie.videoCover)
+                .placeholder(R.drawable.movie) // 设置一个占位符
+                .error(R.drawable.movie) // 如果加载失败，显示一个默认图片
                 .into(binding.pic)
             binding.item.setOnClickListener {}
             binding.item.setOnFocusChangeListener { _, hasFocus ->
