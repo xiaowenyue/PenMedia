@@ -20,4 +20,16 @@ interface AnimationApi {
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): Call<AnimationResponse>
+
+    @GET("documentary")
+    fun getDocumentary(
+        @Query("page") page: Int,
+        @Query("pageSize") pageSize: Int
+    ): Call<AnimationResponse>
+
+    @GET("tv")
+    fun getTv(
+        @Query("page") page: Int,
+        @Query("pageSize") pageSize: Int
+    ): Call<AnimationResponse>
 }

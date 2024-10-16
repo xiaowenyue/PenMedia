@@ -106,7 +106,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.example.penmediatv.NonScrollableRecyclerView
-                android:id="@+id/list_tv_series"
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"

@@ -3,6 +3,7 @@ package com.example.penmediatv
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,23 @@ import android.view.animation.ScaleAnimation
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.penmediatv.API.AnimationApi
+import com.example.penmediatv.Data.AnimationResponse
 import com.example.penmediatv.databinding.FragmentTvserivesBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class TvSeriesFragment : Fragment() {
     private var _binding: FragmentTvserivesBinding? = null
     private val binding get() = _binding!!
+    private var currentPage = 1
+    private var pageSize = 10
+    private var totalPages = 1 // 从服务器获取的总页数
+    private var isLoading = false
+    private lateinit var movieAdapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,10 +40,8 @@ class TvSeriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.listTvSeries.layoutManager = GridLayoutManager(context, 5)
-//        binding.listTvSeries.adapter = MovieAdapter(getMovies(), binding.scrollView)
-        // 设置默认聚焦第一个卡片
-//        binding.card1.requestFocus()
+        setupRecyclerView()
+        fetchAnimations(currentPage, pageSize)
         binding.bgTvSeries.setImageResource(R.drawable.movie) // 设置第一个卡片对应的图片
 
         // 设置焦点变化监听器来切换图片
@@ -93,26 +104,52 @@ class TvSeriesFragment : Fragment() {
 
     }
 
-    private fun getMovies(): List<Movie> {
-        // Generate dummy movie data
-        return listOf(
-            Movie("Movie 1", R.drawable.movie),
-            Movie("Movie 2", R.drawable.ic_search),
-            Movie("Movie 3", R.drawable.ic_history),
-            Movie("Movie 4", R.drawable.ic_mine),
-            Movie("Movie 5", R.drawable.ic_search),
-            Movie("Movie 6", R.drawable.ic_history),
-            Movie("Movie 7", R.drawable.ic_mine),
-            Movie("Movie 8", R.drawable.ic_search),
-            Movie("Movie 9", R.drawable.ic_history),
-            Movie("Movie 10", R.drawable.ic_mine),
-            Movie("Movie 11", R.drawable.ic_search),
-            Movie("Movie 12", R.drawable.ic_history),
-            Movie("Movie 13", R.drawable.ic_mine),
-            Movie("Movie 14", R.drawable.ic_search),
-            Movie("Movie 15", R.drawable.ic_history),
-            Movie("Movie 16", R.drawable.ic_mine)
-        )
+    private fun setupRecyclerView() {
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
+        movieAdapter = MovieAdapter(mutableListOf(), binding.scrollView)
+        binding.recyclerView.adapter = movieAdapter
+    }
+    private fun fetchAnimations(page: Int, pageSize: Int) {
+        isLoading = true
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val animationApi = retrofit.create(AnimationApi::class.java)
+        val call = animationApi.getTv(page, pageSize)
+
+        call.enqueue(object : Callback<AnimationResponse> {
+            override fun onResponse(
+                call: Call<AnimationResponse>,
+                response: Response<AnimationResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val animationData = response.body()?.data
+                    if (animationData != null) {
+                        totalPages = (animationData.totalRecords + pageSize - 1) / pageSize
+                        val animationList = animationData.records
+
+                        if (animationList.isNotEmpty()) {
+                            // 将新数据追加到现有数据中
+                            movieAdapter.updateMovies(animationList)
+                        }
+                    }
+                } else {
+                    Log.e(
+                        "MoviesFragment",
+                        "Error: ${response.code()} - ${response.errorBody()?.string()}"
+                    )
+                }
+                isLoading = false
+            }
+
+            override fun onFailure(call: Call<AnimationResponse>, t: Throwable) {
+                Log.e("MoviesFragment", "Network Error: ${t.message}")
+                isLoading = false
+            }
+        })
     }
 
     override fun onDestroyView() {
