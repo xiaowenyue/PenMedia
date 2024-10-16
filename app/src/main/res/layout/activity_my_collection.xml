@@ -26,6 +26,23 @@
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@id/iv_my_collection"
         app:layout_constraintTop_toTopOf="@id/iv_my_collection" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_clear"
+        style="@style/CollectButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_collect"
+        android:drawablePadding="8dp"
+        android:paddingHorizontal="12dp"
+        android:text="Clear"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!--收藏记录不为空-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
