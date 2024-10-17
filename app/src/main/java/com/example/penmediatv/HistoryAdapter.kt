@@ -5,18 +5,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.penmediatv.Data.HistoryItem
 import com.example.penmediatv.databinding.ItemHistoryBinding
 
-class HistoryAdapter(private val movies: List<Movie>) :
+class HistoryAdapter(private val historyList: MutableList<HistoryItem>) :
     RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
     class HistoryViewHolder(private val binding: ItemHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie) {
-            binding.title.text = movie.name
-            binding.pic.setImageResource(movie.imageResId)
+        fun bind(movie: HistoryItem) {
+            binding.title.text = movie.videoNameEn
+            Glide.with(binding.root)
+                .load(movie.videoCover)
+                .placeholder(R.drawable.movie) // 设置一个占位符
+                .error(R.drawable.movie) // 如果加载失败，显示一个默认图片
+                .into(binding.pic)
             binding.item.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
                     binding.mcvPic.strokeWidth = 6
@@ -58,10 +63,15 @@ class HistoryAdapter(private val movies: List<Movie>) :
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        holder.bind(movies[position])
+        holder.bind(historyList[position])
     }
 
     override fun getItemCount(): Int {
-        return movies.size
+        return historyList.size
+    }
+
+    fun updateHistories(newHistories: List<HistoryItem>) {
+        historyList.addAll(newHistories)
+        notifyDataSetChanged()
     }
 }
