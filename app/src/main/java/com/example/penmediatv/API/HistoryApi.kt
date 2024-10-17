@@ -2,6 +2,7 @@ package com.example.penmediatv.API
 
 import com.example.penmediatv.Data.HistoryAddRequest
 import com.example.penmediatv.Data.HistoryAddResponse
+import com.example.penmediatv.Data.HistoryClearRequest
 import com.example.penmediatv.Data.HistoryResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -22,8 +23,8 @@ interface HistoryApi {
         @Body HistoryRequest: HistoryAddRequest
     ): Call<HistoryAddResponse>
 
-//    @POST("history/clear")
-//    fun clearHistory(
-//        @Body clearResponse: HistoryClearRequest
-//    ): Call<HistoryResponse>
+    @POST("history/clear")
+    fun clearHistory(
+        @Body clearResponse: HistoryClearRequest
+    ): Call<HistoryAddResponse>
 }

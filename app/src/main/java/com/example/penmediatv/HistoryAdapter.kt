@@ -74,4 +74,8 @@ class HistoryAdapter(private val historyList: MutableList<HistoryItem>) :
         historyList.addAll(newHistories)
         notifyDataSetChanged()
     }
+    fun clearMovies() {
+        historyList.clear() // 清空当前列表
+        notifyDataSetChanged() // 通知RecyclerView数据已清空，刷新视图
+    }
 }

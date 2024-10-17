@@ -33,3 +33,7 @@ data class HistoryAddResponse(
     val code: String,
     val message: String
 )
+
+data class HistoryClearRequest(
+    val deviceId: String
+)

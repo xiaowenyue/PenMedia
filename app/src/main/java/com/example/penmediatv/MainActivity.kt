@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity() {
             when (currentFragment.javaClass.simpleName) {
                 "HomeFragment" -> firstFocusableView = currentFragment.view?.findViewById(R.id.cv_0)
                 "HistoryFragment" -> firstFocusableView =
-                    currentFragment.view?.findViewById(R.id.recyclerView)
+                    currentFragment.view?.findViewById(R.id.his_clear)
 
                 "MineFragment" -> firstFocusableView =
                     currentFragment.view?.findViewById(R.id.my_collection)
