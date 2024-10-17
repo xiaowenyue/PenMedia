@@ -40,7 +40,6 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        fetchHistories(currentPage, pageSize)
         binding.hisClear.setOnClickListener {
             clearHistories()
         }
@@ -146,6 +145,16 @@ class HistoryFragment : Fragment() {
                 isLoading = false
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // 重置分页参数
+        currentPage = 1
+        // 清空现有数据
+        adapter.clearMovies()
+        // 从第一页重新获取数据
+        fetchHistories(currentPage, pageSize)
     }
 
     override fun onDestroy() {
