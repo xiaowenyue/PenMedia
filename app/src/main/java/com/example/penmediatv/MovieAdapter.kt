@@ -24,7 +24,7 @@ class MovieAdapter(private val movies: MutableList<AnimationItem>, private val s
         // 绑定 API 返回的数据到UI
         fun bind(movie: AnimationItem, scrollView: ScrollView) {
             // 设置电影名称和描述
-            binding.movieTitle.text = movie.videoNameZh
+            binding.movieTitle.text = movie.videoNameEn
 
             // 加载封面图片（使用 Glide）
             Glide.with(binding.root.context)
