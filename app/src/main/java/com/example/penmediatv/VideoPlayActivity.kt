@@ -54,7 +54,7 @@ class VideoPlayActivity : AppCompatActivity() {
             <html>
             <body>
                 <!-- Bunny视频iframe -->
-                <iframe id="bunnyIframe" src="https://iframe.mediadelivery.net/embed/314818/60b32cdf-b065-4a7d-af08-affec3f3ea92"
+                <iframe id="iframe" src="https://iframe.mediadelivery.net/embed/314818/60b32cdf-b065-4a7d-af08-affec3f3ea92"
                         width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
 
                 <!-- 加载player.js脚本 -->
@@ -62,33 +62,64 @@ class VideoPlayActivity : AppCompatActivity() {
                 <script type="text/javascript">
                     var player;
                     document.addEventListener('DOMContentLoaded', function() {
-                        player = new playerjs.Player('bunnyIframe');
+                        player = new playerjs.Player('iframe');
                         console.log('Player.js脚本加载成功');
-                        
+                        console.log(player);
+                
                         player.on('ready', function() {
                             console.log('Player is ready');
-                            window.isPaused = false;  // 初始化状态
+                            player.play();
+                            console.log("获取播放器状态"+player.play);
+                            window.isPaused = false;  // 播放视频
+                            player.on('play', function() {
+                                console.log("播放事件触发");
+                            });
 
-                            window.addEventListener('keydown', function(event) {
+                            // 监听键盘Enter事件
+                            document.addEventListener('keydown', function(event) {
                                 console.log('按键事件捕获: ' + event.code);
-                                if (event.code === 'Enter') {
-                                    console.log('Enter键被按下，切换播放/暂停');
+                                if (event.code === 'Enter' || event.keyCode === 13) {
+                                    console.log('Enter键被按下');
                                     togglePlayPause();
                                 }
                             });
                         });
                     });
-
+                
                     function togglePlayPause() {
+                        console.log('togglePlayPause函数被调用');
+                        console.log('视频播放状态:'+window.isPaused);
                         if (window.isPaused) {
-                            player.play();
+                            console.log('播放视频');
+                            player.getState(function(state) {
+                                console.log("当前播放器状态: " + state);
+                                if (state !== "playing") {
+                                    console.log("当前播放器未在播放，调用播放方法");
+                                    player.play();  // 确保播放器未在播放时才调用
+                                }
+                            });
                             window.isPaused = false;
+                            return "playing";
                         } else {
+                            console.log('暂停视频');
                             player.pause();
                             window.isPaused = true;
+                            return "paused";
                         }
                     }
+                    // Enter键按下的功能
+                    function simulateEnterKey() {
+                        const event = new KeyboardEvent('keydown', {
+                            code: 'Enter',
+                            keyCode: 13,
+                            which: 13,
+                            key: 'Enter'
+                        });
+                        document.dispatchEvent(event);
+                    }
                 </script>
+                <!-- 测试按钮 -->
+                <button onclick="simulateEnterKey()">Enter键</button>
             </body>
             </html>
         """.trimIndent()
@@ -104,8 +135,10 @@ class VideoPlayActivity : AppCompatActivity() {
             Log.v("VideoPlayActivity", "OK键被按下")
             videoWebView.evaluateJavascript("togglePlayPause();") { result ->
                 Log.v("VideoPlayActivity", "JavaScript执行结果: $result")
-                if (result == "null") {
-                    Log.v("VideoPlayActivity", "JavaScript没有返回有效结果")
+                if (result == "\"playing\"") {
+                    Log.v("VideoPlayActivity", "视频正在播放")
+                } else if (result == "\"paused\"") {
+                    Log.v("VideoPlayActivity", "视频已暂停")
                 }
             }
             return true
