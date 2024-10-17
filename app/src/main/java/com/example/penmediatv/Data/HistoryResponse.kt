@@ -19,14 +19,14 @@ data class HistoryItem(
     val videoNameZh: String,
     val videoCover: String,
     val videoId: String,
-    val playedDuration: Int,
+    val playDuration: Int,
     val duration: Int
 )
 
 data class HistoryAddRequest(
     val deviceId: String,
     val videoId: String,
-    val playedDuration: Int
+    val playDuration: Int
 )
 
 data class HistoryAddResponse(

@@ -32,10 +32,12 @@ class MovieDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val videoId = intent.getStringExtra("VIDEO_ID")
 
         binding.btWatchNow.setOnClickListener {
             Toast.makeText(this, "Watch Now", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, VideoPlayActivity::class.java)
+            intent.putExtra("VIDEO_ID", videoId)
             startActivity(intent)
         }
         binding.recyclerView.layoutManager = GridLayoutManager(this, 4)
@@ -55,7 +57,6 @@ class MovieDetailsActivity : AppCompatActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val collectionApi = retrofit.create(CollectionApi::class.java)
-            val videoId = intent.getStringExtra("VIDEO_ID")
             if (videoId != null) {
                 // 创建请求体
                 val collectionRequest = CollectionAddRequest(
