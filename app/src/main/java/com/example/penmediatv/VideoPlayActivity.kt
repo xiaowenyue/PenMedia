@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -18,34 +19,38 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class VideoPlayActivity : AppCompatActivity() {
     private lateinit var playerView: PlayerView
-    private lateinit var player: ExoPlayer
+    private lateinit var exoPlayer: ExoPlayer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_play)
 
         playerView = findViewById(R.id.player_view)
-        initializePlayer()
+        // 初始化 ExoPlayer
+        exoPlayer = ExoPlayer.Builder(this).build()
+        playerView.player = exoPlayer
+        // 设置播放源
+        val m3u8Url =
+            "https://vz-e8524359-a55.b-cdn.net/eddf6909-8737-4743-b16a-f52ea5e3ffba/playlist.m3u8"
+        val mediaItem = MediaItem.fromUri(Uri.parse(m3u8Url))
+        exoPlayer.setMediaItem(mediaItem)
+        // 准备播放
+        exoPlayer.prepare()
+        exoPlayer.play()
     }
 
-    private fun initializePlayer() {
-        // 初始化 ExoPlayer
-        player = ExoPlayer.Builder(this).build()
-        playerView.player = player
+    override fun onPause() {
+        super.onPause()
+        exoPlayer.pause()
+    }
 
-        // 播放 Bunny.net 的 m3u8 链接
-        val videoUrl =
-            "https://vz-e8524359-a55.b-cdn.net/eddf6909-8737-4743-b16a-f52ea5e3ffba/play_720p.mp4"
-        val mediaItem = MediaItem.fromUri(videoUrl)
-        player.setMediaItem(mediaItem)
-
-        // 准备播放器
-        player.prepare()
-        player.playWhenReady = true
+    override fun onResume() {
+        super.onResume()
+        exoPlayer.play()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        player.release() // 释放资源
+        exoPlayer.release() // 释放资源
         addHistoryRecord() // 调用新增历史记录接口
     }
 
