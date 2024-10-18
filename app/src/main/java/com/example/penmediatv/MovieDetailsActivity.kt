@@ -15,9 +15,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.penmediatv.databinding.ActivityMovieDetailsBinding
 import android.provider.Settings
 import android.util.Log
+import com.bumptech.glide.Glide
+import com.example.penmediatv.API.AnimationApi
 import com.example.penmediatv.API.CollectionApi
 import com.example.penmediatv.Data.CollectionAddRequest
 import com.example.penmediatv.Data.CollectionAddResponse
+import com.example.penmediatv.Data.ResourceDetailResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +35,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        fetchResourceDetails()
         val videoId = intent.getStringExtra("VIDEO_ID")
 
         binding.btWatchNow.setOnClickListener {
@@ -129,6 +133,53 @@ class MovieDetailsActivity : AppCompatActivity() {
             } else {
                 Log.e("MovieDetailsActivity", "Failed to collect: videoId is null")
             }
+        }
+    }
+
+    private fun fetchResourceDetails() {
+        val videoId = intent.getStringExtra("VIDEO_ID")
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val resourceApi = retrofit.create(AnimationApi::class.java)
+        if (videoId != null) {
+            val call = resourceApi.getResourceDetail(videoId)
+            call.enqueue(object : Callback<ResourceDetailResponse> {
+                override fun onResponse(
+                    call: Call<ResourceDetailResponse>,
+                    response: Response<ResourceDetailResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val resourceDetailResponse = response.body()?.data
+                        if (resourceDetailResponse != null) {
+                            binding.tvMovieTitle.text = resourceDetailResponse.videoNameEn
+                            binding.tvMovieIntroductionContent.text =
+                                resourceDetailResponse.introduction
+                            binding.tvMovieGenre.text = resourceDetailResponse.category
+                            binding.tvMovieRegion.text = resourceDetailResponse.otherInfo.region
+                            binding.tvMovieDirector.text = resourceDetailResponse.otherInfo.director
+                            Glide.with(binding.root)
+                                .load(resourceDetailResponse.videoCover)
+                                .into(binding.moviePoster)
+                        } else {
+                            Log.e(
+                                "MovieDetailsActivity",
+                                "Failed to fetch resource details: resourceDetailResponse is null"
+                            )
+                        }
+                    } else {
+                        Log.e(
+                            "MovieDetailsActivity",
+                            "Failed to fetch resource details: ${response.message()}"
+                        )
+                    }
+                }
+
+                override fun onFailure(call: Call<ResourceDetailResponse>, t: Throwable) {
+                    Log.e("MovieDetailsActivity", "Failed to fetch resource details: ${t.message}")
+                }
+            })
         }
     }
 
