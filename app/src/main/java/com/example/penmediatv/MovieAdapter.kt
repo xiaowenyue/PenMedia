@@ -11,11 +11,18 @@ import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.penmediatv.API.EpisodeApi
 import com.example.penmediatv.Data.AnimationItem
+import com.example.penmediatv.Data.EpisodeResponse
 import com.example.penmediatv.databinding.ItemMovieBinding
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 // 修改为 AnimationItem, 使用你从API获取的模型类
-class MovieAdapter(private val movies: MutableList<AnimationItem>, private val scrollView: ScrollView) :
+class MovieAdapter(
+    private val movies: MutableList<AnimationItem>,
+    private val scrollView: ScrollView
+) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder(private val binding: ItemMovieBinding) :
@@ -64,12 +71,49 @@ class MovieAdapter(private val movies: MutableList<AnimationItem>, private val s
 
             // 设置点击事件，跳转到详情页
             binding.movieItem.setOnClickListener {
-                val context = binding.root.context
-                val intent = Intent(context, MovieDetailsActivity::class.java)
-                // 传递 videoId 作为电影详情的标识符
-                intent.putExtra("VIDEO_ID", movie.videoId)
-                context.startActivity(intent)
+                itemClick(movie.videoId)
             }
+        }
+
+        private fun itemClick(videoId: String) {
+            val context = binding.root.context
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://44.208.55.69/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val episodeApi = retrofit.create(EpisodeApi::class.java)
+            val call = episodeApi.getEpisode(videoId, 1, 10)
+            call.enqueue(object : retrofit2.Callback<EpisodeResponse> {
+                override fun onResponse(
+                    call: retrofit2.Call<EpisodeResponse>,
+                    response: retrofit2.Response<EpisodeResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.d("MovieAdapter", "Response successful")
+                        val episodeResponse = response.body()?.data
+                        if (episodeResponse != null) {
+                            if (episodeResponse.records.size <= 1) {
+                                val intent = Intent(context, MovieDetailsActivity::class.java)
+                                // 传递 videoId 作为电影详情的标识符
+                                intent.putExtra("VIDEO_ID", videoId)
+                                context.startActivity(intent)
+                            } else {
+                                val intent = Intent(context, TvDetailsActivity::class.java)
+                                // 传递 videoId 作为电影详情的标识符
+                                intent.putExtra("VIDEO_ID", videoId)
+                                intent.putExtra("VIDEO_EPISODE", episodeResponse.records.size)
+                                context.startActivity(intent)
+                            }
+                        }
+                    } else {
+                        Log.e("MovieAdapter", "Response not successful: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: retrofit2.Call<EpisodeResponse>, t: Throwable) {
+                    Log.e("MovieAdapter", "Error: ${t.message}")
+                }
+            })
         }
 
         // 将焦点滚动到中间
@@ -101,6 +145,7 @@ class MovieAdapter(private val movies: MutableList<AnimationItem>, private val s
     override fun getItemCount(): Int {
         return movies.size
     }
+
     fun updateMovies(newMovies: List<AnimationItem>) {
         movies.addAll(newMovies)
         notifyDataSetChanged()

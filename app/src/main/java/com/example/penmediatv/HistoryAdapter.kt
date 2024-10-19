@@ -51,7 +51,6 @@ class HistoryAdapter(private val historyList: MutableList<HistoryItem>) :
                 val movie = Movie("某电视剧", R.drawable.movie, episodes = 45) // 假设该电视剧有45集
                 val context = binding.root.context
                 val intent = Intent(context, TvDetailsActivity::class.java)
-                intent.putExtra("MOVIE_DATA", movie)
                 context.startActivity(intent)
             }
         }

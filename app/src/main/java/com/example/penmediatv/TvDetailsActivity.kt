@@ -26,11 +26,7 @@ class TvDetailsActivity : AppCompatActivity() {
         binding = ActivityTvDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        movie = intent.getParcelableExtra("MOVIE_DATA") ?: Movie(
-            "movieName",
-            R.drawable.movie,
-            episodes = 50
-        )
+        val episodesSize = intent.getIntExtra("VIDEO_EPISODE", 1)
 
         binding.btWatchNow.setOnClickListener {
             Toast.makeText(this, "Watch Now", Toast.LENGTH_SHORT).show()
@@ -38,7 +34,7 @@ class TvDetailsActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.recyclerView.layoutManager = GridLayoutManager(this, 4)
-        binding.recyclerView.adapter = RelevantRecommendationAdapter(getMovies())
+//        binding.recyclerView.adapter = RelevantRecommendationAdapter(getMovies())
         binding.btnCollect.setOnClickListener {
             val dialog = Dialog(this)
             dialog.setContentView(R.layout.dialog_collected)
@@ -82,7 +78,7 @@ class TvDetailsActivity : AppCompatActivity() {
             }, 2000)
         }
         // 动态生成剧集范围按钮
-        generateEpisodeRangeButtons(movie.episodes)
+        generateEpisodeRangeButtons(episodesSize)
     }
 
     // 动态生成剧集范围按钮 (1-10, 11-20,...)
@@ -94,7 +90,11 @@ class TvDetailsActivity : AppCompatActivity() {
         for (i in 0 until numRanges) {
             val start = i * 10 + 1
             val end = minOf((i + 1) * 10, totalEpisodes)
-            val rangeButton = AppCompatButton(ContextThemeWrapper(this, R.style.EpisodeRangeButton), null, R.style.EpisodeRangeButton).apply {
+            val rangeButton = AppCompatButton(
+                ContextThemeWrapper(this, R.style.EpisodeRangeButton),
+                null,
+                R.style.EpisodeRangeButton
+            ).apply {
                 text = "$start-$end"
                 setOnClickListener {
                     updateEpisodes(start, end)
@@ -122,10 +122,15 @@ class TvDetailsActivity : AppCompatActivity() {
         episodesContainer.removeAllViews() // 清空已有的剧集按钮
         for (i in start..end) {
             // 创建具体剧集按钮
-            val episodeButton = AppCompatButton(ContextThemeWrapper(this, R.style.EpisodeButton), null, R.style.EpisodeButton).apply {
+            val episodeButton = AppCompatButton(
+                ContextThemeWrapper(this, R.style.EpisodeButton),
+                null,
+                R.style.EpisodeButton
+            ).apply {
                 text = i.toString()
                 setOnClickListener {
-                    Toast.makeText(this@TvDetailsActivity, "点击第 $i 集", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@TvDetailsActivity, "点击第 $i 集", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
             val layoutParams = LinearLayout.LayoutParams(
