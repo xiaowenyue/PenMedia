@@ -2,25 +2,21 @@ package com.example.penmediatv
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.penmediatv.databinding.ItemMovieBinding
+import com.example.penmediatv.Data.TrendRecommendItem
 import com.example.penmediatv.databinding.ItemSearchMovieBinding
 
-class PopularMoviesAdapter(private val movies: List<Movie>) :
+class PopularMoviesAdapter(private val movies: MutableList<TrendRecommendItem>) :
     RecyclerView.Adapter<PopularMoviesAdapter.MovieViewHolder>() {
 
     inner class MovieViewHolder(val binding: ItemSearchMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie) {
-            binding.btnMovieName.text = movie.name
+        fun bind(movie: TrendRecommendItem) {
+            binding.btnMovieName.text = movie.videoNameEn
             binding.btnMovieName.setOnClickListener {
                 val intent = Intent(binding.root.context, MovieDetailsActivity::class.java)
-                intent.putExtra("movie", movie)
+                intent.putExtra("VIDEO_ID", movie.videoId)
                 binding.root.context.startActivity(intent)
             }
         }
@@ -37,4 +33,8 @@ class PopularMoviesAdapter(private val movies: List<Movie>) :
     }
 
     override fun getItemCount() = movies.size
+    fun updateMovies(newMovies: List<TrendRecommendItem>) {
+        movies.addAll(newMovies)
+        notifyDataSetChanged()
+    }
 }
