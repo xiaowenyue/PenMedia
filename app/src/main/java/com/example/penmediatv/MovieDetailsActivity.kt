@@ -2,7 +2,6 @@ package com.example.penmediatv
 
 import android.app.Dialog
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -18,6 +17,8 @@ import android.util.Log
 import com.bumptech.glide.Glide
 import com.example.penmediatv.API.AnimationApi
 import com.example.penmediatv.API.CollectionApi
+import com.example.penmediatv.API.RecommendationApi
+import com.example.penmediatv.Data.AnimationResponse
 import com.example.penmediatv.Data.CollectionAddRequest
 import com.example.penmediatv.Data.CollectionAddResponse
 import com.example.penmediatv.Data.ResourceDetailResponse
@@ -30,26 +31,27 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MovieDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMovieDetailsBinding
     private var isCollected = false  // 用于记录是否收藏
+    private lateinit var recommendationAdapter: RelevantRecommendationAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupRecyclerView()
         fetchResourceDetails()
         val videoId = intent.getStringExtra("VIDEO_ID")
-
         binding.btWatchNow.setOnClickListener {
             Toast.makeText(this, "Watch Now", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, VideoPlayActivity::class.java)
             intent.putExtra("VIDEO_ID", videoId)
             startActivity(intent)
         }
-        binding.recyclerView.layoutManager = GridLayoutManager(this, 4)
-        binding.recyclerView.adapter = RelevantRecommendationAdapter(getMovies())
+
         binding.btnCollect.setOnClickListener {
             collectVideo()
         }
     }
+
     private fun collectVideo() {
         val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         val videoId = intent.getStringExtra("VIDEO_ID")
@@ -140,6 +142,12 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupRecyclerView() {
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 4)
+        recommendationAdapter = RelevantRecommendationAdapter(mutableListOf())
+        binding.recyclerView.adapter = recommendationAdapter
+    }
+
     private fun fetchResourceDetails() {
         val videoId = intent.getStringExtra("VIDEO_ID")
         val retrofit = Retrofit.Builder()
@@ -166,6 +174,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                             Glide.with(binding.root)
                                 .load(resourceDetailResponse.videoCover)
                                 .into(binding.moviePoster)
+                            fetchRecommendList(resourceDetailResponse.videoType)
                         } else {
                             Log.e(
                                 "MovieDetailsActivity",
@@ -187,17 +196,55 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun getMovies(): List<Movie> {
-        // Generate dummy movie data
-        return listOf(
-            Movie("Movie 1", R.drawable.movie),
-            Movie("Movie 2", R.drawable.ic_search),
-            Movie("Movie 3", R.drawable.ic_history),
-            Movie("Movie 4", R.drawable.ic_mine),
-            Movie("Movie 5", R.drawable.ic_search),
-            Movie("Movie 6", R.drawable.ic_history),
-            Movie("Movie 7", R.drawable.ic_mine),
-            Movie("Movie 8", R.drawable.ic_search)
-        )
+    private fun fetchRecommendList(videoType: String) {
+        val videoId = intent.getStringExtra("VIDEO_ID")
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val recommendationApi = retrofit.create(RecommendationApi::class.java)
+        val call: Call<AnimationResponse>? = when (videoType) {
+            "MOVIE" -> videoId?.let { recommendationApi.getMovieRecommendation(it) }
+            "TV_SERIES" -> videoId?.let { recommendationApi.getTvRecommendation(it) }
+            else -> null
+        }
+        call?.enqueue(object : Callback<AnimationResponse> {
+            override fun onResponse(
+                call: Call<AnimationResponse>,
+                response: Response<AnimationResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val animationResponse = response.body()
+                    Log.d("MovieDetailsActivity", "Response Body: $animationResponse")  // 添加这一行
+                    val animationData = animationResponse?.data
+                    if (animationData != null) {
+                        val relevantRecommendations = animationData.records
+                        if (relevantRecommendations.isNotEmpty()) {
+                            recommendationAdapter.updateMovies(relevantRecommendations)
+                        } else {
+                            Log.e("MovieDetailsActivity", "No relevant recommendations found")
+                        }
+                    } else {
+                        Log.e(
+                            "MovieDetailsActivity",
+                            "Failed to fetch relevant recommendations: animationResponse.data is null"
+                        )
+                    }
+                } else {
+                    Log.e(
+                        "MovieDetailsActivity",
+                        "Failed to fetch relevant recommendations: ${response.message()}"
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<AnimationResponse>, t: Throwable) {
+                // 处理失败响应
+                Log.e(
+                    "MovieDetailsActivity",
+                    "Failed to fetch relevant recommendations: ${t.message}"
+                )
+            }
+        })
     }
 }
