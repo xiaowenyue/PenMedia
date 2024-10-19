@@ -14,8 +14,7 @@ class RelevantRecommendationAdapter(private val movies: MutableList<AnimationIte
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: AnimationItem) {
             binding.tvMovieRecommendTitle.text = movie.videoNameEn
-            binding.region.text = movie.otherInfo.region
-            binding.releaseDate.text = movie.otherInfo.releaseDate
+            binding.region.text = movie.otherInfo.region + " | " + movie.otherInfo.releaseDate
             // 加载封面图片（使用 Glide）
             Glide.with(binding.root.context)
                 .load(movie.videoCover)  // 从 API 返回的数据中获取封面图片链接
@@ -44,6 +43,7 @@ class RelevantRecommendationAdapter(private val movies: MutableList<AnimationIte
     override fun getItemCount(): Int {
         return movies.size
     }
+
     fun updateMovies(newMovies: List<AnimationItem>) {
         movies.addAll(newMovies)
         notifyDataSetChanged()

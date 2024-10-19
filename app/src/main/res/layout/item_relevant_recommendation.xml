@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_movie_recommend"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:layout_marginHorizontal="8dp"
     android:layout_marginTop="20dp"
     android:background="@drawable/selector_item_recommend"
     android:gravity="center"
@@ -12,7 +13,7 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_movie_recommend"
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="240dp"
         android:layout_margin="4dp"
         android:scaleType="fitXY"
@@ -23,15 +24,20 @@
         android:id="@+id/tv_movie_recommend_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="The Matrix"
         android:textColor="#b3c0e7"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tv_movie_recommend_score"
-        android:layout_width="wrap_content"
+        android:id="@+id/region"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
+        android:ellipsize="end"
+        android:gravity="center"
         android:text="中国香港 ｜ 2003"
         android:textColor="#66ffffff"
         android:textSize="18sp" />
