@@ -1,10 +1,14 @@
 package com.example.penmediatv
 
+import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -41,6 +45,14 @@ class MainActivity : AppCompatActivity() {
             binding.navAnimation,
             binding.navDocumentary
         )
+        // 获取传递的数据
+        val title = intent.getStringExtra("title")
+        val content = intent.getStringExtra("content")
+
+        // 显示弹窗
+        if (!title.isNullOrEmpty() && !content.isNullOrEmpty()) {
+            showDialog(title, content)
+        }
 
         navButtons.forEach { button ->
             button.setOnFocusChangeListener { view, hasFocus ->
@@ -61,6 +73,19 @@ class MainActivity : AppCompatActivity() {
 
         // 设置默认焦点
         binding.navHome.requestFocus()
+    }
+
+    private fun showDialog(title: String, message: String) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_info)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.findViewById<TextView>(R.id.title).text = title
+        dialog.findViewById<TextView>(R.id.content).text = message
+        dialog.show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            dialog.dismiss()
+        }, 2000)
     }
 
     // 图标设置方法，减少重复代码
