@@ -195,10 +195,48 @@ class MovieDetailsActivity : AppCompatActivity() {
                             )
                         }
                     } else {
-                        Log.e(
-                            "MovieDetailsActivity",
-                            "Failed to fetch resource details,response failed: ${response.message()}"
-                        )
+                        // 根据不同的状态码进行处理
+                        when (response.code()) {
+                            404 -> {
+                                // 资源未找到
+                                Log.e("MovieDetailsActivity", "资源未找到 (404): ${response.message()}")
+                                Toast.makeText(this@MovieDetailsActivity, "资源未找到", Toast.LENGTH_SHORT).show()
+                            }
+                            403 -> {
+                                // 权限不足
+                                Log.e("MovieDetailsActivity", "权限不足 (403): ${response.message()}")
+                                Toast.makeText(this@MovieDetailsActivity, "您没有访问该资源的权限", Toast.LENGTH_SHORT).show()
+                            }
+                            401 -> {
+                                // 未授权
+                                Log.e("MovieDetailsActivity", "未授权 (401): ${response.message()}")
+                                Toast.makeText(this@MovieDetailsActivity, "请先登录", Toast.LENGTH_SHORT).show()
+                            }
+                            500 -> {
+                                // 服务器错误
+                                Log.e("MovieDetailsActivity", "服务器错误 (500): ${response.message()}")
+                                val dialog = Dialog(this@MovieDetailsActivity)
+                                dialog.setContentView(R.layout.dialog_network_disconnect)
+                                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                                dialog.show()
+
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    dialog.dismiss()
+                                }, 2000)
+                            }
+                            else -> {
+                                // 其他错误
+                                Log.e("MovieDetailsActivity", "未知错误: ${response.code()}, ${response.message()}")
+                                val dialog = Dialog(this@MovieDetailsActivity)
+                                dialog.setContentView(R.layout.dialog_network_disconnect)
+                                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                                dialog.show()
+
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    dialog.dismiss()
+                                }, 2000)
+                            }
+                        }
                     }
                 }
 
@@ -248,6 +286,14 @@ class MovieDetailsActivity : AppCompatActivity() {
                         "MovieDetailsActivity",
                         "response failed: ${response.message()}"
                     )
+                    val dialog = Dialog(this@MovieDetailsActivity)
+                    dialog.setContentView(R.layout.dialog_network_disconnect)
+                    dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                    dialog.show()
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        dialog.dismiss()
+                    }, 2000)
                 }
             }
 
