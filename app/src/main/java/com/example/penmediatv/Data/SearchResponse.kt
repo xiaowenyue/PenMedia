@@ -15,6 +15,7 @@ data class TrendRecommendItem(
     val videoId: String,
     val subTitle: String?,
     val videoType: String,
+    val videoDesc: String,
     val otherInfo: TrendRecommendOtherInfo
 )
 
