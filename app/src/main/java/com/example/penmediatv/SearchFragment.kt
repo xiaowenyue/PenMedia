@@ -68,6 +68,7 @@ class SearchFragment : Fragment() {
                     if (movies != null) {
                         setupPopularMoviesList(movies)
                         setupSearchResults(movies)
+                        binding.cvMore.visibility = if (movies.size > 7) View.VISIBLE else View.GONE
                     }
                 } else {
                     // 处理错误

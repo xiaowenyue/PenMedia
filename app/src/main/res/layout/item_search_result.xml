@@ -12,7 +12,6 @@
         android:layout_width="160dp"
         android:layout_height="190dp"
         android:scaleType="fitXY"
-        android:src="@drawable/movie"
         app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
     <LinearLayout
@@ -26,9 +25,7 @@
             android:id="@+id/movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
-            android:text="Movie Title"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
@@ -39,7 +36,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
-            android:text="@string/details"
             android:textColor="@android:color/white" />
 
         <androidx.appcompat.widget.AppCompatButton
