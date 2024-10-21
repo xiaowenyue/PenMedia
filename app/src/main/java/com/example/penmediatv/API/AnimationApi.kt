@@ -45,6 +45,7 @@ interface AnimationApi {
 
     @GET("resource/detail")
     fun getResourceDetail(
-        @Query("videoId") videoId: String
+        @Query("videoId") videoId: String,
+        @Query("deviceId") deviceId: String
     ): Call<ResourceDetailResponse>
 }

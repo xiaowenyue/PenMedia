@@ -155,7 +155,8 @@ class MovieDetailsActivity : AppCompatActivity() {
             .build()
         val resourceApi = retrofit.create(AnimationApi::class.java)
         if (videoId != null) {
-            val call = resourceApi.getResourceDetail(videoId)
+            val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+            val call = resourceApi.getResourceDetail(videoId, androidId)
             call.enqueue(object : Callback<ResourceDetailResponse> {
                 override fun onResponse(
                     call: Call<ResourceDetailResponse>,
@@ -170,6 +171,19 @@ class MovieDetailsActivity : AppCompatActivity() {
                             binding.tvMovieGenre.text = resourceDetailResponse.category
                             binding.tvMovieRegion.text = resourceDetailResponse.otherInfo.region
                             binding.tvMovieDirector.text = resourceDetailResponse.otherInfo.director
+                            if (resourceDetailResponse.collection) {
+                                ContextCompat.getDrawable(
+                                    this@MovieDetailsActivity,
+                                    R.drawable.ic_connect
+                                )?.let {
+                                    binding.btnCollect.setCompoundDrawablesWithIntrinsicBounds(
+                                        it,
+                                        null,
+                                        null,
+                                        null
+                                    )
+                                }
+                            }
                             Glide.with(binding.root)
                                 .load(resourceDetailResponse.videoCover)
                                 .into(binding.moviePoster)
@@ -177,19 +191,19 @@ class MovieDetailsActivity : AppCompatActivity() {
                         } else {
                             Log.e(
                                 "MovieDetailsActivity",
-                                "Failed to fetch resource details: resourceDetailResponse is null"
+                                "resourceDetailResponse is null"
                             )
                         }
                     } else {
                         Log.e(
                             "MovieDetailsActivity",
-                            "Failed to fetch resource details: ${response.message()}"
+                            "Failed to fetch resource details,response failed: ${response.message()}"
                         )
                     }
                 }
 
                 override fun onFailure(call: Call<ResourceDetailResponse>, t: Throwable) {
-                    Log.e("MovieDetailsActivity", "Failed to fetch resource details: ${t.message}")
+                    Log.e("MovieDetailsActivity", "fetchResourceDetails onFailure: ${t.message}")
                 }
             })
         }
@@ -226,13 +240,13 @@ class MovieDetailsActivity : AppCompatActivity() {
                     } else {
                         Log.e(
                             "MovieDetailsActivity",
-                            "Failed to fetch relevant recommendations: animationResponse.data is null"
+                            "animationResponse.data is null"
                         )
                     }
                 } else {
                     Log.e(
                         "MovieDetailsActivity",
-                        "Failed to fetch relevant recommendations: ${response.message()}"
+                        "response failed: ${response.message()}"
                     )
                 }
             }
@@ -241,7 +255,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                 // 处理失败响应
                 Log.e(
                     "MovieDetailsActivity",
-                    "Failed to fetch relevant recommendations: ${t.message}"
+                    "fetchRecommendList onFailure: ${t.message}"
                 )
             }
         })

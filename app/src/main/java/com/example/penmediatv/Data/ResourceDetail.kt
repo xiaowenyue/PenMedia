@@ -17,5 +17,6 @@ data class ResourceDetailData(
     val category: String,
     val videoType: String,
     val subTitle: String?,
+    val collection: Boolean,
     val otherInfo: AnimationOtherInfo
 )
