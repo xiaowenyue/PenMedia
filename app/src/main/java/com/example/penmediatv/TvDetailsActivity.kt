@@ -29,7 +29,6 @@ class TvDetailsActivity : AppCompatActivity() {
         val episodesSize = intent.getIntExtra("VIDEO_EPISODE", 1)
 
         binding.btWatchNow.setOnClickListener {
-            Toast.makeText(this, "Watch Now", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MoviePlayActivity::class.java)
             startActivity(intent)
         }

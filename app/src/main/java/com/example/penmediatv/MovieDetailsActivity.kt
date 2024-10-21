@@ -41,7 +41,6 @@ class MovieDetailsActivity : AppCompatActivity() {
         fetchResourceDetails()
         val videoId = intent.getStringExtra("VIDEO_ID")
         binding.btWatchNow.setOnClickListener {
-            Toast.makeText(this, "Watch Now", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, VideoPlayActivity::class.java)
             intent.putExtra("VIDEO_ID", videoId)
             startActivity(intent)
