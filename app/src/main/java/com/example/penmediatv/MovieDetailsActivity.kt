@@ -27,6 +27,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 
 class MovieDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMovieDetailsBinding
@@ -241,7 +242,21 @@ class MovieDetailsActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ResourceDetailResponse>, t: Throwable) {
-                    Log.e("MovieDetailsActivity", "fetchResourceDetails onFailure: ${t.message}")
+                    // 根据不同的错误类型进行处理
+                    if (t is IOException) {
+                        // 网络或服务器不可达
+                        Log.e("MovieDetailsActivity", "网络错误或服务器不可达: ${t.message}")
+                    } else {
+                        // 其他类型错误（如转换错误）
+                        Log.e("MovieDetailsActivity", "未知错误: ${t.message}")
+                    }
+                    val dialog = Dialog(this@MovieDetailsActivity)
+                    dialog.setContentView(R.layout.dialog_network_dismiss)
+                    dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                    dialog.show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        dialog.dismiss()
+                    }, 2000)
                 }
             })
         }
