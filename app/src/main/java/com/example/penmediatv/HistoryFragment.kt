@@ -1,11 +1,15 @@
 package com.example.penmediatv
 
+import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.penmediatv.API.HistoryApi
@@ -18,6 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 
 class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
@@ -74,19 +79,90 @@ class HistoryFragment : Fragment() {
                             "Error: ${response.code()} - ${response.errorBody()?.string()}"
                         )
                     }
+                } else {
+                    // 根据不同的状态码进行处理
+                    when (response.code()) {
+                        404 -> {
+                            // 资源未找到
+                            Log.e("HistoryFragment", "资源未找到 (404): ${response.message()}")
+                            Toast.makeText(binding.root.context, "资源未找到", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                        403 -> {
+                            // 权限不足
+                            Log.e("HistoryFragment", "权限不足 (403): ${response.message()}")
+                            Toast.makeText(
+                                binding.root.context,
+                                "您没有访问该资源的权限",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        401 -> {
+                            // 未授权
+                            Log.e("HistoryFragment", "未授权 (401): ${response.message()}")
+                            Toast.makeText(binding.root.context, "请先登录", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                        500 -> {
+                            // 服务器错误
+                            Log.e("HistoryFragment", "服务器错误 (500): ${response.message()}")
+                            val dialog = Dialog(binding.root.context)
+                            dialog.setContentView(R.layout.dialog_network_disconnect)
+                            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                            dialog.show()
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                dialog.dismiss()
+                            }, 2000)
+                        }
+
+                        else -> {
+                            // 其他错误
+                            Log.e(
+                                "HistoryFragment",
+                                "未知错误: ${response.code()}, ${response.message()}"
+                            )
+                            val dialog = Dialog(binding.root.context)
+                            dialog.setContentView(R.layout.dialog_network_disconnect)
+                            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                            dialog.show()
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                dialog.dismiss()
+                            }, 2000)
+                        }
+                    }
                 }
             }
 
             override fun onFailure(call: Call<HistoryAddResponse>, t: Throwable) {
-                // 请求失败处理
-                Log.e("HistoryFragment", "Failed to clear: ${t.message}")
+                // 根据不同的错误类型进行处理
+                if (t is IOException) {
+                    // 网络或服务器不可达
+                    Log.e("HistoryFragment", "网络错误或服务器不可达: ${t.message}")
+                } else {
+                    // 其他类型错误（如转换错误）
+                    Log.e("HistoryFragment", "未知错误: ${t.message}")
+                }
+                val dialog = Dialog(binding.root.context)
+                dialog.setContentView(R.layout.dialog_network_dismiss)
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                dialog.show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dialog.dismiss()
+                }, 2000)
             }
         })
     }
+
     private fun showRecyclerView() {
         binding.recyclerView.visibility = View.VISIBLE
         binding.llEmpty.visibility = View.GONE
     }
+
     private fun showEmptyState() {
         binding.recyclerView.visibility = View.GONE
         binding.llEmpty.visibility = View.VISIBLE
@@ -136,6 +212,14 @@ class HistoryFragment : Fragment() {
                         "HistoryFragment",
                         "Error: ${response.code()} - ${response.errorBody()?.string()}"
                     )
+                    val dialog = Dialog(binding.root.context)
+                    dialog.setContentView(R.layout.dialog_network_disconnect)
+                    dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                    dialog.show()
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        dialog.dismiss()
+                    }, 2000)
                 }
                 isLoading = false
             }
@@ -143,6 +227,20 @@ class HistoryFragment : Fragment() {
             override fun onFailure(call: Call<HistoryResponse>, t: Throwable) {
                 Log.e("HistoryFragment", "Network Error: ${t.message}")
                 isLoading = false
+                if (t is IOException) {
+                    // 网络或服务器不可达
+                    Log.e("HistoryFragment", "网络错误或服务器不可达: ${t.message}")
+                } else {
+                    // 其他类型错误（如转换错误）
+                    Log.e("HistoryFragment", "未知错误: ${t.message}")
+                }
+                val dialog = Dialog(binding.root.context)
+                dialog.setContentView(R.layout.dialog_network_dismiss)
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                dialog.show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dialog.dismiss()
+                }, 2000)
             }
         })
     }
