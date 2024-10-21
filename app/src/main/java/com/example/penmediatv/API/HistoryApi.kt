@@ -20,7 +20,7 @@ interface HistoryApi {
 
     @POST("history/add")
     fun addHistory(
-        @Body HistoryRequest: HistoryAddRequest
+        @Body historyRequest: HistoryAddRequest
     ): Call<HistoryAddResponse>
 
     @POST("history/clear")

@@ -20,6 +20,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class VideoPlayActivity : AppCompatActivity() {
     private lateinit var playerView: PlayerView
     private lateinit var exoPlayer: ExoPlayer
+    private var watchDuration: Long = 0 // 记录观看时长
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_play)
@@ -30,11 +32,19 @@ class VideoPlayActivity : AppCompatActivity() {
         playerView.player = exoPlayer
         // 设置播放源
         val m3u8Url =
-            "https://vz-e8524359-a55.b-cdn.net/eddf6909-8737-4743-b16a-f52ea5e3ffba/playlist.m3u8"
+            "https://vz-e8524359-a55.b-cdn.net/a1032a95-e4dc-41ff-91cf-46c6465cf9fa/playlist.m3u8"
         val mediaItem = MediaItem.fromUri(Uri.parse(m3u8Url))
         exoPlayer.setMediaItem(mediaItem)
         // 准备播放
         exoPlayer.prepare()
+        exoPlayer.play()
+        // 如果有历史记录进度，设置到上次观看的位置
+        val historyDuration = intent.getLongExtra("WATCH_DURATION", 0L)
+        if (historyDuration > 0) {
+            exoPlayer.seekTo(historyDuration)
+        } else {
+            exoPlayer.seekTo(0)
+        }
         exoPlayer.play()
     }
 
@@ -50,11 +60,13 @@ class VideoPlayActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        watchDuration = exoPlayer.currentPosition // 获取当前的播放位置（观看时长）
         exoPlayer.release() // 释放资源
-        addHistoryRecord() // 调用新增历史记录接口
+        addHistoryRecord(watchDuration) // 将观看时长传递给后端
     }
 
-    private fun addHistoryRecord() {
+    // 新增历史记录
+    private fun addHistoryRecord(playDuration: Long) {
         val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         val videoId = intent.getStringExtra("VIDEO_ID")
         val retrofit = Retrofit.Builder()
@@ -65,10 +77,13 @@ class VideoPlayActivity : AppCompatActivity() {
         val historyApi = retrofit.create(HistoryApi::class.java)
 
         if (videoId != null) {
+            Log.v("VideoPlayActivity", "Android ID：$androidId")
+            Log.v("VideoPlayActivity", "视频ID：$videoId")
+            Log.v("VideoPlayActivity", "观看时长：$playDuration")
             val historyData = HistoryAddRequest(
                 deviceId = androidId,
                 videoId = videoId,
-                playDuration = 50
+                playDuration = playDuration.toInt()
             )
 
             val call = historyApi.addHistory(historyData)

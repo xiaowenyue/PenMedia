@@ -48,9 +48,10 @@ class HistoryAdapter(private val historyList: MutableList<HistoryItem>) :
                 }
             }
             binding.item.setOnClickListener {
-                val movie = Movie("某电视剧", R.drawable.movie, episodes = 45) // 假设该电视剧有45集
                 val context = binding.root.context
-                val intent = Intent(context, TvDetailsActivity::class.java)
+                val intent = Intent(context, VideoPlayActivity::class.java)
+                intent.putExtra("VIDEO_ID", movie.videoId)
+                intent.putExtra("WATCH_DURATION", movie.playedDuration.toLong())
                 context.startActivity(intent)
             }
         }
@@ -73,6 +74,7 @@ class HistoryAdapter(private val historyList: MutableList<HistoryItem>) :
         historyList.addAll(newHistories)
         notifyDataSetChanged()
     }
+
     fun clearMovies() {
         historyList.clear() // 清空当前列表
         notifyDataSetChanged() // 通知RecyclerView数据已清空，刷新视图
