@@ -23,7 +23,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.SocketTimeoutException
 
 @androidx.media3.common.util.UnstableApi
 class VideoPlayActivity : AppCompatActivity() {

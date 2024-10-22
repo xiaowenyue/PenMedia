@@ -110,7 +110,7 @@ class HistoryFragment : Fragment() {
                             // 服务器错误
                             Log.e("HistoryFragment", "服务器错误 (500): ${response.message()}")
                             val dialog = Dialog(binding.root.context)
-                            dialog.setContentView(R.layout.dialog_network_disconnect)
+                            dialog.setContentView(R.layout.dialog_network_dismiss)
                             dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                             dialog.show()
 
@@ -126,7 +126,7 @@ class HistoryFragment : Fragment() {
                                 "未知错误: ${response.code()}, ${response.message()}"
                             )
                             val dialog = Dialog(binding.root.context)
-                            dialog.setContentView(R.layout.dialog_network_disconnect)
+                            dialog.setContentView(R.layout.dialog_network_dismiss)
                             dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                             dialog.show()
 
@@ -148,7 +148,7 @@ class HistoryFragment : Fragment() {
                     Log.e("HistoryFragment", "未知错误: ${t.message}")
                 }
                 val dialog = Dialog(binding.root.context)
-                dialog.setContentView(R.layout.dialog_network_dismiss)
+                dialog.setContentView(R.layout.dialog_network_disconnect)
                 dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                 dialog.show()
                 Handler(Looper.getMainLooper()).postDelayed({
@@ -213,7 +213,7 @@ class HistoryFragment : Fragment() {
                         "Error: ${response.code()} - ${response.errorBody()?.string()}"
                     )
                     val dialog = Dialog(binding.root.context)
-                    dialog.setContentView(R.layout.dialog_network_disconnect)
+                    dialog.setContentView(R.layout.dialog_network_dismiss)
                     dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                     dialog.show()
 
@@ -235,7 +235,7 @@ class HistoryFragment : Fragment() {
                     Log.e("HistoryFragment", "未知错误: ${t.message}")
                 }
                 val dialog = Dialog(binding.root.context)
-                dialog.setContentView(R.layout.dialog_network_dismiss)
+                dialog.setContentView(R.layout.dialog_network_disconnect)
                 dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                 dialog.show()
                 Handler(Looper.getMainLooper()).postDelayed({

@@ -217,7 +217,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                                 // 服务器错误
                                 Log.e("MovieDetailsActivity", "服务器错误 (500): ${response.message()}")
                                 val dialog = Dialog(this@MovieDetailsActivity)
-                                dialog.setContentView(R.layout.dialog_network_disconnect)
+                                dialog.setContentView(R.layout.dialog_network_dismiss)
                                 dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                                 dialog.show()
 
@@ -229,7 +229,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                                 // 其他错误
                                 Log.e("MovieDetailsActivity", "未知错误: ${response.code()}, ${response.message()}")
                                 val dialog = Dialog(this@MovieDetailsActivity)
-                                dialog.setContentView(R.layout.dialog_network_disconnect)
+                                dialog.setContentView(R.layout.dialog_network_dismiss)
                                 dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                                 dialog.show()
 
@@ -251,7 +251,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                         Log.e("MovieDetailsActivity", "未知错误: ${t.message}")
                     }
                     val dialog = Dialog(this@MovieDetailsActivity)
-                    dialog.setContentView(R.layout.dialog_network_dismiss)
+                    dialog.setContentView(R.layout.dialog_network_disconnect)
                     dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                     dialog.show()
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -302,7 +302,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                         "response failed: ${response.message()}"
                     )
                     val dialog = Dialog(this@MovieDetailsActivity)
-                    dialog.setContentView(R.layout.dialog_network_disconnect)
+                    dialog.setContentView(R.layout.dialog_network_dismiss)
                     dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                     dialog.show()
 
@@ -318,6 +318,13 @@ class MovieDetailsActivity : AppCompatActivity() {
                     "MovieDetailsActivity",
                     "fetchRecommendList onFailure: ${t.message}"
                 )
+                val dialog = Dialog(this@MovieDetailsActivity)
+                dialog.setContentView(R.layout.dialog_network_dismiss)
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                dialog.show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    dialog.dismiss()
+                }, 2000)
             }
         })
     }
