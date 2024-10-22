@@ -18,6 +18,7 @@ import androidx.media3.ui.PlayerView
 import com.example.penmediatv.API.HistoryApi
 import com.example.penmediatv.Data.HistoryAddRequest
 import com.example.penmediatv.Data.HistoryAddResponse
+import com.example.penmediatv.utils.ErrorHandler
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -130,11 +131,20 @@ class VideoPlayActivity : AppCompatActivity() {
                         Log.v("VideoPlayActivity", "历史记录新增成功")
                     } else {
                         Log.e("VideoPlayActivity", "新增历史记录失败: ${response.code()}")
+                        ErrorHandler.handleUnsuccessfulResponse(
+                            this@VideoPlayActivity,
+                            this::class.java.simpleName
+                        )
                     }
                 }
 
                 override fun onFailure(call: Call<HistoryAddResponse>, t: Throwable) {
                     Log.e("VideoPlayActivity", "网络错误: ${t.message}")
+                    ErrorHandler.handleFailure(
+                        t,
+                        this@VideoPlayActivity,
+                        this::class.java.simpleName
+                    )
                 }
             })
         } else {

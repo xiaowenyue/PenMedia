@@ -13,6 +13,7 @@ import com.example.penmediatv.API.SearchApi
 import com.example.penmediatv.Data.TrendRecommendItem
 import com.example.penmediatv.Data.TrendRecommendResponse
 import com.example.penmediatv.databinding.FragmentSearchBinding
+import com.example.penmediatv.utils.ErrorHandler
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -72,11 +73,20 @@ class SearchFragment : Fragment() {
                     }
                 } else {
                     // 处理错误
+                    ErrorHandler.handleUnsuccessfulResponse(
+                        binding.root.context,
+                        this::class.java.simpleName
+                    )
                 }
             }
 
             override fun onFailure(call: retrofit2.Call<TrendRecommendResponse>, t: Throwable) {
                 // 处理错误
+                ErrorHandler.handleFailure(
+                    t,
+                    binding.root.context,
+                    this::class.java.simpleName
+                )
             }
         })
     }

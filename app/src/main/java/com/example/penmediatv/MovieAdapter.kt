@@ -15,6 +15,7 @@ import com.example.penmediatv.API.EpisodeApi
 import com.example.penmediatv.Data.AnimationItem
 import com.example.penmediatv.Data.EpisodeResponse
 import com.example.penmediatv.databinding.ItemMovieBinding
+import com.example.penmediatv.utils.ErrorHandler
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -107,11 +108,20 @@ class MovieAdapter(
                         }
                     } else {
                         Log.e("MovieAdapter", "Response not successful: ${response.code()}")
+                        ErrorHandler.handleUnsuccessfulResponse(
+                            binding.root.context,
+                            this::class.java.simpleName
+                        )
                     }
                 }
 
                 override fun onFailure(call: retrofit2.Call<EpisodeResponse>, t: Throwable) {
                     Log.e("MovieAdapter", "Error: ${t.message}")
+                    ErrorHandler.handleFailure(
+                        t,
+                        binding.root.context,
+                        this::class.java.simpleName
+                    )
                 }
             })
         }

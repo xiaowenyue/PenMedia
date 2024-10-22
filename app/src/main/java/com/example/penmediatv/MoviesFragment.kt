@@ -20,6 +20,7 @@ import com.example.penmediatv.API.AnimationApi
 import com.example.penmediatv.Data.AnimationResponse
 import com.example.penmediatv.Data.SwiperResponse
 import com.example.penmediatv.databinding.FragmentMoviesBinding
+import com.example.penmediatv.utils.ErrorHandler
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -138,6 +139,10 @@ class MoviesFragment : Fragment() {
                         "MoviesFragment",
                         "Error: ${response.code()} - ${response.errorBody()?.string()}"
                     )
+                    ErrorHandler.handleUnsuccessfulResponse(
+                        binding.root.context,
+                        this::class.java.simpleName
+                    )
                 }
                 isLoading = false
             }
@@ -145,6 +150,11 @@ class MoviesFragment : Fragment() {
             override fun onFailure(call: Call<AnimationResponse>, t: Throwable) {
                 Log.e("MoviesFragment", "Network Error: ${t.message}")
                 isLoading = false
+                ErrorHandler.handleFailure(
+                    t,
+                    binding.root.context,
+                    this::class.java.simpleName
+                )
             }
         })
     }
