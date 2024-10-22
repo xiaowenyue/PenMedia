@@ -332,7 +332,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
         android:background="@drawable/bg_search"
-        android:paddingStart="23dp"
+        android:paddingStart="13dp"
         android:paddingTop="25dp"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/cl_left"
