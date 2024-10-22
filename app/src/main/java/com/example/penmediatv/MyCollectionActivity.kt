@@ -13,6 +13,7 @@ import com.example.penmediatv.Data.AnimationResponse
 import com.example.penmediatv.Data.CollectionClearRequest
 import com.example.penmediatv.Data.CollectionResponse
 import com.example.penmediatv.databinding.ActivityMyCollectionBinding
+import com.example.penmediatv.utils.ErrorHandler
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -84,6 +85,10 @@ class MyCollectionActivity : AppCompatActivity() {
                         "Error: ${response.code()} - ${response.errorBody()?.string()}"
                     )
                     showEmptyState()
+                    ErrorHandler.handleUnsuccessfulResponse(
+                        this@MyCollectionActivity,
+                        this::class.java.simpleName
+                    )
                 }
                 isLoading = false
             }
@@ -92,6 +97,11 @@ class MyCollectionActivity : AppCompatActivity() {
                 Log.e("CollectionActivity", "Network Error: ${t.message}")
                 showEmptyState()
                 isLoading = false
+                ErrorHandler.handleFailure(
+                    t,
+                    this@MyCollectionActivity,
+                    this::class.java.simpleName
+                )
             }
         })
     }
@@ -124,12 +134,22 @@ class MyCollectionActivity : AppCompatActivity() {
                             "Error: ${response.code()} - ${response.errorBody()?.string()}"
                         )
                     }
+                } else {
+                    ErrorHandler.handleUnsuccessfulResponse(
+                        this@MyCollectionActivity,
+                        this::class.java.simpleName
+                    )
                 }
             }
 
             override fun onFailure(call: Call<CollectionResponse>, t: Throwable) {
                 // 请求失败处理
                 Log.e("CollectionActivity", "Failed to clear: ${t.message}")
+                ErrorHandler.handleFailure(
+                    t,
+                    this@MyCollectionActivity,
+                    this::class.java.simpleName
+                )
             }
         })
     }
