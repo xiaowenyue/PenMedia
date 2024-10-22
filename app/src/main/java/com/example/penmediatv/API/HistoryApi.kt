@@ -11,19 +11,19 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface HistoryApi {
-    @GET("history")
+    @GET("video/history")
     fun getHistory(
         @Query("deviceId") deviceId: String,
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): Call<HistoryResponse>
 
-    @POST("history/add")
+    @POST("video/history/add")
     fun addHistory(
         @Body historyRequest: HistoryAddRequest
     ): Call<HistoryAddResponse>
 
-    @POST("history/clear")
+    @POST("video/history/clear")
     fun clearHistory(
         @Body clearResponse: HistoryClearRequest
     ): Call<HistoryAddResponse>

@@ -7,43 +7,43 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface AnimationApi {
-    @GET("animation")
+    @GET("video/animation")
     fun getAnimations(
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): Call<AnimationResponse>
 
-    @GET("animation/swiper")
+    @GET("video/animation/swiper")
     fun getSwiperAnimations(): Call<SwiperResponse>
 
-    @GET("movie")
+    @GET("video/movie")
     fun getMovies(
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): Call<AnimationResponse>
 
-    @GET("movie/swiper")
+    @GET("video/movie/swiper")
     fun getSwiperMovie(): Call<SwiperResponse>
 
-    @GET("documentary")
+    @GET("video/documentary")
     fun getDocumentary(
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): Call<AnimationResponse>
 
-    @GET("documentary/swiper")
+    @GET("video/documentary/swiper")
     fun getSwiperDocumentary(): Call<SwiperResponse>
 
-    @GET("tv")
+    @GET("video/tv")
     fun getTv(
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): Call<AnimationResponse>
 
-    @GET("tv/swiper")
+    @GET("video/tv/swiper")
     fun getSwiperTv(): Call<SwiperResponse>
 
-    @GET("resource/detail")
+    @GET("video/resource/detail")
     fun getResourceDetail(
         @Query("videoId") videoId: String,
         @Query("deviceId") deviceId: String

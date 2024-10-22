@@ -11,19 +11,19 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface CollectionApi {
-    @GET("collection")
+    @GET("video/collection")
     fun getCollection(
         @Query("deviceId") deviceId: String,
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): Call<CollectionResponse>
 
-    @POST("collection/add")
+    @POST("video/collection/add")
     fun addCollection(
         @Body collectionRequest: CollectionAddRequest
     ): Call<CollectionAddResponse>
 
-    @POST("collection/clear")
+    @POST("video/collection/clear")
     fun clearCollection(
         @Body clearResponse: CollectionClearRequest
     ): Call<CollectionResponse>

@@ -5,6 +5,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface SearchApi {
-    @GET("trending/recommend")
+    @GET("video/trending/recommend")
     fun getTrendingRecommend(): Call<TrendRecommendResponse>
 }

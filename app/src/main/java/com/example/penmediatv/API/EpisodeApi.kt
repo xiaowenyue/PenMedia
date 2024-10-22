@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface EpisodeApi {
-    @GET("episode/detail")
+    @GET("video/episode/detail")
     fun getEpisode(
         @Query("videoId") videoId: String,
         @Query("page") page: Int,

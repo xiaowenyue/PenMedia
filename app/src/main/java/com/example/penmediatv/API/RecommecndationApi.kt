@@ -7,12 +7,12 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RecommendationApi {
-    @GET("tv/recommend")
+    @GET("video/tv/recommend")
     fun getTvRecommendation(
         @Query("videoId") videoId: String
     ): Call<AnimationResponse>
 
-    @GET("movie/recommend")
+    @GET("video/movie/recommend")
     fun getMovieRecommendation(
         @Query("videoId") videoId: String
     ): Call<AnimationResponse>
