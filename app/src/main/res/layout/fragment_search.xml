@@ -73,22 +73,22 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/keyA"
                 style="@style/KeyboardButton"
-                android:text="A"/>
+                android:text="A" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/keyB"
                 style="@style/KeyboardButton"
-                android:text="B"/>
+                android:text="B" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/keyC"
                 style="@style/KeyboardButton"
-                android:text="C"/>
+                android:text="C" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/keyD"
                 style="@style/KeyboardButton"
-                android:text="D"/>
+                android:text="D" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/keyE"
@@ -330,7 +330,6 @@
         android:id="@+id/cl_result"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
         android:background="@drawable/bg_search"
         android:paddingStart="13dp"
         android:paddingTop="25dp"
@@ -348,7 +347,7 @@
             app:layout_constraintEnd_toStartOf="@+id/search_results"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.35">
+            app:layout_constraintWidth_percent="0.3">
 
             <TextView
                 android:id="@+id/tv_popular"
@@ -403,7 +402,6 @@
             android:id="@+id/search_results"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="12dp"
             android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
