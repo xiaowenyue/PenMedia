@@ -1,11 +1,18 @@
 package com.example.penmediatv
 
+import android.app.Dialog
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackException
+import androidx.media3.common.Player
+import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.datasource.HttpDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import com.example.penmediatv.API.HistoryApi
@@ -16,7 +23,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.SocketTimeoutException
 
+@androidx.media3.common.util.UnstableApi
 class VideoPlayActivity : AppCompatActivity() {
     private lateinit var playerView: PlayerView
     private lateinit var exoPlayer: ExoPlayer
@@ -27,17 +36,42 @@ class VideoPlayActivity : AppCompatActivity() {
         setContentView(R.layout.activity_video_play)
 
         playerView = findViewById(R.id.player_view)
+
+        // 配置超时时间
+        val httpDataSourceFactory = DefaultHttpDataSource.Factory()
+            .setConnectTimeoutMs(15000) // 设置连接超时为15秒
+            .setReadTimeoutMs(15000)    // 设置读取数据超时为15秒
+            .setTransferListener(null)
+
         // 初始化 ExoPlayer
         exoPlayer = ExoPlayer.Builder(this).build()
         playerView.player = exoPlayer
+
         // 设置播放源
         val m3u8Url =
             "https://vz-e8524359-a55.b-cdn.net/a1032a95-e4dc-41ff-91cf-46c6465cf9fa/playlist.m3u8"
         val mediaItem = MediaItem.fromUri(Uri.parse(m3u8Url))
         exoPlayer.setMediaItem(mediaItem)
+
+        // 添加错误监听器
+        exoPlayer.addListener(object : Player.Listener {
+            override fun onPlayerError(error: PlaybackException) {
+                if (error.cause is HttpDataSource.HttpDataSourceException) {
+                    val dialog = Dialog(this@VideoPlayActivity)
+                    dialog.setContentView(R.layout.dialog_network_dismiss)
+                    dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                    dialog.show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        dialog.dismiss()
+                    }, 2000)
+                }
+            }
+        })
+
         // 准备播放
         exoPlayer.prepare()
         exoPlayer.play()
+
         // 如果有历史记录进度，设置到上次观看的位置
         val historyDuration = intent.getLongExtra("WATCH_DURATION", 0L)
         if (historyDuration > 0) {
