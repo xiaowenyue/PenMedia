@@ -33,8 +33,7 @@
                     android:id="@+id/bg_tv_series"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/movie" />
+                    android:scaleType="fitXY"/>
 
                 <View
                     android:id="@+id/overlay"
@@ -73,7 +72,6 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_margin="10dp"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/movie"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintWidth_percent="0.4"
                                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
@@ -149,7 +147,6 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_margin="10dp"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/movie"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintWidth_percent="0.4"
                                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
@@ -227,7 +224,6 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_margin="10dp"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/movie"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintWidth_percent="0.4"
                                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
@@ -292,7 +288,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="36dp"
                         android:layout_marginBottom="16dp"
-                        android:text="阅兵盛典"
                         android:textColor="@android:color/white"
                         android:textSize="24sp"
                         android:textStyle="bold" />
