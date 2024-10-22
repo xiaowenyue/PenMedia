@@ -72,6 +72,8 @@ class MyCollectionActivity : AppCompatActivity() {
                             // 将新数据追加到现有数据中
                             adapter.updateMovies(collectionList)
                             showRecyclerView()
+                        } else {
+                            showEmptyState()
                         }
                     } else {
                         showEmptyState()

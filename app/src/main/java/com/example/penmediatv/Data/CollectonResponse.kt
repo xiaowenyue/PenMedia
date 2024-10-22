@@ -1,7 +1,5 @@
 package com.example.penmediatv.Data
 
-import java.sql.Timestamp
-
 data class CollectionAddRequest(
     val deviceId: String,
     val videoId: String

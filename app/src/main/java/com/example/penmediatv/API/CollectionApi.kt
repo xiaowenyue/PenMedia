@@ -27,4 +27,9 @@ interface CollectionApi {
     fun clearCollection(
         @Body clearResponse: CollectionClearRequest
     ): Call<CollectionResponse>
+
+    @POST("video/collection/clear/single")
+    fun clearSingleCollection(
+        @Body clearSingleRequest: CollectionAddRequest
+    ): Call<CollectionAddResponse>
 }
