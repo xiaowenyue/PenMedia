@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         app:layout_constraintEnd_toStartOf="@id/cl_result"
         app:layout_constraintStart_toStartOf="parent"
+        android:paddingEnd="10dp"
         app:layout_constraintWidth_percent="0.38">
 
         <LinearLayout
@@ -367,7 +368,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_more"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:focusable="true"
                 app:cardCornerRadius="18dp">
