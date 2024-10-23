@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.penmediatv.API.SearchApi
 import com.example.penmediatv.Data.SearchRequest
+import com.example.penmediatv.Data.SearchResponse
 import com.example.penmediatv.Data.TrendRecommendItem
 import com.example.penmediatv.Data.TrendRecommendResponse
 import com.example.penmediatv.databinding.FragmentSearchBinding
@@ -162,13 +163,13 @@ class SearchFragment : Fragment() {
         val searchRequest = SearchRequest(page = 1, pageSize = 7, searchList = listOf(query))
         val call = searchApi.search(searchRequest)
 
-        call.enqueue(object : retrofit2.Callback<TrendRecommendResponse> {
+        call.enqueue(object : retrofit2.Callback<SearchResponse> {
             override fun onResponse(
-                call: retrofit2.Call<TrendRecommendResponse>,
-                response: retrofit2.Response<TrendRecommendResponse>
+                call: retrofit2.Call<SearchResponse>,
+                response: retrofit2.Response<SearchResponse>
             ) {
                 if (response.isSuccessful) {
-                    val movies = response.body()?.data
+                    val movies = response.body()?.data?.records
                     if (movies != null) {
                         // 更新列表
                         updateMovieLists(movies)
@@ -182,7 +183,7 @@ class SearchFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<TrendRecommendResponse>, t: Throwable) {
+            override fun onFailure(call: retrofit2.Call<SearchResponse>, t: Throwable) {
                 Log.e("SearchFragment", "search onFailure: ${t.message}")
                 // 处理失败
                 ErrorHandler.handleFailure(

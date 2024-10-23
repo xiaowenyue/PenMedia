@@ -1,6 +1,7 @@
 package com.example.penmediatv.API
 
 import com.example.penmediatv.Data.SearchRequest
+import com.example.penmediatv.Data.SearchResponse
 import com.example.penmediatv.Data.TrendRecommendResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -14,5 +15,5 @@ interface SearchApi {
     @POST("video/search")
     fun search(
         @Body searchRequest: SearchRequest
-    ): Call<TrendRecommendResponse>
+    ): Call<SearchResponse>
 }

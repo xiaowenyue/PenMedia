@@ -32,3 +32,17 @@ data class SearchRequest(
     val pageSize: Int,
     val searchList: List<String>
 )
+
+data class SearchResponse(
+    val code: String,
+    val message: String,
+    val data: SearchData
+)
+
+data class SearchData(
+    val currentPage: Int,
+    val pageSize: Int,
+    val totalPages: Int,
+    val totalRecords: Int,
+    val records: List<TrendRecommendItem>
+)
