@@ -44,12 +44,6 @@ class TvDetailsActivity : AppCompatActivity() {
         val episodesSize = intent.getIntExtra("VIDEO_EPISODE", 1)
         setupRecyclerView()
         fetchResourceDetails()
-        val videoId = intent.getStringExtra("VIDEO_ID")
-        binding.btWatchNow.setOnClickListener {
-            val intent = Intent(this, VideoPlayActivity::class.java)
-            intent.putExtra("VIDEO_ID", videoId)
-            startActivity(intent)
-        }
         binding.btnCollect.setOnClickListener {
             collectVideo()
         }
@@ -194,6 +188,13 @@ class TvDetailsActivity : AppCompatActivity() {
                                 .load(resourceDetailResponse.videoCover)
                                 .into(binding.moviePoster)
                             fetchRecommendList(resourceDetailResponse.videoType)
+                            binding.btWatchNow.setOnClickListener {
+                                val intent =
+                                    Intent(this@TvDetailsActivity, VideoPlayActivity::class.java)
+                                intent.putExtra("VIDEO_URL", resourceDetailResponse.videoUrl)
+                                intent.putExtra("VIDEO_ID", videoId)
+                                startActivity(intent)
+                            }
                         } else {
                             Log.e(
                                 "MovieDetailsActivity",

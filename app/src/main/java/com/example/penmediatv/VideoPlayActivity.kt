@@ -46,10 +46,17 @@ class VideoPlayActivity : AppCompatActivity() {
         // 初始化 ExoPlayer
         exoPlayer = ExoPlayer.Builder(this).build()
         playerView.player = exoPlayer
-
         // 设置播放源
-        val m3u8Url =
-            "https://vz-e8524359-a55.b-cdn.net/a1032a95-e4dc-41ff-91cf-46c6465cf9fa/playlist.m3u8"
+        var m3u8Url = intent.getStringExtra("VIDEO_URL")
+        if (m3u8Url == null) {
+            Log.e("VideoPlayActivity", "视频URL为空")
+            m3u8Url =
+                "https://vz-e8524359-a55.b-cdn.net/049e1cdf-f6bf-40a0-a97c-ba7ec6a5fd56/playlist.m3u8"
+        } else {
+            Log.e("VideoPlayActivity", "视频URL不为空：${m3u8Url}")
+        }
+//        val m3u8Url =
+//            "https://vz-e8524359-a55.b-cdn.net/049e1cdf-f6bf-40a0-a97c-ba7ec6a5fd56/playlist.m3u8"
         val mediaItem = MediaItem.fromUri(Uri.parse(m3u8Url))
         exoPlayer.setMediaItem(mediaItem)
 
