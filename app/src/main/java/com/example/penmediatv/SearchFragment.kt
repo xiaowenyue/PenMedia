@@ -1,6 +1,8 @@
 package com.example.penmediatv
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -27,7 +29,8 @@ class SearchFragment : Fragment() {
 
     private lateinit var popularMoviesAdapter: PopularMoviesAdapter
     private lateinit var searchResultsAdapter: SearchResultsAdapter
-
+    private var searchHandler = Handler(Looper.getMainLooper())
+    private var searchRunnable: Runnable? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,10 +48,16 @@ class SearchFragment : Fragment() {
         binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val query = s.toString()
-                searchMovies(query)
+                // 移除之前的搜索任务，避免重复搜索
+                searchRunnable?.let { searchHandler.removeCallbacks(it) }
+
+                // 延迟执行搜索请求
+                searchRunnable = Runnable {
+                    searchMovies(query)
+                }
+                searchHandler.postDelayed(searchRunnable!!, 500) // 延迟500毫秒后执行搜索
             }
 
-            // 其他TextWatcher方法可以留空
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })

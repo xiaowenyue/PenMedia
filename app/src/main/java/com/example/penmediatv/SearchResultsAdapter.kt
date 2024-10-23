@@ -44,6 +44,7 @@ class SearchResultsAdapter(private val movies: MutableList<TrendRecommendItem>) 
 
     override fun getItemCount() = movies.size
     fun updateMovies(newMovies: List<TrendRecommendItem>) {
+        movies.clear()
         movies.addAll(newMovies)
         notifyDataSetChanged()
     }
