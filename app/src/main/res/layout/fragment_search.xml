@@ -63,13 +63,13 @@
         <GridLayout
             android:id="@+id/keyboard"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:columnCount="6"
             android:rowCount="5"
             app:layout_constraintBottom_toTopOf="@id/kb_number"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.45"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_underline"
             app:layout_constraintWidth_percent="1.0">
 
@@ -207,14 +207,14 @@
         <GridLayout
             android:id="@+id/kb_number"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:columnCount="6"
             android:rowCount="1"
             app:layout_constraintBottom_toBottomOf="@id/ll_delete"
             app:layout_constraintEnd_toEndOf="@id/keyboard"
-            app:layout_constraintHeight_percent="0.08"
             app:layout_constraintStart_toStartOf="@id/keyboard"
-            app:layout_constraintTop_toBottomOf="@id/keyboard">
+            app:layout_constraintTop_toBottomOf="@id/keyboard"
+            app:layout_constraintWidth_percent="1.0">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/key1"
@@ -254,7 +254,6 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/keyboard"
-            app:layout_constraintHeight_percent="0.08"
             app:layout_constraintStart_toStartOf="@id/keyboard"
             app:layout_constraintTop_toBottomOf="@id/kb_number"
             app:layout_constraintWidth_percent="1.0">
@@ -287,7 +286,6 @@
                 android:src="@drawable/ic_delete_search" />
         </LinearLayout>
 
-        <!--结果为空-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
