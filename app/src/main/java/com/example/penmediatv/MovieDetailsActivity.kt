@@ -22,6 +22,7 @@ import com.example.penmediatv.Data.AnimationResponse
 import com.example.penmediatv.Data.CollectionAddRequest
 import com.example.penmediatv.Data.CollectionAddResponse
 import com.example.penmediatv.Data.ResourceDetailResponse
+import com.example.penmediatv.utils.ErrorHandler
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,82 +64,150 @@ class MovieDetailsActivity : AppCompatActivity() {
         val imageView = dialog.findViewById<ImageView>(R.id.iv_connected)
         val titleTextView = dialog.findViewById<TextView>(R.id.tv_title)
         val subTextView = dialog.findViewById<TextView>(R.id.tv_content)
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://44.208.55.69")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val collectionApi = retrofit.create(CollectionApi::class.java)
-        if (videoId != null) {
-            // 创建请求体
-            val collectionRequest = CollectionAddRequest(
-                deviceId = androidId,
-                videoId = videoId
-            )
-            // 调用接口
-            val call = collectionApi.addCollection(collectionRequest)
+        if (isCollected) {
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://44.208.55.69")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val collectionApi = retrofit.create(CollectionApi::class.java)
+            if (videoId != null) {
+                // 创建请求体
+                val collectionRequest = CollectionAddRequest(
+                    deviceId = androidId,
+                    videoId = videoId
+                )
+                // 调用接口
+                val call = collectionApi.clearSingleCollection(collectionRequest)
 
-            call.enqueue(object : Callback<CollectionAddResponse> {
-                override fun onResponse(
-                    call: Call<CollectionAddResponse>,
-                    response: Response<CollectionAddResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        val collectionResponse = response.body()
-                        if (collectionResponse?.code == "0000") {
-                            // 收藏成功，更新UI
-                            imageView.setImageResource(R.drawable.ic_connected)
-                            titleTextView.text = "Collected"
-                            subTextView.text = "View at the personal center"
-                            isCollected = true  // 更新收藏状态为已收藏
-                            ContextCompat.getDrawable(
-                                this@MovieDetailsActivity,
-                                R.drawable.ic_connect
-                            )?.let {
-                                binding.btnCollect.setCompoundDrawablesWithIntrinsicBounds(
-                                    it,
-                                    null,
-                                    null,
-                                    null
+                call.enqueue(object : Callback<CollectionAddResponse> {
+                    override fun onResponse(
+                        call: Call<CollectionAddResponse>,
+                        response: Response<CollectionAddResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val collectionResponse = response.body()
+                            if (collectionResponse?.code == "0000") {
+                                // 取消收藏成功，更新UI
+                                imageView.setImageResource(R.drawable.ic_unconnected)
+                                titleTextView.text = "Uncollected"
+                                subTextView.visibility = TextView.GONE
+                                isCollected = false
+                                ContextCompat.getDrawable(
+                                    this@MovieDetailsActivity,
+                                    R.drawable.ic_heart
+                                )?.let {
+                                    binding.btnCollect.setCompoundDrawablesWithIntrinsicBounds(
+                                        it,
+                                        null,
+                                        null,
+                                        null
+                                    )
+                                }
+                                dialog.show()
+                                // 使用 Handler 使弹窗在3秒后自动消失
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    dialog.dismiss()
+                                }, 2000)
+                            } else {
+                                // 收藏失败，显示失败提示
+                                ErrorHandler.handleUnsuccessfulResponse(
+                                    this@MovieDetailsActivity,
+                                    this::class.java.simpleName
                                 )
                             }
                         } else {
-                            // 收藏失败，显示失败提示
-                            imageView.setImageResource(R.drawable.ic_unconnected)
-                            titleTextView.text = "Uncollected"
-                            subTextView.visibility = TextView.GONE
-                            isCollected = false
+                            // 处理失败响应
+                            ErrorHandler.handleUnsuccessfulResponse(
+                                this@MovieDetailsActivity,
+                                this::class.java.simpleName
+                            )
                         }
-                    } else {
-                        // 处理失败响应
-                        imageView.setImageResource(R.drawable.ic_unconnected)
-                        titleTextView.text = "Uncollected"
-                        subTextView.visibility = TextView.GONE
-                        isCollected = false
                     }
-                    dialog.show()
 
-                    // 使用 Handler 使弹窗在3秒后自动消失
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        dialog.dismiss()
-                    }, 2000)
-                }
-
-                override fun onFailure(call: Call<CollectionAddResponse>, t: Throwable) {
-                    // 请求失败处理
-                    Log.e("MovieDetailsActivity", "Failed to collect: ${t.message}")
-                    imageView.setImageResource(R.drawable.ic_unconnected)
-                    titleTextView.text = "Uncollected"
-                    subTextView.visibility = TextView.GONE
-                    isCollected = false
-                    dialog.show()
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        dialog.dismiss()
-                    }, 2000)
-                }
-            })
+                    override fun onFailure(call: Call<CollectionAddResponse>, t: Throwable) {
+                        // 请求失败处理
+                        ErrorHandler.handleFailure(
+                            t,
+                            this@MovieDetailsActivity,
+                            this::class.java.simpleName
+                        )
+                    }
+                })
+            } else {
+                Log.e("MovieDetailsActivity", "Failed to collect: videoId is null")
+            }
         } else {
-            Log.e("MovieDetailsActivity", "Failed to collect: videoId is null")
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://44.208.55.69")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val collectionApi = retrofit.create(CollectionApi::class.java)
+            if (videoId != null) {
+                // 创建请求体
+                val collectionRequest = CollectionAddRequest(
+                    deviceId = androidId,
+                    videoId = videoId
+                )
+                // 调用接口
+                val call = collectionApi.addCollection(collectionRequest)
+
+                call.enqueue(object : Callback<CollectionAddResponse> {
+                    override fun onResponse(
+                        call: Call<CollectionAddResponse>,
+                        response: Response<CollectionAddResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val collectionResponse = response.body()
+                            if (collectionResponse?.code == "0000") {
+                                // 收藏成功，更新UI
+                                imageView.setImageResource(R.drawable.ic_connected)
+                                titleTextView.text = "Collected"
+                                subTextView.text = "View at the personal center"
+                                isCollected = true  // 更新收藏状态为已收藏
+                                ContextCompat.getDrawable(
+                                    this@MovieDetailsActivity,
+                                    R.drawable.ic_connect
+                                )?.let {
+                                    binding.btnCollect.setCompoundDrawablesWithIntrinsicBounds(
+                                        it,
+                                        null,
+                                        null,
+                                        null
+                                    )
+                                }
+                                dialog.show()
+                                // 使用 Handler 使弹窗在3秒后自动消失
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    dialog.dismiss()
+                                }, 2000)
+                            } else {
+                                // 收藏失败，显示失败提示
+                                ErrorHandler.handleUnsuccessfulResponse(
+                                    this@MovieDetailsActivity,
+                                    this::class.java.simpleName
+                                )
+                            }
+                        } else {
+                            // 处理失败响应
+                            ErrorHandler.handleUnsuccessfulResponse(
+                                this@MovieDetailsActivity,
+                                this::class.java.simpleName
+                            )
+                        }
+                    }
+
+                    override fun onFailure(call: Call<CollectionAddResponse>, t: Throwable) {
+                        // 请求失败处理
+                        ErrorHandler.handleFailure(
+                            t,
+                            this@MovieDetailsActivity,
+                            this::class.java.simpleName
+                        )
+                    }
+                })
+            } else {
+                Log.e("MovieDetailsActivity", "Failed to collect: videoId is null")
+            }
         }
     }
 
@@ -173,6 +242,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                             binding.tvMovieRegion.text = resourceDetailResponse.otherInfo.region
                             binding.tvMovieDirector.text = resourceDetailResponse.otherInfo.director
                             if (resourceDetailResponse.collection) {
+                                isCollected = true
                                 ContextCompat.getDrawable(
                                     this@MovieDetailsActivity,
                                     R.drawable.ic_connect
@@ -184,6 +254,8 @@ class MovieDetailsActivity : AppCompatActivity() {
                                         null
                                     )
                                 }
+                            } else {
+                                isCollected = false
                             }
                             Glide.with(binding.root)
                                 .load(resourceDetailResponse.videoCover)
@@ -200,22 +272,46 @@ class MovieDetailsActivity : AppCompatActivity() {
                         when (response.code()) {
                             404 -> {
                                 // 资源未找到
-                                Log.e("MovieDetailsActivity", "资源未找到 (404): ${response.message()}")
-                                Toast.makeText(this@MovieDetailsActivity, "资源未找到", Toast.LENGTH_SHORT).show()
+                                Log.e(
+                                    "MovieDetailsActivity",
+                                    "资源未找到 (404): ${response.message()}"
+                                )
+                                Toast.makeText(
+                                    this@MovieDetailsActivity,
+                                    "资源未找到",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
+
                             403 -> {
                                 // 权限不足
-                                Log.e("MovieDetailsActivity", "权限不足 (403): ${response.message()}")
-                                Toast.makeText(this@MovieDetailsActivity, "您没有访问该资源的权限", Toast.LENGTH_SHORT).show()
+                                Log.e(
+                                    "MovieDetailsActivity",
+                                    "权限不足 (403): ${response.message()}"
+                                )
+                                Toast.makeText(
+                                    this@MovieDetailsActivity,
+                                    "您没有访问该资源的权限",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
+
                             401 -> {
                                 // 未授权
                                 Log.e("MovieDetailsActivity", "未授权 (401): ${response.message()}")
-                                Toast.makeText(this@MovieDetailsActivity, "请先登录", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this@MovieDetailsActivity,
+                                    "请先登录",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
+
                             500 -> {
                                 // 服务器错误
-                                Log.e("MovieDetailsActivity", "服务器错误 (500): ${response.message()}")
+                                Log.e(
+                                    "MovieDetailsActivity",
+                                    "服务器错误 (500): ${response.message()}"
+                                )
                                 val dialog = Dialog(this@MovieDetailsActivity)
                                 dialog.setContentView(R.layout.dialog_network_dismiss)
                                 dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -225,9 +321,13 @@ class MovieDetailsActivity : AppCompatActivity() {
                                     dialog.dismiss()
                                 }, 2000)
                             }
+
                             else -> {
                                 // 其他错误
-                                Log.e("MovieDetailsActivity", "未知错误: ${response.code()}, ${response.message()}")
+                                Log.e(
+                                    "MovieDetailsActivity",
+                                    "未知错误: ${response.code()}, ${response.message()}"
+                                )
                                 val dialog = Dialog(this@MovieDetailsActivity)
                                 dialog.setContentView(R.layout.dialog_network_dismiss)
                                 dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
