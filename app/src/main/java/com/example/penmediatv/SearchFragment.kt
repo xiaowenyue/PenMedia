@@ -3,6 +3,7 @@ package com.example.penmediatv
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.penmediatv.API.SearchApi
+import com.example.penmediatv.Data.SearchRequest
 import com.example.penmediatv.Data.TrendRecommendItem
 import com.example.penmediatv.Data.TrendRecommendResponse
 import com.example.penmediatv.databinding.FragmentSearchBinding
@@ -42,7 +44,7 @@ class SearchFragment : Fragment() {
         binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val query = s.toString()
-//                searchMovies(query)
+                searchMovies(query)
             }
 
             // 其他TextWatcher方法可以留空
@@ -151,26 +153,54 @@ class SearchFragment : Fragment() {
         binding.searchResults.adapter = searchResultsAdapter
     }
 
-//    private fun searchMovies(query: String) {
-//        // 假设这里是调用API来获取查询结果，代码只是演示
-//        val results = listOf(
-//            Movie("搜索结果1", R.drawable.movie, "描述..."),
-//            // 添加更多搜索结果
-//        )
-//
-//        searchResults.clear()
-//        searchResults.addAll(results)
-//        searchResultsAdapter.notifyDataSetChanged()
-//
-//        val resultsSimple = listOf(
-//            Movie("搜索结果1", R.drawable.movie, "描述..."),
-//            // 添加更多搜索结果
-//        )
-//        popularMovies.clear()
-//        popularMovies.addAll(resultsSimple)
-//        popularMoviesAdapter.notifyDataSetChanged()
-//        binding.cvMore.visibility = if (results.size > 7) View.VISIBLE else View.GONE
-//    }
+    private fun searchMovies(query: String) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val searchApi = retrofit.create(SearchApi::class.java)
+        val searchRequest = SearchRequest(page = 1, pageSize = 7, searchList = listOf(query))
+        val call = searchApi.search(searchRequest)
+
+        call.enqueue(object : retrofit2.Callback<TrendRecommendResponse> {
+            override fun onResponse(
+                call: retrofit2.Call<TrendRecommendResponse>,
+                response: retrofit2.Response<TrendRecommendResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val movies = response.body()?.data
+                    if (movies != null) {
+                        // 更新列表
+                        updateMovieLists(movies)
+                    }
+                } else {
+                    // 处理错误
+                    ErrorHandler.handleUnsuccessfulResponse(
+                        binding.root.context,
+                        this::class.java.simpleName
+                    )
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<TrendRecommendResponse>, t: Throwable) {
+                Log.e("SearchFragment", "search onFailure: ${t.message}")
+                // 处理失败
+                ErrorHandler.handleFailure(
+                    t,
+                    binding.root.context,
+                    this::class.java.simpleName
+                )
+            }
+        })
+    }
+
+    private fun updateMovieLists(movies: List<TrendRecommendItem>) {
+        popularMoviesAdapter.updateMovies(movies)  // 更新热门影片列表
+        searchResultsAdapter.updateMovies(movies)  // 更新搜索结果列表
+
+        // 根据影片数量显示或隐藏 “查看更多” 按钮
+        binding.cvMore.visibility = if (movies.size > 7) View.VISIBLE else View.GONE
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

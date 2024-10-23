@@ -15,7 +15,7 @@ data class TrendRecommendItem(
     val videoId: String,
     val subTitle: String?,
     val videoType: String,
-    val videoDesc: String,
+    val videoDesc: String?,
     val otherInfo: TrendRecommendOtherInfo
 )
 
@@ -27,3 +27,8 @@ data class TrendRecommendOtherInfo(
     val releaseDate: String
 )
 
+data class SearchRequest(
+    val page: Int,
+    val pageSize: Int,
+    val searchList: List<String>
+)
