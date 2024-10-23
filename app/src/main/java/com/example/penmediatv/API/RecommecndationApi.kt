@@ -16,4 +16,14 @@ interface RecommendationApi {
     fun getMovieRecommendation(
         @Query("videoId") videoId: String
     ): Call<AnimationResponse>
+
+    @GET("video/animation/recommend")
+    fun getAnimationRecommendation(
+        @Query("videoId") videoId: String
+    ): Call<AnimationResponse>
+
+    @GET("video/documentary/recommend")
+    fun getDocumentaryRecommendation(
+        @Query("videoId") videoId: String
+    ): Call<AnimationResponse>
 }

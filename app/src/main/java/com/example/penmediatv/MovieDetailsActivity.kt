@@ -372,6 +372,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         val call: Call<AnimationResponse>? = when (videoType) {
             "MOVIE" -> videoId?.let { recommendationApi.getMovieRecommendation(it) }
             "TV_SERIES" -> videoId?.let { recommendationApi.getTvRecommendation(it) }
+            "ANIMATION" -> videoId?.let { recommendationApi.getAnimationRecommendation(it) }
+            "DOCUMENTARY" -> videoId?.let { recommendationApi.getDocumentaryRecommendation(it) }
             else -> null
         }
         call?.enqueue(object : Callback<AnimationResponse> {
