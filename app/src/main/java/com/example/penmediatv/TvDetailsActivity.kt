@@ -19,10 +19,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.penmediatv.API.AnimationApi
 import com.example.penmediatv.API.CollectionApi
+import com.example.penmediatv.API.EpisodeApi
 import com.example.penmediatv.API.RecommendationApi
 import com.example.penmediatv.Data.AnimationResponse
 import com.example.penmediatv.Data.CollectionAddRequest
 import com.example.penmediatv.Data.CollectionAddResponse
+import com.example.penmediatv.Data.EpisodeResponse
 import com.example.penmediatv.Data.ResourceDetailResponse
 import com.example.penmediatv.databinding.ActivityTvDetailsBinding
 import retrofit2.Call
@@ -318,8 +320,8 @@ class TvDetailsActivity : AppCompatActivity() {
             ).apply {
                 text = i.toString()
                 setOnClickListener {
-                    Toast.makeText(this@TvDetailsActivity, "点击第 $i 集", Toast.LENGTH_SHORT)
-                        .show()
+                    // 调用接口获取该剧集的播放链接
+                    fetchEpisodePlayUrl(i)
                 }
             }
             val layoutParams = LinearLayout.LayoutParams(
@@ -332,5 +334,40 @@ class TvDetailsActivity : AppCompatActivity() {
             episodesContainer.addView(episodeButton)
         }
     }
+
+    private fun fetchEpisodePlayUrl(episodeNumber: Int) {
+        val videoId = intent.getStringExtra("VIDEO_ID") ?: return
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val resourceApi = retrofit.create(EpisodeApi::class.java)
+
+        // 调用获取集数详情的接口
+        val call = resourceApi.getEpisode(videoId, 1, 10) // 假设 page = 1, pageSize = 10
+        call.enqueue(object : Callback<EpisodeResponse> {
+            override fun onResponse(call: Call<EpisodeResponse>, response: Response<EpisodeResponse>) {
+                if (response.isSuccessful) {
+                    val episodeList = response.body()?.data?.records
+                    if (episodeList != null && episodeNumber <= episodeList.size) {
+                        val playUrl = episodeList[episodeNumber - 1].videoUrl // 获取对应集数的播放链接
+                        // 跳转到播放页面并传递 playUrl
+                        val intent = Intent(this@TvDetailsActivity, VideoPlayActivity::class.java)
+                        intent.putExtra("VIDEO_URL", playUrl)
+                        startActivity(intent)
+                    } else {
+                        Log.e("TvDetailsActivity", "No episode data found for episode $episodeNumber")
+                    }
+                } else {
+                    Log.e("TvDetailsActivity", "Failed to fetch episode details: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<EpisodeResponse>, t: Throwable) {
+                Log.e("TvDetailsActivity", "Error fetching episode details: ${t.message}")
+            }
+        })
+    }
+
 
 }
