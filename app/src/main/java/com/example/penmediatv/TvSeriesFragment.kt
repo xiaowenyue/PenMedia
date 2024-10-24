@@ -112,20 +112,34 @@ class TvSeriesFragment : Fragment() {
                             }
                         }
                         binding.card1.setOnClickListener {
-                            val intent = Intent(context, MovieDetailsActivity::class.java)
-                            intent.putExtra(
-                                "VIDEO_ID",
-                                swiperDate[1].videoId
-                            ) // 将 videoId 传递给 MovieDetailsActivity
-                            startActivity(intent)
+                            if (swiperDate[0].episode <= 1) {
+                                val intent = Intent(context, MovieDetailsActivity::class.java)
+                                intent.putExtra(
+                                    "VIDEO_ID",
+                                    swiperDate[0].videoId
+                                ) // 将 videoId 传递给 MovieDetailsActivity
+                                startActivity(intent)
+                            } else {
+                                val intent = Intent(context, TvDetailsActivity::class.java)
+                                intent.putExtra("VIDEO_ID", swiperDate[0].videoId)
+                                intent.putExtra("VIDEO_EPISODE", swiperDate[0].episode)
+                                startActivity(intent)
+                            }
                         }
                         binding.card2.setOnClickListener {
-                            val intent = Intent(context, MovieDetailsActivity::class.java)
-                            intent.putExtra(
-                                "VIDEO_ID",
-                                swiperDate[2].videoId
-                            ) // 将 videoId 传递给 MovieDetailsActivity
-                            startActivity(intent)
+                            if (swiperDate[1].episode <= 1) {
+                                val intent = Intent(context, MovieDetailsActivity::class.java)
+                                intent.putExtra(
+                                    "VIDEO_ID",
+                                    swiperDate[1].videoId
+                                ) // 将 videoId 传递给 MovieDetailsActivity
+                                startActivity(intent)
+                            } else {
+                                val intent = Intent(context, TvDetailsActivity::class.java)
+                                intent.putExtra("VIDEO_ID", swiperDate[1].videoId)
+                                intent.putExtra("VIDEO_EPISODE", swiperDate[1].episode)
+                                startActivity(intent)
+                            }
                         }
                         binding.card2.setOnFocusChangeListener { _, hasFocus ->
                             if (hasFocus) {
