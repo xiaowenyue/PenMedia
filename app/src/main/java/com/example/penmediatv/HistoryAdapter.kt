@@ -19,8 +19,8 @@ class HistoryAdapter(private val historyList: MutableList<HistoryItem>) :
             binding.title.text = movie.videoNameEn
             Glide.with(binding.root)
                 .load(movie.videoCover)
-                .placeholder(R.drawable.movie) // 设置一个占位符
-                .error(R.drawable.movie) // 如果加载失败，显示一个默认图片
+//                .placeholder(R.drawable.movie) // 设置一个占位符
+//                .error(R.drawable.movie) // 如果加载失败，显示一个默认图片
                 .into(binding.pic)
             binding.item.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {

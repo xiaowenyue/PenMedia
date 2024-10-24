@@ -21,8 +21,6 @@ class SearchResultsAdapter(private val movies: MutableList<TrendRecommendItem>) 
             binding.movieDescription.text = movie.videoDesc
             Glide.with(binding.root.context)
                 .load(movie.videoCover)  // 从 API 返回的数据中获取封面图片链接
-                .placeholder(R.drawable.movie) // 设置一个占位符
-                .error(R.drawable.movie) // 如果加载失败，显示一个默认图片
                 .into(binding.moviePoster)
             binding.btnWatch.setOnClickListener {
                 val intent = Intent(binding.root.context, MovieDetailsActivity::class.java)

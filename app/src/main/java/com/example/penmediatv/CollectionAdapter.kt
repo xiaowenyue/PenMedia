@@ -27,8 +27,6 @@ class CollectionAdapter(private val collectionList: MutableList<CollectionItem>)
             binding.title.text = movie.videoNameEn
             Glide.with(binding.root)
                 .load(movie.videoCover)
-                .placeholder(R.drawable.movie)
-                .error(R.drawable.movie)
                 .into(binding.pic)
 
             // 使用外部类的 itemClick 方法

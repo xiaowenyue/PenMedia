@@ -37,8 +37,6 @@ class MovieAdapter(
             // 加载封面图片（使用 Glide）
             Glide.with(binding.root.context)
                 .load(movie.videoCover)  // 从 API 返回的数据中获取封面图片链接
-                .placeholder(R.drawable.movie) // 设置一个占位符
-                .error(R.drawable.movie) // 如果加载失败，显示一个默认图片
                 .into(binding.movieImage)
 
             // 设置获取焦点时的动画效果
