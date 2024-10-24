@@ -38,7 +38,6 @@ class AnimationFragment : Fragment() {
     private var currentPage = 1
     private var pageSize = 10
     private var totalPages = 1 // 从服务器获取的总页数
-    private var totalRecords = 1 // 从服务器获取的总页数
     private var isLoading = false
     private lateinit var movieAdapter: MovieAdapter
 
@@ -55,32 +54,16 @@ class AnimationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         fetchAnimations(currentPage, pageSize)
-        // 设置滚动监听器
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView.layoutManager as GridLayoutManager
-                val visibleItemCount = layoutManager.childCount
-                val totalItemCount = layoutManager.itemCount
-                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-                // 判断是否滑到底部，并且不处于加载状态
-                if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-                    && firstVisibleItemPosition >= 0
-                ) {
-                    loadMoreItems()
-                }
-            }
-        })
         //轮播图数据
         fetchSwiperAnimation()
         binding.vpmAnimation.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
-                Log.v("MoviesFragment", "viewPager has focus")
+                Log.v("AnimationFragment", "viewPager has focus")
                 view.setOnKeyListener { v, keyCode, event ->
                     if (event.action == KeyEvent.ACTION_DOWN) {
                         when (keyCode) {
                             KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                                Log.v("MoviesFragment", "viewPager right key pressed")
+                                Log.v("AnimationFragment", "viewPager right key pressed")
                                 // 右键按下时切换到下一个页面
                                 stopAutoSlide()
                                 val currentItem = binding.viewPager.currentItem
@@ -92,7 +75,7 @@ class AnimationFragment : Fragment() {
                             }
 
                             KeyEvent.KEYCODE_DPAD_LEFT -> {
-                                Log.v("MoviesFragment", "viewPager left key pressed")
+                                Log.v("AnimationFragment", "viewPager left key pressed")
                                 // 左键按下时切换到上一个页面
                                 stopAutoSlide()
                                 val currentItem = binding.viewPager.currentItem
@@ -176,21 +159,26 @@ class AnimationFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
+        val gridLayoutManager = GridLayoutManager(context, 5)
+        binding.recyclerView.layoutManager = gridLayoutManager
         movieAdapter = MovieAdapter(mutableListOf(), binding.scrollView)
         binding.recyclerView.adapter = movieAdapter
-    }
 
-    private fun loadMoreItems() {
-        val remainingItems = totalRecords - currentPage * pageSize // 计算剩余的影片数量
-        // 判断是否还有下一页数据
-        if (currentPage < totalPages) {
-            currentPage++
-            val nextPageSize = if (remainingItems < pageSize) remainingItems else pageSize
-            fetchAnimations(currentPage, nextPageSize) // 动态调整请求的 pageSize
-        } else {
-            Log.d("MoviesFragment", "没有更多数据可加载")
-        }
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                // 获取最后一个可见项的索引
+                val visibleItemCount = gridLayoutManager.childCount
+                val totalItemCount = gridLayoutManager.itemCount
+                val firstVisibleItemPosition = gridLayoutManager.findFirstVisibleItemPosition()
+
+                // 判断是否接近底部，并且确保没有正在加载数据
+                if (!isLoading && firstVisibleItemPosition + visibleItemCount >= totalItemCount - 2 && currentPage < totalPages) {
+                    currentPage++
+                    fetchAnimations(currentPage, pageSize)
+                }
+            }
+        })
     }
 
     private fun fetchAnimations(page: Int, pageSize: Int) {
@@ -205,26 +193,42 @@ class AnimationFragment : Fragment() {
         val call = animationApi.getAnimations(page, pageSize)
 
         call.enqueue(object : Callback<AnimationResponse> {
-            override fun onResponse(call: Call<AnimationResponse>, response: Response<AnimationResponse>) {
+            override fun onResponse(
+                call: Call<AnimationResponse>,
+                response: Response<AnimationResponse>
+            ) {
                 if (response.isSuccessful) {
                     val animationData = response.body()?.data
                     if (animationData != null) {
-                        totalPages = animationData.totalPages
-                        totalRecords = animationData.totalRecords // 获取总的影片数量
+                        totalPages = (animationData.totalRecords + pageSize - 1) / pageSize
                         val animationList = animationData.records
+
                         if (animationList.isNotEmpty()) {
+                            // 将新数据追加到现有数据中
                             movieAdapter.updateMovies(animationList)
                         }
                     }
                 } else {
-                    Log.e("MoviesFragment", "Error: ${response.code()} - ${response.errorBody()?.string()}")
+                    Log.e(
+                        "AnimationFragment",
+                        "Error: ${response.code()} - ${response.errorBody()?.string()}"
+                    )
+                    ErrorHandler.handleUnsuccessfulResponse(
+                        binding.root.context,
+                        this::class.java.simpleName
+                    )
                 }
-                isLoading = false // 加载完成后一定要更新状态
+                isLoading = false
             }
 
             override fun onFailure(call: Call<AnimationResponse>, t: Throwable) {
-                Log.e("MoviesFragment", "Network Error: ${t.message}")
-                isLoading = false // 加载失败后也要更新状态
+                Log.e("AnimationFragment", "Network Error: ${t.message}")
+                isLoading = false
+                ErrorHandler.handleFailure(
+                    t,
+                    binding.root.context,
+                    this::class.java.simpleName
+                )
             }
         })
     }
