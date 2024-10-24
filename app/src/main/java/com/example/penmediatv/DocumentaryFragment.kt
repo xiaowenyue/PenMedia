@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
@@ -149,7 +150,30 @@ class DocumentaryFragment : Fragment() {
                             }
                             false
                         }
-
+                        binding.card0.setOnClickListener {
+                            val intent = Intent(context, MovieDetailsActivity::class.java)
+                            intent.putExtra(
+                                "VIDEO_ID",
+                                swiperDate[0].videoId
+                            ) // 将 videoId 传递给 MovieDetailsActivity
+                            startActivity(intent)
+                        }
+                        binding.card1.setOnClickListener {
+                            val intent = Intent(context, MovieDetailsActivity::class.java)
+                            intent.putExtra(
+                                "VIDEO_ID",
+                                swiperDate[1].videoId
+                            ) // 将 videoId 传递给 MovieDetailsActivity
+                            startActivity(intent)
+                        }
+                        binding.card2.setOnClickListener {
+                            val intent = Intent(context, MovieDetailsActivity::class.java)
+                            intent.putExtra(
+                                "VIDEO_ID",
+                                swiperDate[2].videoId
+                            ) // 将 videoId 传递给 MovieDetailsActivity
+                            startActivity(intent)
+                        }
                         binding.card1.setOnFocusChangeListener { _, hasFocus ->
                             if (hasFocus) {
                                 Glide.with(requireContext())
