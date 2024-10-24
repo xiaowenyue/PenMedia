@@ -52,6 +52,7 @@ class HistoryAdapter(private val historyList: MutableList<HistoryItem>) :
                 val intent = Intent(context, VideoPlayActivity::class.java)
                 intent.putExtra("VIDEO_ID", movie.videoId)
                 intent.putExtra("WATCH_DURATION", movie.playedDuration.toLong())
+                intent.putExtra("VIDEO_URL", movie.videoUrl)
                 context.startActivity(intent)
             }
         }

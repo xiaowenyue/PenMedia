@@ -18,6 +18,7 @@ data class HistoryItem(
     val videoNameEn: String,
     val videoNameZh: String,
     val videoCover: String,
+    val videoUrl: String,
     val videoId: String,
     val playedDuration: Int,
     val duration: Int
