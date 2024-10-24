@@ -196,8 +196,7 @@ class SearchFragment : Fragment() {
             .build()
         val searchApi = retrofit.create(SearchApi::class.java)
 
-        val searchRequest =
-            SearchRequest(page = currentPage, pageSize = pageSize, searchList = listOf(query))
+        val searchRequest = SearchRequest(page = currentPage, pageSize = pageSize, searchList = listOf(query))
         val call = searchApi.search(searchRequest)
 
         call.enqueue(object : retrofit2.Callback<SearchResponse> {
@@ -227,8 +226,9 @@ class SearchFragment : Fragment() {
 
     private fun updateMovieLists(movies: List<TrendRecommendItem>, isLoadMore: Boolean = false) {
         if (isLoadMore) {
-            searchResultsAdapter.addMovies(movies)  // 在现有的基础上添加更多影片
-            popularMoviesAdapter.addMovies(movies)  // 在现有的基础上添加更多影片
+            // 只更新新请求的七条数据
+            popularMoviesAdapter.updateMovies(movies)  // 更新热门影片列表
+            searchResultsAdapter.updateMovies(movies)  // 更新搜索结果列表
         } else {
             popularMoviesAdapter.updateMovies(movies)  // 更新热门影片列表
             searchResultsAdapter.updateMovies(movies)  // 更新搜索结果列表
