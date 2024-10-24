@@ -19,7 +19,7 @@
         android:layout_below="@id/logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="Watching TV on PenmediaTV"
+        android:text="Watching TV on PenMax TV"
         android:textSize="30dp"
         android:textColor="@android:color/white"/>
 
