@@ -38,6 +38,7 @@ class AnimationFragment : Fragment() {
     private var currentPage = 1
     private var pageSize = 10
     private var totalPages = 1 // 从服务器获取的总页数
+    private var totalRecords = 1 // 从服务器获取的总页数
     private var isLoading = false
     private lateinit var movieAdapter: MovieAdapter
 
@@ -181,10 +182,14 @@ class AnimationFragment : Fragment() {
     }
 
     private fun loadMoreItems() {
+        val remainingItems = totalRecords - currentPage * pageSize // 计算剩余的影片数量
         // 判断是否还有下一页数据
         if (currentPage < totalPages) {
             currentPage++
-            fetchAnimations(currentPage, pageSize)
+            val nextPageSize = if (remainingItems < pageSize) remainingItems else pageSize
+            fetchAnimations(currentPage, nextPageSize) // 动态调整请求的 pageSize
+        } else {
+            Log.d("MoviesFragment", "没有更多数据可加载")
         }
     }
 
@@ -200,42 +205,26 @@ class AnimationFragment : Fragment() {
         val call = animationApi.getAnimations(page, pageSize)
 
         call.enqueue(object : Callback<AnimationResponse> {
-            override fun onResponse(
-                call: Call<AnimationResponse>,
-                response: Response<AnimationResponse>
-            ) {
+            override fun onResponse(call: Call<AnimationResponse>, response: Response<AnimationResponse>) {
                 if (response.isSuccessful) {
                     val animationData = response.body()?.data
                     if (animationData != null) {
-                        totalPages = (animationData.totalRecords + pageSize - 1) / pageSize
+                        totalPages = animationData.totalPages
+                        totalRecords = animationData.totalRecords // 获取总的影片数量
                         val animationList = animationData.records
-
                         if (animationList.isNotEmpty()) {
-                            // 将新数据追加到现有数据中
                             movieAdapter.updateMovies(animationList)
                         }
                     }
                 } else {
-                    Log.e(
-                        "MoviesFragment",
-                        "Error: ${response.code()} - ${response.errorBody()?.string()}"
-                    )
-                    ErrorHandler.handleUnsuccessfulResponse(
-                        binding.root.context,
-                        this::class.java.simpleName
-                    )
+                    Log.e("MoviesFragment", "Error: ${response.code()} - ${response.errorBody()?.string()}")
                 }
-                isLoading = false
+                isLoading = false // 加载完成后一定要更新状态
             }
 
             override fun onFailure(call: Call<AnimationResponse>, t: Throwable) {
                 Log.e("MoviesFragment", "Network Error: ${t.message}")
-                isLoading = false
-                ErrorHandler.handleFailure(
-                    t,
-                    binding.root.context,
-                    this::class.java.simpleName
-                )
+                isLoading = false // 加载失败后也要更新状态
             }
         })
     }
