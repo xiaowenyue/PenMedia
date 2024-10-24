@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.penmediatv.Data.SwiperItem
 import com.example.penmediatv.databinding.ItemCarouselTitleBinding
 
-class CarouselAdapter(private val items: List<SwiperItem>) :
+class CarouselAdapter(val items: List<SwiperItem>) :
     RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>() {
 
     // 使用 ViewBinding 来替代手动查找视图
