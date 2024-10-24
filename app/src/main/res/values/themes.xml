@@ -75,6 +75,15 @@
         <item name="android:textSize">28sp</item>
     </style>
 
+    <style name="Alphabet">
+        <item name="android:background">@drawable/selector_item_recommend</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="MovieCardStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">8dp</item>
         <item name="cardBackgroundColor">@color/black</item>

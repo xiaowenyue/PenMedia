@@ -13,7 +13,6 @@ class TestActivity :AppCompatActivity(){
 
         binding.etSearch.setOnFocusChangeListener { v, hasFocus ->
         }
-        binding.keyA.setOnFocusChangeListener{ v, hasFocus ->
-        }
+
     }
 }

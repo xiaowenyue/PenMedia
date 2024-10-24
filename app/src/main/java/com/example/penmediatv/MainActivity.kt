@@ -220,7 +220,7 @@ class MainActivity : AppCompatActivity() {
                     currentFragment.view?.findViewById(R.id.my_collection)
 
                 "SearchFragment" -> firstFocusableView =
-                    currentFragment.view?.findViewById(R.id.keyA)
+                    currentFragment.view?.findViewById(R.id.alphabet)
 
                 "MoviesFragment" -> firstFocusableView =
                     currentFragment.view?.findViewById(R.id.viewPagerLayout)

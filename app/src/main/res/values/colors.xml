@@ -21,4 +21,5 @@
     <color name="text">#ffb3c0e7</color>
     <color name="text_focused">#ffffffff</color>
     <color name="button">#ff24272e</color>
+    <color name="transparent">#00000000</color>
 </resources>
