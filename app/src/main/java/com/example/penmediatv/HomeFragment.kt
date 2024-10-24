@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -275,6 +276,9 @@ class HomeFragment : Fragment() {
                             binding.tvName0.text = animationList[0].videoNameEn
                             binding.tvSubtitle0.text = animationList[0].otherInfo.mainActors
                             binding.tvTime0.text = animationList[0].otherInfo.releaseDate
+                            binding.cv0.setOnClickListener {
+                                clickItem(animationList[0])
+                            }
 
                             binding.tvType1.text = animationList[1].videoType
                             binding.tvType1.setBackgroundColor(getColorByVideoType(animationList[1].videoType))
@@ -284,30 +288,45 @@ class HomeFragment : Fragment() {
                             binding.tvName1.text = animationList[1].videoNameEn
                             binding.tvSubtitle1.text = animationList[1].otherInfo.mainActors
                             binding.tvTime1.text = animationList[1].otherInfo.releaseDate
+                            binding.cv1.setOnClickListener {
+                                clickItem(animationList[1])
+                            }
 
                             binding.tvType2.text = animationList[2].videoType
                             binding.tvType2.setBackgroundColor(getColorByVideoType(animationList[2].videoType))
                             Glide.with(requireContext())
                                 .load(animationList[2].videoCover)
                                 .into(binding.imageView2)
+                            binding.cv2.setOnClickListener {
+                                clickItem(animationList[2])
+                            }
 
                             binding.tvType3.text = animationList[3].videoType
                             binding.tvType3.setBackgroundColor(getColorByVideoType(animationList[3].videoType))
                             Glide.with(requireContext())
                                 .load(animationList[3].videoCover)
                                 .into(binding.imageView3)
+                            binding.cv3.setOnClickListener {
+                                clickItem(animationList[3])
+                            }
 
                             binding.tvType4.text = animationList[4].videoType
                             binding.tvType4.setBackgroundColor(getColorByVideoType(animationList[4].videoType))
                             Glide.with(requireContext())
                                 .load(animationList[4].videoCover)
                                 .into(binding.imageView4)
+                            binding.cv4.setOnClickListener {
+                                clickItem(animationList[4])
+                            }
 
                             binding.tvType5.text = animationList[5].videoType
                             binding.tvType5.setBackgroundColor(getColorByVideoType(animationList[5].videoType))
                             Glide.with(requireContext())
                                 .load(animationList[5].videoCover)
                                 .into(binding.imageView5)
+                            binding.cv5.setOnClickListener {
+                                clickItem(animationList[5])
+                            }
                         }
                     }
                 } else {
@@ -331,6 +350,21 @@ class HomeFragment : Fragment() {
                 )
             }
         })
+    }
+
+    private fun clickItem(animation: SwiperResourceItem) {
+        if (animation.episode <= 1) {
+            val intent =
+                Intent(requireContext(), MovieDetailsActivity::class.java)
+            intent.putExtra("VIDEO_ID", animation.videoId)
+            startActivity(intent)
+        } else {
+            val intent =
+                Intent(requireContext(), TvDetailsActivity::class.java)
+            intent.putExtra("VIDEO_ID", animation.videoId)
+            intent.putExtra("VIDEO_EPISODE", animation.episode)
+            startActivity(intent)
+        }
     }
 
     fun convertSwiperResourceToAnimationItem(swipeItem: SwiperResourceItem): AnimationItem {
