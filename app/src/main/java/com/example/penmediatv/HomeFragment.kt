@@ -1,6 +1,7 @@
 package com.example.penmediatv
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +10,24 @@ import android.view.animation.ScaleAnimation
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.penmediatv.API.AnimationApi
+import com.example.penmediatv.Data.AnimationItem
+import com.example.penmediatv.Data.AnimationResponse
+import com.example.penmediatv.Data.HomeResponse
+import com.example.penmediatv.Data.SwiperResourceItem
 import com.example.penmediatv.databinding.FragmentHomeBinding
+import com.example.penmediatv.utils.ErrorHandler
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var movieAdapter: MovieAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,8 +39,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
-//        binding.recyclerView.adapter = MovieAdapter(getMovies(), binding.scrollView)
-
+        setupRecyclerView()
+        fetchVideos()
         binding.cv0.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.cv0.strokeWidth = 6
@@ -177,25 +189,72 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getMovies(): List<Movie> {
-        // Generate dummy movie data
-        return listOf(
-            Movie("Movie 1", R.drawable.movie),
-            Movie("Movie 2", R.drawable.ic_search),
-            Movie("Movie 3", R.drawable.ic_history),
-            Movie("Movie 4", R.drawable.ic_mine),
-            Movie("Movie 5", R.drawable.ic_search),
-            Movie("Movie 6", R.drawable.ic_history),
-            Movie("Movie 7", R.drawable.ic_mine),
-            Movie("Movie 8", R.drawable.ic_search),
-            Movie("Movie 9", R.drawable.ic_history),
-            Movie("Movie 10", R.drawable.ic_mine),
-            Movie("Movie 11", R.drawable.ic_search),
-            Movie("Movie 12", R.drawable.ic_history),
-            Movie("Movie 13", R.drawable.ic_mine),
-            Movie("Movie 14", R.drawable.ic_search),
-            Movie("Movie 15", R.drawable.ic_history),
-            Movie("Movie 16", R.drawable.ic_mine)
+    private fun setupRecyclerView() {
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
+        movieAdapter = MovieAdapter(mutableListOf(), binding.scrollView)
+        binding.recyclerView.adapter = movieAdapter
+    }
+
+    private fun fetchVideos() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val animationApi = retrofit.create(AnimationApi::class.java)
+        val call = animationApi.getHomeResource()
+
+        call.enqueue(object : Callback<HomeResponse> {
+            override fun onResponse(
+                call: Call<HomeResponse>,
+                response: Response<HomeResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val animationData = response.body()?.data
+                    if (animationData != null) {
+                        val animationList = animationData.recommandResourceList
+                        if (animationList.isNotEmpty()) {
+                            // 将新数据追加到现有数据中
+                            movieAdapter.updateMovies(animationList.map {
+                                convertSwiperResourceToAnimationItem(
+                                    it
+                                )
+                            })
+                        }
+                    }
+                } else {
+                    Log.e(
+                        "HomeFragment",
+                        "Error: ${response.code()} - ${response.errorBody()?.string()}"
+                    )
+                    ErrorHandler.handleUnsuccessfulResponse(
+                        binding.root.context,
+                        this::class.java.simpleName
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                Log.e("HomeFragment", "Network Error: ${t.message}")
+                ErrorHandler.handleFailure(
+                    t,
+                    binding.root.context,
+                    this::class.java.simpleName
+                )
+            }
+        })
+    }
+
+    fun convertSwiperResourceToAnimationItem(swipeItem: SwiperResourceItem): AnimationItem {
+        return AnimationItem(
+            videoNameEn = swipeItem.videoNameEn,
+            videoNameZh = swipeItem.videoNameZh,
+            videoCover = swipeItem.videoCover,
+            episode = swipeItem.episode,
+            videoId = swipeItem.videoId,
+            subTitle = swipeItem.subTitle,
+            videoDesc = "", // 假设otherInfo中有description字段
+            otherInfo = swipeItem.otherInfo
         )
     }
 

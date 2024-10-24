@@ -1,5 +1,6 @@
 package com.example.penmediatv.API
 import com.example.penmediatv.Data.AnimationResponse
+import com.example.penmediatv.Data.HomeResponse
 import com.example.penmediatv.Data.ResourceDetailResponse
 import com.example.penmediatv.Data.SwiperResponse
 import retrofit2.Call
@@ -48,4 +49,7 @@ interface AnimationApi {
         @Query("videoId") videoId: String,
         @Query("deviceId") deviceId: String
     ): Call<ResourceDetailResponse>
+
+    @GET("video/home/resource")
+    fun getHomeResource(): Call<HomeResponse>
 }
