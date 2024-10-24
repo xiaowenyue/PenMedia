@@ -46,17 +46,17 @@
 
                     <FrameLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/imageView0"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="fitXY"
-                            android:src="@drawable/movie"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                         <TextView
+                            android:id="@+id/tv_type0"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:background="@drawable/bg_exit_type"
@@ -77,24 +77,30 @@
                             android:visibility="gone">
 
                             <TextView
+                                android:id="@+id/tv_name0"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
+                                android:layout_marginBottom="0dp"
                                 android:text="movieName"
                                 android:textColor="@color/white"
                                 android:textSize="20sp" />
 
                             <TextView
+                                android:id="@+id/tv_subtitle0"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                android:layout_marginTop="6dp"
+                                android:layout_marginBottom="0dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
                                 android:text="movieSubtitle"
                                 android:textColor="@color/white"
                                 android:textSize="18sp" />
 
                             <TextView
+                                android:id="@+id/tv_time0"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="0dp"
                                 android:text="movieTime"
                                 android:textColor="@color/white"
                                 android:textSize="18sp" />
@@ -116,17 +122,17 @@
 
                     <FrameLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
 
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/imageView1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="fitXY"
-                            android:src="@drawable/movie"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                         <TextView
+                            android:id="@+id/tv_type1"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:background="@drawable/bg_exit_type"
@@ -147,6 +153,7 @@
                             android:visibility="gone">
 
                             <TextView
+                                android:id="@+id/tv_name1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
                                 android:text="movieName"
@@ -154,14 +161,18 @@
                                 android:textSize="20sp" />
 
                             <TextView
+                                android:id="@+id/tv_subtitle1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
                                 android:layout_marginTop="6dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
                                 android:text="movieSubtitle"
                                 android:textColor="@color/white"
                                 android:textSize="18sp" />
 
                             <TextView
+                                android:id="@+id/tv_time1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
                                 android:layout_marginTop="10dp"
@@ -208,10 +219,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/movie"
                                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                             <TextView
+                                android:id="@+id/tv_type2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
                                 android:background="@drawable/bg_exit_type"
@@ -260,10 +271,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/movie"
                                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                             <TextView
+                                android:id="@+id/tv_type3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
                                 android:background="@drawable/bg_exit_type"
@@ -312,10 +323,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/movie"
                                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                             <TextView
+                                android:id="@+id/tv_type4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
                                 android:background="@drawable/bg_exit_type"
@@ -364,10 +375,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/movie"
                                 app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                             <TextView
+                                android:id="@+id/tv_type5"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
                                 android:background="@drawable/bg_exit_type"

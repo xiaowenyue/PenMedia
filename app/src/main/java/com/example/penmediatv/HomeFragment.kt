@@ -1,5 +1,6 @@
 package com.example.penmediatv
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -10,6 +11,7 @@ import android.view.animation.ScaleAnimation
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.example.penmediatv.API.AnimationApi
 import com.example.penmediatv.Data.AnimationItem
 import com.example.penmediatv.Data.AnimationResponse
@@ -41,6 +43,7 @@ class HomeFragment : Fragment() {
         binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
         setupRecyclerView()
         fetchVideos()
+        fetchRecommendList()
         binding.cv0.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.cv0.strokeWidth = 6
@@ -245,6 +248,91 @@ class HomeFragment : Fragment() {
         })
     }
 
+    private fun fetchRecommendList() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://44.208.55.69/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val animationApi = retrofit.create(AnimationApi::class.java)
+        val call = animationApi.getHomeResource()
+
+        call.enqueue(object : Callback<HomeResponse> {
+            override fun onResponse(
+                call: Call<HomeResponse>,
+                response: Response<HomeResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val animationData = response.body()?.data
+                    if (animationData != null) {
+                        val animationList = animationData.swiperResourceList
+                        if (animationList.isNotEmpty()) {
+                            binding.tvType0.text = animationList[0].videoType
+                            binding.tvType0.setBackgroundColor(getColorByVideoType(animationList[0].videoType))
+                            Glide.with(requireContext())
+                                .load(animationList[0].videoCover)
+                                .into(binding.imageView0)
+                            binding.tvName0.text = animationList[0].videoNameEn
+                            binding.tvSubtitle0.text = animationList[0].otherInfo.mainActors
+                            binding.tvTime0.text = animationList[0].otherInfo.releaseDate
+
+                            binding.tvType1.text = animationList[1].videoType
+                            binding.tvType1.setBackgroundColor(getColorByVideoType(animationList[1].videoType))
+                            Glide.with(requireContext())
+                                .load(animationList[1].videoCover)
+                                .into(binding.imageView1)
+                            binding.tvName1.text = animationList[1].videoNameEn
+                            binding.tvSubtitle1.text = animationList[1].otherInfo.mainActors
+                            binding.tvTime1.text = animationList[1].otherInfo.releaseDate
+
+                            binding.tvType2.text = animationList[2].videoType
+                            binding.tvType2.setBackgroundColor(getColorByVideoType(animationList[2].videoType))
+                            Glide.with(requireContext())
+                                .load(animationList[2].videoCover)
+                                .into(binding.imageView2)
+
+                            binding.tvType3.text = animationList[3].videoType
+                            binding.tvType3.setBackgroundColor(getColorByVideoType(animationList[3].videoType))
+                            Glide.with(requireContext())
+                                .load(animationList[3].videoCover)
+                                .into(binding.imageView3)
+
+                            binding.tvType4.text = animationList[4].videoType
+                            binding.tvType4.setBackgroundColor(getColorByVideoType(animationList[4].videoType))
+                            Glide.with(requireContext())
+                                .load(animationList[4].videoCover)
+                                .into(binding.imageView4)
+
+                            binding.tvType5.text = animationList[5].videoType
+                            binding.tvType5.setBackgroundColor(getColorByVideoType(animationList[5].videoType))
+                            Glide.with(requireContext())
+                                .load(animationList[5].videoCover)
+                                .into(binding.imageView5)
+                        }
+                    }
+                } else {
+                    Log.e(
+                        "HomeFragment",
+                        "Error: ${response.code()} - ${response.errorBody()?.string()}"
+                    )
+                    ErrorHandler.handleUnsuccessfulResponse(
+                        binding.root.context,
+                        this::class.java.simpleName
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                Log.e("HomeFragment", "Network Error: ${t.message}")
+                ErrorHandler.handleFailure(
+                    t,
+                    binding.root.context,
+                    this::class.java.simpleName
+                )
+            }
+        })
+    }
+
     fun convertSwiperResourceToAnimationItem(swipeItem: SwiperResourceItem): AnimationItem {
         return AnimationItem(
             videoNameEn = swipeItem.videoNameEn,
@@ -256,6 +344,17 @@ class HomeFragment : Fragment() {
             videoDesc = "", // 假设otherInfo中有description字段
             otherInfo = swipeItem.otherInfo
         )
+    }
+
+    // 根据影片类型返回对应的颜色
+    fun getColorByVideoType(videoType: String): Int {
+        return when (videoType) {
+            "MOVIE" -> Color.parseColor("#48a99a")
+            "TV_SERIES" -> Color.parseColor("#707eb5")
+            "ANIMATION" -> Color.parseColor("#bc4d5f")
+            "DOCUMENTARY" -> Color.parseColor("#505a70")
+            else -> Color.parseColor("#000000") // 默认颜色，防止类型不匹配时出现错误
+        }
     }
 
     override fun onDestroyView() {
