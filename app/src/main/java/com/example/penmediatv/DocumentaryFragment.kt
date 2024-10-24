@@ -13,6 +13,7 @@ import android.view.animation.ScaleAnimation
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.penmediatv.API.AnimationApi
 import com.example.penmediatv.Data.AnimationResponse
@@ -285,9 +286,26 @@ class DocumentaryFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.recyclerView.layoutManager = GridLayoutManager(context, 5)
+        val gridLayoutManager = GridLayoutManager(context, 5)
+        binding.recyclerView.layoutManager = gridLayoutManager
         movieAdapter = MovieAdapter(mutableListOf(), binding.scrollView)
         binding.recyclerView.adapter = movieAdapter
+
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                // 获取最后一个可见项的索引
+                val visibleItemCount = gridLayoutManager.childCount
+                val totalItemCount = gridLayoutManager.itemCount
+                val firstVisibleItemPosition = gridLayoutManager.findFirstVisibleItemPosition()
+
+                // 判断是否接近底部，并且确保没有正在加载数据
+                if (!isLoading && firstVisibleItemPosition + visibleItemCount >= totalItemCount - 2 && currentPage < totalPages) {
+                    currentPage++
+                    fetchAnimations(currentPage, pageSize)
+                }
+            }
+        })
     }
 
     private fun fetchAnimations(page: Int, pageSize: Int) {
