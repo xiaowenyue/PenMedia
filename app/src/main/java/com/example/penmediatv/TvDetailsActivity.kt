@@ -310,9 +310,9 @@ class TvDetailsActivity : AppCompatActivity() {
     // 动态生成具体剧集按钮
     private fun updateEpisodes(start: Int, end: Int) {
         val episodesContainer = binding.llEpisodes
-        episodesContainer.removeAllViews() // 清空已有的剧集按钮
+        episodesContainer.removeAllViews() // Clear existing episode buttons
         for (i in start..end) {
-            // 创建具体剧集按钮
+            // Create individual episode buttons
             val episodeButton = AppCompatButton(
                 ContextThemeWrapper(this, R.style.EpisodeButton),
                 null,
@@ -320,17 +320,15 @@ class TvDetailsActivity : AppCompatActivity() {
             ).apply {
                 text = i.toString()
                 setOnClickListener {
-                    // 调用接口获取该剧集的播放链接
-                    fetchEpisodePlayUrl(i)
+                    fetchEpisodePlayUrl(i) // Fetch play URL for the selected episode
                 }
             }
             val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            layoutParams.setMargins(8, 0, 8, 0) // 设置按钮的上下左右间距
+            layoutParams.setMargins(8, 0, 8, 0) // Set margins for the buttons
             episodeButton.layoutParams = layoutParams
-            // 将按钮添加到容器中
             episodesContainer.addView(episodeButton)
         }
     }
@@ -343,20 +341,26 @@ class TvDetailsActivity : AppCompatActivity() {
             .build()
         val resourceApi = retrofit.create(EpisodeApi::class.java)
 
-        // 调用获取集数详情的接口
-        val call = resourceApi.getEpisode(videoId, 1, 10) // 假设 page = 1, pageSize = 10
+        // Assume each page contains 10 episodes
+        val page = (episodeNumber + 9) / 10 // Calculate the page number dynamically
+        val pageSize = 10 // Fixed page size for each request
+
+        // Call the API to fetch the episode details
+        val call = resourceApi.getEpisode(videoId, page, pageSize)
         call.enqueue(object : Callback<EpisodeResponse> {
             override fun onResponse(call: Call<EpisodeResponse>, response: Response<EpisodeResponse>) {
                 if (response.isSuccessful) {
                     val episodeList = response.body()?.data?.records
-                    if (episodeList != null && episodeNumber <= episodeList.size) {
-                        val playUrl = episodeList[episodeNumber - 1].videoUrl // 获取对应集数的播放链接
-                        // 跳转到播放页面并传递 playUrl
-                        val intent = Intent(this@TvDetailsActivity, VideoPlayActivity::class.java)
-                        intent.putExtra("VIDEO_URL", playUrl)
-                        startActivity(intent)
-                    } else {
-                        Log.e("TvDetailsActivity", "No episode data found for episode $episodeNumber")
+                    if (episodeList != null) {
+                        val episodeIndex = (episodeNumber - 1) % 10 // Index of the episode on the page
+                        val playUrl = episodeList.getOrNull(episodeIndex)?.videoUrl
+                        if (playUrl != null) {
+                            val intent = Intent(this@TvDetailsActivity, VideoPlayActivity::class.java)
+                            intent.putExtra("VIDEO_URL", playUrl)
+                            startActivity(intent)
+                        } else {
+                            Log.e("TvDetailsActivity", "No play URL found for episode $episodeNumber")
+                        }
                     }
                 } else {
                     Log.e("TvDetailsActivity", "Failed to fetch episode details: ${response.message()}")
@@ -368,6 +372,4 @@ class TvDetailsActivity : AppCompatActivity() {
             }
         })
     }
-
-
 }
