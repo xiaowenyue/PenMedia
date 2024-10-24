@@ -7,12 +7,14 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.penmediatv.API.SearchApi
 import com.example.penmediatv.Data.SearchRequest
 import com.example.penmediatv.Data.SearchResponse
@@ -36,6 +38,10 @@ class SearchFragment : Fragment() {
     private lateinit var numberAdapter: NumberAdapter
     private var searchHandler = Handler(Looper.getMainLooper())
     private var searchRunnable: Runnable? = null
+    private var currentPage = 1
+    private var totalPages = 1
+    private var pageSize = 7
+    private var isLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,23 +57,48 @@ class SearchFragment : Fragment() {
         setupKeyboard()
         fetchTrendingRecommend()
 
+        // 搜索框监听
         binding.etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val query = s.toString()
-                // 移除之前的搜索任务，避免重复搜索
                 searchRunnable?.let { searchHandler.removeCallbacks(it) }
-
-                // 延迟执行搜索请求
                 searchRunnable = Runnable {
+                    currentPage = 1 // 重置页码
                     searchMovies(query)
                 }
-                searchHandler.postDelayed(searchRunnable!!, 500) // 延迟500毫秒后执行搜索
+                searchHandler.postDelayed(searchRunnable!!, 500)
             }
 
-            // 其他TextWatcher方法可以留空
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+        binding.popularMoviesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                // 检查是否到达底部
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+                val totalItemCount = layoutManager.itemCount
+
+                // 如果到达底部，并且按下向下按钮
+                if (lastVisibleItemPosition == 6) {
+                    recyclerView.setOnKeyListener { _, keyCode, event ->
+                        if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && event.action == KeyEvent.ACTION_DOWN) {
+                            // 将焦点设置到 cvMore 按钮
+                            binding.cvMore.requestFocus()
+                            true
+                        } else {
+                            false
+                        }
+                    }
+                }
+            }
+        })
+        // 设置查看更多按钮点击事件
+        binding.cvMore.setOnClickListener {
+            currentPage++ // 加载下一页
+            searchMovies(binding.etSearch.text.toString(), isLoadMore = true) // 加载下一页数据
+        }
     }
 
     private fun fetchTrendingRecommend() {
@@ -88,7 +119,8 @@ class SearchFragment : Fragment() {
                     if (movies != null) {
                         setupPopularMoviesList(movies)
                         setupSearchResults(movies)
-                        binding.cvMore.visibility = if (movies.size > 7) View.VISIBLE else View.GONE
+                        binding.cvMore.visibility =
+                            if (movies.size >= 7) View.VISIBLE else View.GONE
                     }
                 } else {
                     // 处理错误
@@ -157,13 +189,15 @@ class SearchFragment : Fragment() {
         binding.searchResults.adapter = searchResultsAdapter
     }
 
-    private fun searchMovies(query: String) {
+    private fun searchMovies(query: String, isLoadMore: Boolean = false) {
         val retrofit = Retrofit.Builder()
             .baseUrl("http://44.208.55.69/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val searchApi = retrofit.create(SearchApi::class.java)
-        val searchRequest = SearchRequest(page = 1, pageSize = 7, searchList = listOf(query))
+
+        val searchRequest =
+            SearchRequest(page = currentPage, pageSize = pageSize, searchList = listOf(query))
         val call = searchApi.search(searchRequest)
 
         call.enqueue(object : retrofit2.Callback<SearchResponse> {
@@ -174,11 +208,10 @@ class SearchFragment : Fragment() {
                 if (response.isSuccessful) {
                     val movies = response.body()?.data?.records
                     if (movies != null) {
-                        // 更新列表
-                        updateMovieLists(movies)
+                        // 加载新页的数据
+                        updateMovieLists(movies, isLoadMore)
                     }
                 } else {
-                    // 处理错误
                     ErrorHandler.handleUnsuccessfulResponse(
                         binding.root.context,
                         this::class.java.simpleName
@@ -187,23 +220,21 @@ class SearchFragment : Fragment() {
             }
 
             override fun onFailure(call: retrofit2.Call<SearchResponse>, t: Throwable) {
-                Log.e("SearchFragment", "search onFailure: ${t.message}")
-                // 处理失败
-                ErrorHandler.handleFailure(
-                    t,
-                    binding.root.context,
-                    this::class.java.simpleName
-                )
+                ErrorHandler.handleFailure(t, binding.root.context, this::class.java.simpleName)
             }
         })
     }
 
-    private fun updateMovieLists(movies: List<TrendRecommendItem>) {
-        popularMoviesAdapter.updateMovies(movies)  // 更新热门影片列表
-        searchResultsAdapter.updateMovies(movies)  // 更新搜索结果列表
-
-        // 根据影片数量显示或隐藏 “查看更多” 按钮
-        binding.cvMore.visibility = if (movies.size > 7) View.VISIBLE else View.GONE
+    private fun updateMovieLists(movies: List<TrendRecommendItem>, isLoadMore: Boolean = false) {
+        if (isLoadMore) {
+            searchResultsAdapter.addMovies(movies)  // 在现有的基础上添加更多影片
+            popularMoviesAdapter.addMovies(movies)  // 在现有的基础上添加更多影片
+        } else {
+            popularMoviesAdapter.updateMovies(movies)  // 更新热门影片列表
+            searchResultsAdapter.updateMovies(movies)  // 更新搜索结果列表
+        }
+        // 显示或隐藏“查看更多”按钮
+        binding.cvMore.visibility = if (movies.size >= 7) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

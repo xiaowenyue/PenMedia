@@ -46,4 +46,8 @@ class SearchResultsAdapter(private val movies: MutableList<TrendRecommendItem>) 
         movies.addAll(newMovies)
         notifyDataSetChanged()
     }
+    fun addMovies(newMovies: List<TrendRecommendItem>) {
+        movies.addAll(newMovies)
+        notifyDataSetChanged()
+    }
 }

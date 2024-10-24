@@ -151,7 +151,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/popular_movies_list"
                 android:layout_width="match_parent"
-                android:layout_height="490dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:focusable="true"
                 android:scrollbars="vertical" />
@@ -161,6 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:focusable="true"
+                android:visibility="gone"
                 app:cardCornerRadius="18dp">
 
                 <LinearLayout
