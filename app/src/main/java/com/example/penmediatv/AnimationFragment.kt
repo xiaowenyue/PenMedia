@@ -114,7 +114,10 @@ class AnimationFragment : Fragment() {
             }
         }
         binding.vpmAnimation.setOnClickListener {
-            val intent = Intent(context, TvDetailsActivity::class.java)
+            val currentPosition = binding.viewPager.currentItem // 获取当前显示的页面索引
+            val currentItem = adapter.items[currentPosition] // 从适配器获取当前显示的 SwiperItem
+            val intent = Intent(context, MovieDetailsActivity::class.java)
+            intent.putExtra("VIDEO_ID", currentItem.videoId) // 将 videoId 传递给 MovieDetailsActivity
             startActivity(intent)
         }
     }

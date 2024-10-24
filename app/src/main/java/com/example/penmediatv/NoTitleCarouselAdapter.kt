@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.penmediatv.Data.SwiperItem
 
-class NoTitleCarouselAdapter(private val items: List<SwiperItem>) :
+class NoTitleCarouselAdapter(val items: List<SwiperItem>) :
     RecyclerView.Adapter<NoTitleCarouselAdapter.NoTitleCarouselViewHolder>() {
 
     class NoTitleCarouselViewHolder(view: View) : RecyclerView.ViewHolder(view) {
